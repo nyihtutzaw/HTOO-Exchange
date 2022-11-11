@@ -7,21 +7,21 @@ const NavListArray = [
   "Employee",
   "Bank Name",
   "Customer",
-  "Comm-Table",
-  "W-Agent1",
-  "W-Agent2",
-  "True Money",
-  "Exchange",
-  "Adjustment",
-  "Expensce",
-  "Reports",
-  "Accounts"
+  "Comm-Table"
+  // "W-Agent1",
+  // "W-Agent2",
+  // "True Money"
+  // "Exchange",
+  // "Adjustment",
+  // "Expensce",
+  // "Reports",
+  // "Accounts"
 ];
 function App() {
   return (
     <>
       <Navbar lists={NavListArray} />
-      <Employee />
+      {/* <Employee /> */}
       {/* <Nav /> */}
     </>
   );
