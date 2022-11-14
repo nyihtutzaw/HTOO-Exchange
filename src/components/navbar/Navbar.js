@@ -13,11 +13,13 @@ import {
   Tooltip,
   Typography,
   useTheme,
-  useMediaQuery 
+  useMediaQuery
 } from "@mui/material";
 import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DrawerComp from "../drewer/DrawerComp";
+// import styles from "./nav.modules.css";
+import styles from "./nav.module.css";
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
@@ -41,7 +43,7 @@ const Navbar = ({ lists }) => {
     <AppBar
       sx={{
         backgroundImage:
-          "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(50,9,121,1) 35%, rgba(0,212,255,1) 100%)"
+          "linear-gradient(90deg, rgba(9,121,86,1) 100%, rgba(0,212,255,1) 100%);"
       }}
     >
       <Toolbar>
@@ -56,19 +58,21 @@ const Navbar = ({ lists }) => {
                 <AddShoppingCartIcon />
               </Typography>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={9}>
               <Tabs
                 textColor="secondary"
                 indicatorColor="secondary"
                 value={tabValue}
                 onChange={(e, value) => setTabValue(value)}
+                className={styles.scrollmenu}
               >
                 {lists.map((lab, index) => (
                   <Tab
+                    className={styles.a}
                     style={{
                       textTransform: "none",
-                      color: "white",
-                      overflow: "hidden"
+                      color: "white"
+                      // overflow: "hidden"
                     }}
                     key={index}
                     label={lab}
@@ -76,7 +80,7 @@ const Navbar = ({ lists }) => {
                 ))}
               </Tabs>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <Box display="flex">
                 <Button
                   sx={{ marginLeft: "auto", background: "rgba(2,0,36,1)" }}

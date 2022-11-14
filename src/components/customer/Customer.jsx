@@ -1,20 +1,19 @@
-import { Typography } from "@mui/material";
 import React from "react";
 
-const Employee = () => {
+const Customer = () => {
   return (
     <div
       style={{
         position: "absolute",
         width: "100%",
-        height: "120%",
+        height: "90%",
         backgroundColor: "green",
         marginTop: "65px"
       }}
     >
-      <Typography color="red">Employee</Typography>
+      Customer
     </div>
   );
 };
 
-export default Employee;
+export default Customer;

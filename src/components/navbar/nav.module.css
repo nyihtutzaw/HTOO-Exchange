@@ -1,0 +1,23 @@
+.scrollmenu {
+  max-width: 1200px;
+  background-color: #2481ce;
+  overflow: auto;
+  white-space: nowrap;
+  border-radius: 5px;
+}
+
+.scrollmenu a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  transition: width 3s, height 4s;
+}
+
+.scrollmenu a:hover {
+  background-color: #7394af;
+  border-radius: 5px;
+  width: 70px;
+  height: 20px;
+}

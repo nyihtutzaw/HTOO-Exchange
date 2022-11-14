@@ -9,10 +9,13 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
+import styles from "./nav.module.css";
+import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
 
 const pages = [
   "Employee",
@@ -27,6 +30,7 @@ const pages = [
   "Reports",
   "Accounts"
 ];
+
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function ResponsiveAppBar() {
@@ -49,29 +53,29 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none"
-            }}
-          >
-            LOGO
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+    <AppBar>
+      {/* <Container maxWidth="xl"> */}
+      <Toolbar disableGutters>
+        <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1, ml: 1 }} />
+        <Typography
+          variant="h6"
+          noWrap
+          component="a"
+          href="/"
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            fontFamily: "monospace",
+            fontWeight: 700,
+            letterSpacing: ".3rem",
+            color: "inherit",
+            textDecoration: "none"
+          }}
+        >
+          LOGO
+        </Typography>
+        {/* for mobile humbegar menu */}
+        {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -106,9 +110,11 @@ function ResponsiveAppBar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
-          <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
+          </Box> */}
+        {/* for mobile menu with logo adbIcon */}
+        {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
+        {/* for mobile menu with logo */}
+        {/* <Typography
             variant="h5"
             noWrap
             component="a"
@@ -125,9 +131,15 @@ function ResponsiveAppBar() {
             }}
           >
             LOGO
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+          </Typography> */}
+        <Box
+          sx={{
+            flexGrow: 2,
+            display: { xs: "none", md: "flex", xl: "flex" },
+            justifyContent: "center"
+          }}
+        >
+          {/* {pages.map((page) => (
               <Button
                 style={{ textTransform: "none" }}
                 key={page}
@@ -136,40 +148,97 @@ function ResponsiveAppBar() {
               >
                 {page}
               </Button>
-            ))}
-          </Box>
+            ))} */}
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right"
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right"
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        </Toolbar>
-      </Container>
+          <div className={styles.scrollmenu}>
+            <Link className={styles.a} to="employee">
+              Employee
+            </Link>
+            <Link className={styles.a} to="bank-name">
+              BankName
+            </Link>
+            <Link className={styles.a} to="customer">
+              Customer
+            </Link>
+            <Link className={styles.a} to="/comm-table">
+              Com-Table
+            </Link>
+            <Link className={styles.a} to="/w-agent1">
+              W-Agent1
+            </Link>
+            <Link className={styles.a} to="/w-agent2">
+              W-Agent2
+            </Link>
+            <Link className={styles.a} to="/true-money">
+              TrueMoney
+            </Link>
+            <Link className={styles.a} to="/exchange">
+              Exchange
+            </Link>
+            <Link className={styles.a} to="/adjustment">
+              Adjustment
+            </Link>
+            <Link className={styles.a} to="/true-money">
+              TrueMoney
+            </Link>
+            <Link className={styles.a} to="/exchange">
+              Exchange
+            </Link>
+            <Link className={styles.a} to="/adjustment">
+              Adjustment
+            </Link>
+            <Link className={styles.a} to="/true-money">
+              TrueMoney
+            </Link>
+            <Link className={styles.a} to="/exchange">
+              Exchange
+            </Link>
+            <Link className={styles.a} to="/adjustment">
+              Adjustment
+            </Link>
+            <Link className={styles.a} to="/true-money">
+              TrueMoney
+            </Link>
+            <Link className={styles.a} to="/exchange">
+              Exchange
+            </Link>
+            <Link className={styles.a} to="/adjustment">
+              Adjustment
+            </Link>
+          </div>
+        </Box>
+        {/* for mobile and desktop menu login and logout button */}
+        <Box sx={{ flexGrow: 0, mr: 3 }}>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: "45px" }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right"
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right"
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      </Toolbar>
+      {/* </Container> */}
     </AppBar>
   );
 }
