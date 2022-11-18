@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Employee from "../components/Employee/Employee";
 import Customer from "../components/customer/Customer";
 import BankName from "../components/bank_name/BankName";
+import Navbar from "../components/navbar/Navbar";
 // import { Navigate } from "react-router-dom";
 
 // const pages = [
@@ -17,12 +18,12 @@ import BankName from "../components/bank_name/BankName";
 const Admin = () => {
   return (
     <div>
-      <Nav />
-
+      {/* <Nav /> */}
+      <Navbar />
       <Routes>
         <Route
           path="/"
-          element={<Navigate to="/admin/dashboard"></Navigate>}
+          element={<Navigate to="/admin/employee"></Navigate>}
         ></Route>
         <Route path="employee" element={<Employee />} />
         <Route path="customer" element={<Customer />} />

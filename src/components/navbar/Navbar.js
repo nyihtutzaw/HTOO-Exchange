@@ -7,29 +7,90 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Tab,
-  Tabs,
   Toolbar,
   Tooltip,
   Typography,
   useTheme,
-  useMediaQuery
+  useMediaQuery,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio
 } from "@mui/material";
 import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DrawerComp from "../drewer/DrawerComp";
-// import styles from "./nav.modules.css";
-import styles from "./nav.module.css";
-
+import Employee from "../Employee/Employee";
+import Customer from "../customer/Customer";
+import { Link } from "react-router-dom";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
-const Navbar = ({ lists }) => {
+const lists = [
+  {
+    name: "W-Agent",
+    route: "employee",
+    element: <Employee />
+  },
+  {
+    name: "True Money",
+    route: "customer",
+    element: <Customer />
+  },
+  {
+    name: "Exchange",
+    route: "employee",
+    element: <Employee />
+  },
+  {
+    name: "Customers",
+    route: "customer",
+    element: <Customer />
+  },
+  {
+    name: "Employees",
+    route: "employee",
+    element: <Employee />
+  }
+];
+
+const menus = [
+  {
+    name: "W-Agent",
+    route: "employee",
+    element: <Employee />
+  },
+  {
+    name: "True Money",
+    route: "customer",
+    element: <Customer />
+  },
+  {
+    name: "Exchange",
+    route: "employee",
+    element: <Employee />
+  },
+  {
+    name: "Customers",
+    route: "customer",
+    element: <Customer />
+  },
+  {
+    name: "Employees",
+    route: "employee",
+    element: <Employee />
+  }
+];
+
+const Navbar = () => {
   const theme = useTheme();
-  console.log(theme);
+  // console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log(isMatch);
-  const [tabValue, setTabValue] = useState(0);
+  // console.log(isMatch);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElUsers, setAnchorElUsers] = useState(null);
+  const [buttonLabel, setButtonLabel] = useState("Set Up");
+
+  // console.log(age);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -39,12 +100,20 @@ const Navbar = ({ lists }) => {
     setAnchorElUser(null);
   };
 
+  const handleOpenUser = (event) => {
+    setAnchorElUsers(event.currentTarget);
+  };
+
+  const handleCloseUser = () => {
+    setAnchorElUsers(null);
+  };
+
   return (
     <AppBar
-      sx={{
-        backgroundImage:
-          "linear-gradient(90deg, rgba(9,121,86,1) 100%, rgba(0,212,255,1) 100%);"
+      style={{
+        backgroundColor: "#e6e6e6"
       }}
+      sx={{ minHeight: "75px !important" }}
     >
       <Toolbar>
         {isMatch ? (
@@ -52,48 +121,156 @@ const Navbar = ({ lists }) => {
             <DrawerComp />
           </>
         ) : (
-          <Grid container sx={{ placeItems: "center" }}>
+          <Grid
+            container
+            sx={{
+              placeItems: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              textAlign: "center"
+            }}
+          >
             <Grid item xs={1}>
-              <Typography>
+              <Typography variant="h5" color="black">
                 <AddShoppingCartIcon />
               </Typography>
             </Grid>
-            <Grid item xs={9}>
-              <Tabs
-                textColor="secondary"
-                indicatorColor="secondary"
-                value={tabValue}
-                onChange={(e, value) => setTabValue(value)}
-                className={styles.scrollmenu}
+            <Grid item xs={6}>
+              {lists.map((lab, index) => (
+                <Link
+                  key={lab.name}
+                  to={lab.route}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Button sx={{ margin: "5px" }} variant="contained">
+                    {lab.name}
+                  </Button>
+                </Link>
+              ))}
+            </Grid>
+            <Grid item xs={1}>
+              <Box
+                sx={{
+                  flexGrow: 0,
+                  mr: 3,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
               >
-                {lists.map((lab, index) => (
-                  <Tab
-                    className={styles.a}
-                    style={{
-                      textTransform: "none",
-                      color: "white"
-                      // overflow: "hidden"
-                    }}
-                    key={index}
-                    label={lab}
-                  />
-                ))}
-              </Tabs>
+                <Tooltip title="Open settings">
+                  <Button variant="contained" onClick={handleOpenUser}>
+                    {buttonLabel}
+                  </Button>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUsers}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  open={Boolean(anchorElUsers)}
+                  onClose={handleCloseUser}
+                >
+                  {menus.map((data) => (
+                    <MenuItem key={data.name} onClick={handleCloseUser}>
+                      <Link
+                        to={data.route}
+                        style={{ textDecoration: "none" }}
+                        onClick={() => setButtonLabel(data.name)}
+                      >
+                        <Typography textAlign="center" color="black">
+                          {data.name}
+                        </Typography>
+                      </Link>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
             </Grid>
             <Grid item xs={2}>
-              <Box display="flex">
-                <Button
-                  sx={{ marginLeft: "auto", background: "rgba(2,0,36,1)" }}
-                  variant="contained"
+              <FormControl
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="mm"
+                  name="radio-buttons-group"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                    color: "black"
+                  }}
                 >
-                  Login
-                </Button>
-                <Button
-                  sx={{ marginLeft: 1, background: "rgba(2,0,36,1)" }}
-                  variant="contained"
+                  <FormControlLabel
+                    value="mm"
+                    control={<Radio />}
+                    label="Myanmer"
+                  />
+                  <FormControlLabel
+                    value="eng"
+                    control={<Radio />}
+                    label="English"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
+            <Grid item xs={1}>
+              <Box
+                sx={{
+                  flexGrow: 0,
+                  mr: 3,
+                  display: "flex",
+                  justifyContent: "end",
+                  alignItems: "center"
+                }}
+              >
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar
+                      alt="Remy Sharp"
+                      src="/static/images/avatar/2.jpg"
+                    />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right"
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
                 >
-                  SingUp
-                </Button>
+                  {settings.map((setting) => (
+                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
               </Box>
             </Grid>
           </Grid>

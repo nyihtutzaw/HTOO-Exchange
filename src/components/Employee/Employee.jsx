@@ -9,7 +9,7 @@ const Employee = () => {
         width: "100%",
         height: "120%",
         backgroundColor: "green",
-        marginTop: "65px"
+        marginTop: "75px"
       }}
     >
       <Typography color="red">Employee</Typography>

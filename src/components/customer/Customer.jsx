@@ -6,9 +6,9 @@ const Customer = () => {
       style={{
         position: "absolute",
         width: "100%",
-        height: "90%",
+        height: "92%",
         backgroundColor: "green",
-        marginTop: "65px"
+        marginTop: "75px"
       }}
     >
       Customer

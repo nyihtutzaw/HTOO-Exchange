@@ -15,20 +15,15 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import styles from "./nav.module.css";
 import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 const pages = [
-  "Employee",
-  "Bank Name",
-  "Customer",
-  "Comm-Table",
-  "W-Agent1",
-  "W-Agent2",
+  "W-Agent",
   "True Money",
   "Exchange",
-  "Expensce",
-  "Reports",
-  "Accounts"
+  "Employees",
+  "Customers",
+  "SetUp"
 ];
 
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -36,27 +31,30 @@ const settings = ["Profile", "Account", "Dashboard", "Logout"];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
   return (
-    <AppBar>
-      {/* <Container maxWidth="xl"> */}
+    <AppBar style={{ background: "#e6e6e6" }}>
+      {/* <Container maxWidth="false"> */}
       <Toolbar disableGutters>
-        <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1, ml: 1 }} />
+        <AdbIcon
+          sx={{
+            display: { xs: "none", md: "flex", color: "black" },
+            mr: 1,
+            ml: 1
+          }}
+        />
         <Typography
           variant="h6"
           noWrap
@@ -68,7 +66,7 @@ function ResponsiveAppBar() {
             fontFamily: "monospace",
             fontWeight: 700,
             letterSpacing: ".3rem",
-            color: "inherit",
+            color: "black",
             textDecoration: "none"
           }}
         >
@@ -134,23 +132,29 @@ function ResponsiveAppBar() {
           </Typography> */}
         <Box
           sx={{
-            flexGrow: 2,
+            flexGrow: 1,
             display: { xs: "none", md: "flex", xl: "flex" },
-            justifyContent: "center"
+            justifyContent: "start"
           }}
         >
-          {/* {pages.map((page) => (
-              <Button
-                style={{ textTransform: "none" }}
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))} */}
+          {pages.map((page) => (
+            <Button
+              mr={50}
+              style={{ textTransform: "none" }}
+              key={page}
+              onClick={handleCloseNavMenu}
+              sx={{
+                my: 2,
+                color: "black",
+                display: "block",
+                fontSize: "19px"
+              }}
+            >
+              {page}
+            </Button>
+          ))}
 
-          <div className={styles.scrollmenu}>
+          {/* <div className={styles.scrollmenu}>
             <Link className={styles.a} to="employee">
               Employee
             </Link>
@@ -205,7 +209,7 @@ function ResponsiveAppBar() {
             <Link className={styles.a} to="/adjustment">
               Adjustment
             </Link>
-          </div>
+          </div> */}
         </Box>
         {/* for mobile and desktop menu login and logout button */}
         <Box sx={{ flexGrow: 0, mr: 3 }}>
