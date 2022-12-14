@@ -1,6 +1,4 @@
 import React from "react";
-import Nav from "./components/navbar/Nav";
-import Employee from "./components/Employee/Employee";
 import {
   BrowserRouter as Router,
   Route,
@@ -17,23 +15,8 @@ import AuthRoute from "./routers/AuthRoute";
 import PirvateRoute from "./routers/PrivateRoute";
 import Admin from "./pages/Admin";
 
-const lists = [
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee",
-  "Employee"
-];
+
+
 function App() {
   return (
     <Router>

@@ -15,21 +15,24 @@ import {
   FormControl,
   RadioGroup,
   FormControlLabel,
-  Radio
+  Radio,
+  Select,
+  InputLabel,
+  Fade
 } from "@mui/material";
 import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DrawerComp from "../drewer/DrawerComp";
-import Employee from "../Employee/Employee";
 import Customer from "../customer/Customer";
 import { Link } from "react-router-dom";
+import CreateEmployee from "../Employee/CreateEmployee";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const lists = [
   {
     name: "W-Agent",
     route: "employee",
-    element: <Employee />
+    element: <CreateEmployee />
   },
   {
     name: "True Money",
@@ -39,17 +42,12 @@ const lists = [
   {
     name: "Exchange",
     route: "employee",
-    element: <Employee />
-  },
-  {
-    name: "Customers",
-    route: "customer",
-    element: <Customer />
+    element: <CreateEmployee />
   },
   {
     name: "Employees",
-    route: "employee",
-    element: <Employee />
+    route: "create-employee",
+    element: <CreateEmployee />
   }
 ];
 
@@ -57,7 +55,7 @@ const menus = [
   {
     name: "W-Agent",
     route: "employee",
-    element: <Employee />
+    element: <CreateEmployee />
   },
   {
     name: "True Money",
@@ -67,7 +65,7 @@ const menus = [
   {
     name: "Exchange",
     route: "employee",
-    element: <Employee />
+    element: <CreateEmployee />
   },
   {
     name: "Customers",
@@ -76,8 +74,8 @@ const menus = [
   },
   {
     name: "Employees",
-    route: "employee",
-    element: <Employee />
+    route: "create-employee",
+    element: <CreateEmployee/>
   }
 ];
 
@@ -89,6 +87,7 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElUsers, setAnchorElUsers] = useState(null);
   const [buttonLabel, setButtonLabel] = useState("Set Up");
+  const [age, setAge] = React.useState('');
 
   // console.log(age);
 
@@ -106,6 +105,21 @@ const Navbar = () => {
 
   const handleCloseUser = () => {
     setAnchorElUsers(null);
+  };
+
+  const handleChange = (e) => {
+    setAge(e.target.value);
+  };
+
+  // console.log(age);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   return (
@@ -143,13 +157,13 @@ const Navbar = () => {
                   to={lab.route}
                   style={{ textDecoration: "none" }}
                 >
-                  <Button sx={{ margin: "5px" }} variant="contained">
+                  <Button sx={{ margin: "5px" }} variant="contained" >
                     {lab.name}
                   </Button>
                 </Link>
               ))}
             </Grid>
-            <Grid item xs={1}>
+            <Grid item xs={2}>
               <Box
                 sx={{
                   flexGrow: 0,
@@ -160,7 +174,7 @@ const Navbar = () => {
                 }}
               >
                 <Tooltip title="Open settings">
-                  <Button variant="contained" onClick={handleOpenUser}>
+                  <Button variant="contained" sx={{ margin: "5px" }} onClick={handleOpenUser}>
                     {buttonLabel}
                   </Button>
                 </Tooltip>
@@ -196,7 +210,7 @@ const Navbar = () => {
                 </Menu>
               </Box>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1}>
               <FormControl
                 sx={{
                   display: "flex",
@@ -215,18 +229,19 @@ const Navbar = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     textAlign: "center",
-                    color: "black"
+                    color: "black",
+                    flexWrap: "nowrap"
                   }}
                 >
                   <FormControlLabel
                     value="mm"
                     control={<Radio />}
-                    label="Myanmer"
+                    label="MM"
                   />
                   <FormControlLabel
                     value="eng"
                     control={<Radio />}
-                    label="English"
+                    label="Eng"
                   />
                 </RadioGroup>
               </FormControl>

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import Nav from "../components/navbar/Nav";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Employee from "../components/Employee/Employee";
+import CreateEmployee from "../components/Employee/CreateEmployee";
 import Customer from "../components/customer/Customer";
 import BankName from "../components/bank_name/BankName";
 import Navbar from "../components/navbar/Navbar";
@@ -23,9 +23,9 @@ const Admin = () => {
       <Routes>
         <Route
           path="/"
-          element={<Navigate to="/admin/employee"></Navigate>}
+          element={<Navigate to="/admin/create-employee"></Navigate>}
         ></Route>
-        <Route path="employee" element={<Employee />} />
+        <Route path="create-employee" element={<CreateEmployee />} />
         <Route path="customer" element={<Customer />} />
         <Route path="bank-name" element={<BankName />} />
         {/* {pages.map((page) => (
