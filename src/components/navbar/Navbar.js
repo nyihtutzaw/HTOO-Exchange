@@ -23,9 +23,10 @@ import {
 import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DrawerComp from "../drewer/DrawerComp";
-import Customer from "../customer/Customer";
+import Customer from "../customer/CreateCustomer";
 import { Link } from "react-router-dom";
 import CreateEmployee from "../Employee/CreateEmployee";
+import CreateCustomer from "../customer/CreateCustomer";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const lists = [
@@ -60,7 +61,7 @@ const menus = [
   {
     name: "True Money",
     route: "customer",
-    element: <Customer />
+    element: <CreateEmployee />
   },
   {
     name: "Exchange",
@@ -69,13 +70,13 @@ const menus = [
   },
   {
     name: "Customers",
-    route: "customer",
-    element: <Customer />
+    route: "create-customer",
+    element: <CreateCustomer />
   },
   {
     name: "Employees",
     route: "create-employee",
-    element: <CreateEmployee/>
+    element: <CreateEmployee />
   }
 ];
 
@@ -157,7 +158,7 @@ const Navbar = () => {
                   to={lab.route}
                   style={{ textDecoration: "none" }}
                 >
-                  <Button sx={{ margin: "5px" }} variant="contained" >
+                  <Button sx={{ margin: "5px", backgroundColor: "#094708" }} variant="contained" >
                     {lab.name}
                   </Button>
                 </Link>
@@ -174,7 +175,11 @@ const Navbar = () => {
                 }}
               >
                 <Tooltip title="Open settings">
-                  <Button variant="contained" sx={{ margin: "5px" }} onClick={handleOpenUser}>
+                  <Button variant="contained" sx={{
+                    margin: "5px", backgroundColor: "#094708", ':hover': {
+                      bgcolor: '#094708'
+                    }
+                  }} onClick={handleOpenUser}>
                     {buttonLabel}
                   </Button>
                 </Tooltip>

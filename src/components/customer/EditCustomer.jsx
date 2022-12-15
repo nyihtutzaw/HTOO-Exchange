@@ -1,8 +1,10 @@
 import { Box, Button, Card, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import EditEmployee from "../Employee/EditEmployee";
 
-const CreateEmployee
+const EditCustomer
+
   = () => {
     return (
       <div
@@ -16,7 +18,7 @@ const CreateEmployee
       >
         <Card sx={{ marginTop: "65px", bgcolor: '#edeff2'}} >
           <Box sx={{ margin: "30px", }}>
-            <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ
+            <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>customerစာရင်းပြင်ဆင်ရန်စာမျက်နှာ
             </Typography>
             <Stack spacing={2} direction="row" m={2}>
               <Button variant="contained" size="small" sx={{
@@ -24,7 +26,7 @@ const CreateEmployee
                   bgcolor: '#094708',
                   color: '#fff'
                 }
-              }}>ရာထူး</Button>
+              }}>အမည်</Button>
               <TextField type="text" required label="" variant="outlined" size="small" sx={{ width: "350px" }} />
             </Stack>
             <Stack spacing={2} direction="row" m={2}>
@@ -33,7 +35,7 @@ const CreateEmployee
                   bgcolor: '#094708',
                   color: '#fff'
                 }
-              }}>အမည်</Button>
+              }}>Facebook အကောင့်အမည်</Button>
               <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
             </Stack>
             <Stack spacing={2} direction="row" m={2}>
@@ -42,7 +44,7 @@ const CreateEmployee
                   bgcolor: '#094708',
                   color: '#fff'
                 }
-              }}>မွေးနေ့</Button>
+              }}>Facebook ID</Button>
               <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
             </Stack>
             <Stack spacing={2} direction="row" m={2}>
@@ -51,7 +53,7 @@ const CreateEmployee
                   bgcolor: '#094708',
                   color: '#fff'
                 }
-              }}>မှတ်ပုံတင်</Button>
+              }}>ဖုန်းနံပါတ်</Button>
               <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
             </Stack>
             <Stack spacing={2} direction="row" m={2}>
@@ -69,40 +71,23 @@ const CreateEmployee
                   bgcolor: '#094708',
                   color: '#fff'
                 }
-              }}>အလုပ်ဝင်သည့်နေ့</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>အလုပ်ထွက်သည့်နေ့</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
               }}>မှတ်ချက်</Button>
               <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
             </Stack>
+           
             <Stack spacing={2} direction="row" m={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop:'15px' }}>
               <Button variant="contained" size="small" sx={{
                 backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
                   bgcolor: '#fff',
                   color: '#094708'
                 }
-              }}>Save & Asign</Button>
+              }}>မူလစာမျာက်နှာသို့</Button>
               <Button variant="contained" size="small" sx={{
                 backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
                   bgcolor: '#469152',
                   color: '#fff'
                 }
-              }}>မှတ်ချက်</Button>
+              }}>သိမ်းမည်</Button>
             </Stack>
           </Box>
 
@@ -113,5 +98,6 @@ const CreateEmployee
     );
   };
 
-export default CreateEmployee
+export default EditCustomer
+
   ;
