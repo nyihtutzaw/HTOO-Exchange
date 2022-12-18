@@ -5,7 +5,7 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
-import BankName from "./components/bank_name/BankName";
+import BankName from "./components/bank_name/CreateBankName";
 import Navbar from "./components/navbar/Navbar";
 // import Admin from "./pages/Admin";
 // import Login from "./pages/Login";

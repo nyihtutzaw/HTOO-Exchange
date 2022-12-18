@@ -27,6 +27,11 @@ import Customer from "../customer/CreateCustomer";
 import { Link } from "react-router-dom";
 import CreateEmployee from "../Employee/CreateEmployee";
 import CreateCustomer from "../customer/CreateCustomer";
+import CreateBankName from "../bank_name/CreateBankName";
+import CreateRoleAccess from "../roleAndAccess/CreateRoleAccess";
+import CreateExpense from "../expense/CreateExpense";
+import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
+import CreateStackSalary from "../stackSalary/CreateStackSalary";
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const lists = [
@@ -54,19 +59,19 @@ const lists = [
 
 const menus = [
   {
-    name: "W-Agent",
-    route: "employee",
+    name: "Branch",
+    route: "create-branch",
     element: <CreateEmployee />
   },
   {
-    name: "True Money",
-    route: "customer",
-    element: <CreateEmployee />
+    name: "Role&Access",
+    route: "create-role-access",
+    element: <CreateRoleAccess />
   },
   {
-    name: "Exchange",
-    route: "employee",
-    element: <CreateEmployee />
+    name: "Bank Name",
+    route: "create-bank",
+    element: <CreateBankName />
   },
   {
     name: "Customers",
@@ -74,9 +79,19 @@ const menus = [
     element: <CreateCustomer />
   },
   {
-    name: "Employees",
-    route: "create-employee",
-    element: <CreateEmployee />
+    name: "Expense",
+    route: "create-expense",
+    element: <CreateExpense />
+  },
+  {
+    name: "BranchTransfer",
+    route: "create-branch-transfer",
+    element: <CreateBranchTransfer />
+  },
+  {
+    name: "StackSalary",
+    route: "create-stack-salary",
+    element: <CreateStackSalary />
   }
 ];
 
@@ -158,7 +173,12 @@ const Navbar = () => {
                   to={lab.route}
                   style={{ textDecoration: "none" }}
                 >
-                  <Button sx={{ margin: "5px", backgroundColor: "#094708" }} variant="contained" >
+                  <Button sx={{
+                    margin: "5px", backgroundColor: "#094708", ':hover': {
+                      bgcolor: '#094708',
+                      color: '#fff'
+                    }
+                  }} variant="contained" >
                     {lab.name}
                   </Button>
                 </Link>
