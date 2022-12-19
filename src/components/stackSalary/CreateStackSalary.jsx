@@ -1,6 +1,8 @@
 import { Box, Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import SaveAsIcon from '@mui/icons-material/SaveAs';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const CreateStackSalary
     = () => {
@@ -198,13 +200,17 @@ const CreateStackSalary
                                     bgcolor: '#fff',
                                     color: '#094708'
                                 }
-                            }}>မူလစာမျာက်နှာသို့</Button>
+                            }}>
+                                <ExitToAppIcon/>
+                                မူလစာမျာက်နှာသို့</Button>
                             <Button variant="contained" size="small" sx={{
                                 backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
                                     bgcolor: '#469152',
                                     color: '#fff'
                                 }
-                            }}>သိမ်းမည်</Button>
+                            }}>
+                                <SaveAsIcon/>
+                                သိမ်းမည်</Button>
                         </Stack>
                     </Box>
                 </Card>

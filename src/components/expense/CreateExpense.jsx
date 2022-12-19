@@ -1,6 +1,8 @@
 import { Box, Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import SaveAsIcon from '@mui/icons-material/SaveAs';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 
 const CreateExpense
 
@@ -26,7 +28,7 @@ const CreateExpense
                         </Typography>
                         <Stack spacing={2} direction="row" m={2}>
                             <Button variant="contained" size="small" sx={{
-                                backgroundColor: "#094708", minWidth: "200px",  fontSize: "14px", ':hover': {
+                                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                                     bgcolor: '#094708',
                                     color: '#fff'
                                 }
@@ -79,7 +81,7 @@ const CreateExpense
 
                             </Button>
                             <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-                            
+
                         </Stack>
                         <Stack spacing={2} direction="row" m={2}>
                             <Button variant="contained" size="small" sx={{
@@ -90,7 +92,7 @@ const CreateExpense
                             }}>အကြောင်းအရာ
                             </Button>
                             <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-                            
+
                         </Stack>
                         <Stack spacing={2} direction="row" m={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: '15px' }}>
                             <Button variant="contained" size="small" sx={{
@@ -98,13 +100,17 @@ const CreateExpense
                                     bgcolor: '#fff',
                                     color: '#094708'
                                 }
-                            }}>မူလစာမျာက်နှာသို့</Button>
+                            }}>
+                                <ExitToAppIcon />
+                                မူလစာမျာက်နှာသို့</Button>
                             <Button variant="contained" size="small" sx={{
                                 backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
                                     bgcolor: '#469152',
                                     color: '#fff'
                                 }
-                            }}>သိမ်းမည်</Button>
+                            }}>
+                                <SaveAsIcon />
+                                သိမ်းမည်</Button>
                         </Stack>
                     </Box>
                 </Card>

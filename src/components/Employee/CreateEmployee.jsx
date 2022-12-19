@@ -1,6 +1,8 @@
 import { Box, Button, Card, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
+import SaveIcon from '@mui/icons-material/Save';
+import SaveAsIcon from '@mui/icons-material/SaveAs';
 
 const CreateEmployee
   = () => {
@@ -96,13 +98,17 @@ const CreateEmployee
                   bgcolor: '#fff',
                   color: '#094708'
                 }
-              }}>Save & Asign</Button>
+              }}>
+                <SaveIcon />
+                Save & Asign</Button>
               <Button variant="contained" size="small" sx={{
                 backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
                   bgcolor: '#469152',
                   color: '#fff'
                 }
-              }}>မှတ်ချက်</Button>
+              }}>
+                <SaveAsIcon/>
+                သိမ်းမည်</Button>
             </Stack>
           </Box>
 

@@ -3,6 +3,8 @@ import { Stack } from "@mui/system";
 import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import SaveIcon from '@mui/icons-material/Save';
+import SaveAsIcon from '@mui/icons-material/SaveAs';
 
 const useStyles = makeStyles({
     button: {
@@ -70,7 +72,7 @@ const EditEmployee
                     </Stack>
                     <Stack spacing={2} direction="row" m={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <Button variant="contained" size="small" sx={{ backgroundColor: "#fff", minWidth: "200px", fontSize: "18px", color: "green", textTransform: "none" }}> <ExitToAppOutlinedIcon />မူလစာမျက်နှာသို့ </Button>
-                        <Button variant="contained" size="small" sx={{ backgroundColor: "#469152", minWidth: "200px", fontSize: "18px" }}>မှတ်ချက်</Button>
+                        <Button variant="contained" size="small" sx={{ backgroundColor: "#469152", minWidth: "200px", fontSize: "18px" }}><SaveAsIcon/> သိမ်းမည်</Button>
                     </Stack>
                 </Box>
 
