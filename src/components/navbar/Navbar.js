@@ -32,6 +32,15 @@ import CreateRoleAccess from "../roleAndAccess/CreateRoleAccess";
 import CreateExpense from "../expense/CreateExpense";
 import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
 import CreateStackSalary from "../stackSalary/CreateStackSalary";
+import EmployeeList from "../Employee/EmployeeList";
+import CustomerList from "../customer/CustomerList";
+import BankNameList from "../bank_name/BankNameList";
+import BranchList from "../branch/BranchList";
+import RoleAndAccessList from "../roleAndAccess/RoleAndAccessList";
+import StackSalaryList from "../stackSalary/StackSalaryList";
+import ExpenseList from "../expense/ExpenseList";
+
+
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const lists = [
@@ -52,36 +61,36 @@ const lists = [
   },
   {
     name: "Employees",
-    route: "create-employee",
-    element: <CreateEmployee />
+    route: "list-employee",
+    element: <EmployeeList />
   }
 ];
 
 const menus = [
   {
     name: "Branch",
-    route: "create-branch",
-    element: <CreateEmployee />
+    route: "list-branch",
+    element: <BranchList />
   },
   {
     name: "Role&Access",
-    route: "create-role-access",
-    element: <CreateRoleAccess />
+    route: "list-role-access",
+    element: <RoleAndAccessList />
   },
   {
-    name: "Bank Name",
-    route: "create-bank",
-    element: <CreateBankName />
+    name: "Bank",
+    route: "list-bank",
+    element: <BankNameList />
   },
   {
     name: "Customers",
-    route: "create-customer",
-    element: <CreateCustomer />
+    route: "list-customer",
+    element: <CustomerList />
   },
   {
     name: "Expense",
-    route: "create-expense",
-    element: <CreateExpense />
+    route: "list-expense",
+    element: <ExpenseList />
   },
   {
     name: "BranchTransfer",
@@ -90,8 +99,8 @@ const menus = [
   },
   {
     name: "StackSalary",
-    route: "create-stack-salary",
-    element: <CreateStackSalary />
+    route: "list-stack-salary",
+    element: <StackSalaryList />
   }
 ];
 

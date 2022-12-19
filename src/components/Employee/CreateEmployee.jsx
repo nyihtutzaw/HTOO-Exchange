@@ -21,7 +21,8 @@ const CreateEmployee
             <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ
             </Typography>
             <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
+              <Button variant="contained" size="small" 
+              sx={{
                 backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                   bgcolor: '#094708',
                   color: '#fff'
