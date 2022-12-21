@@ -3,120 +3,234 @@ import { Stack } from "@mui/system";
 import React from "react";
 import SaveIcon from '@mui/icons-material/Save';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
+import Navbar from "../navbar/Navbar";
 
 const CreateEmployee
   = () => {
     return (
-      <div
-        style={{
-          position: "absolute",
-          width: "100%",
-          height: "80%",
-          marginTop: "75px",
-          display: "flex", justifyContent: "center", alignItems: "center"
-        }}
-      >
-        <Card sx={{ marginTop: "65px", bgcolor: '#edeff2'}} >
-          <Box sx={{ margin: "30px", }}>
-            <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ
-            </Typography>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" 
-              sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>ရာထူး</Button>
-              <TextField type="text" required label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>အမည်</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>မွေးနေ့</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>မှတ်ပုံတင်</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>နေရပ်လိပ်စာ</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>အလုပ်ဝင်သည့်နေ့</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>အလုပ်ထွက်သည့်နေ့</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>မှတ်ချက်</Button>
-              <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
-            </Stack>
-            <Stack spacing={2} direction="row" m={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop:'15px' }}>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
-                  bgcolor: '#fff',
-                  color: '#094708'
-                }
-              }}>
-                <SaveIcon />
-                Save & Asign</Button>
-              <Button variant="contained" size="small" sx={{
-                backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#469152',
-                  color: '#fff'
-                }
-              }}>
-                <SaveAsIcon/>
-                သိမ်းမည်</Button>
-            </Stack>
-          </Box>
+      <>
+        <Navbar />
+        <div
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "80%",
+            marginTop: "75px",
+            display: "flex", justifyContent: "center", alignItems: "center"
+          }}
+        >
+          <Card sx={{ marginTop: "65px", bgcolor: '#edeff2' }} >
+            <Box sx={{ margin: "30px", }}>
+              <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ
+              </Typography>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small"
+                  sx={{
+                    backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                      bgcolor: '#094708',
+                      color: '#fff'
+                    }
+                  }}>ရာထူး</Button>
+                <TextField type="text" required label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>အမည်</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>မွေးနေ့</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>မှတ်ပုံတင်</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>နေရပ်လိပ်စာ</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>အလုပ်ဝင်သည့်နေ့</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>အလုပ်ထွက်သည့်နေ့</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>မှတ်ချက်</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: '15px' }}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
+                    bgcolor: '#fff',
+                    color: '#094708'
+                  }
+                }}>
+                  <SaveIcon />
+                  Save & Asign</Button>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#469152',
+                    color: '#fff'
+                  }
+                }}>
+                  <SaveAsIcon />
+                  သိမ်းမည်</Button>
+              </Stack>
+            </Box>
 
-        </Card>
+          </Card>
 
 
-      </div>
+        </div><div
+          style={{
+            position: "absolute",
+            width: "100%",
+            height: "80%",
+            marginTop: "75px",
+            display: "flex", justifyContent: "center", alignItems: "center"
+          }}
+        >
+          <Card sx={{ marginTop: "65px", bgcolor: '#edeff2' }} >
+            <Box sx={{ margin: "30px", }}>
+              <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ
+              </Typography>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small"
+                  sx={{
+                    backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                      bgcolor: '#094708',
+                      color: '#fff'
+                    }
+                  }}>ရာထူး</Button>
+                <TextField type="text" required label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>အမည်</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>မွေးနေ့</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>မှတ်ပုံတင်</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>နေရပ်လိပ်စာ</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>အလုပ်ဝင်သည့်နေ့</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>အလုပ်ထွက်သည့်နေ့</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#094708',
+                    color: '#fff'
+                  }
+                }}>မှတ်ချက်</Button>
+                <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: '15px' }}>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
+                    bgcolor: '#fff',
+                    color: '#094708'
+                  }
+                }}>
+                  <SaveIcon />
+                  Save & Asign</Button>
+                <Button variant="contained" size="small" sx={{
+                  backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
+                    bgcolor: '#469152',
+                    color: '#fff'
+                  }
+                }}>
+                  <SaveAsIcon />
+                  သိမ်းမည်</Button>
+              </Stack>
+            </Box>
+
+          </Card>
+
+
+        </div>
+      </>
+
     );
   };
 

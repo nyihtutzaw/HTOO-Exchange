@@ -6,13 +6,11 @@ import {
   Navigate
 } from "react-router-dom";
 import BankName from "./components/bank_name/CreateBankName";
-import Navbar from "./components/navbar/Navbar";
-// import Admin from "./pages/Admin";
-// import Login from "./pages/Login";
+// import Navbar from "./components/navbar/Navbar";
 import Login_form from "./pages/Login_form";
-import AuthRoute from "./routers/AuthRoute";
+// import AuthRoute from "./routers/AuthRoute";
 import PirvateRoute from "./routers/PrivateRoute";
-import Admin from "./pages/Admin";
+// import Admin from "./pages/Admin";
 import CreateEmployee from "./components/Employee/CreateEmployee";
 import EditEmployee from "./components/Employee/EditEmployee";
 import EmployeeList from "./components/Employee/EmployeeList";
@@ -32,6 +30,9 @@ import StackSalaryList from "./components/stackSalary/StackSalaryList";
 import CreateExpense from "./components/expense/CreateExpense";
 import ExpenseList from "./components/expense/ExpenseList";
 import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransfer";
+import CreateWave from "./components/wave/CreateWave";
+import CreateTrue from "./components/true/CreateTrue";
+import CreateExchange from "./components/exchange/CreateExchange";
 
 
 function App() {
@@ -39,44 +40,52 @@ function App() {
     <Router>
       <Routes>
         <Route path="/auth/login" element={<Login_form />} />
-
-        
-        <Route path="/admin" element={<PirvateRoute />} >
+        <Route element={<PirvateRoute />} >
           <Route
-            path="/admin/*"
+            path="/"
             element={<Navigate to="/admin/list-employee"></Navigate>}
           />
+
           {/* stack routes */}
-          <Route path="create-employee" element={<CreateEmployee />} />
-          <Route path="edit-employee" element={<EditEmployee />} />
-          <Route path="list-employee" element={<EmployeeList />} />
+          <Route path="/admin/create-employee" element={<CreateEmployee />} />
+          <Route path="/admin/edit-employee" element={<EditEmployee />} />
+          <Route path="/admin/list-employee" element={<EmployeeList />} />
           {/* customer routes */}
-          <Route path="create-customer" element={<CreateCustomer />} />
-          <Route path="edit-customer" element={<EditCustomer />} />
-          <Route path="list-customer" element={<CustomerList />} />
+          <Route path="/admin/create-customer" element={<CreateCustomer />} />
+          <Route path="/admin/edit-customer" element={<EditCustomer />} />
+          <Route path="/admin/list-customer" element={<CustomerList />} />
 
           {/* bank routes */}
-          <Route path="create-bank" element={<BankName />} />
-          <Route path="edit-bank" element={<EditBankName />} />
-          <Route path="list-bank" element={<BankNameList />} />
+          <Route path="/admin/create-bank" element={<BankName />} />
+          <Route path="/admin/edit-bank" element={<EditBankName />} />
+          <Route path="/admin/list-bank" element={<BankNameList />} />
           {/* branch routes */}
-          <Route path="create-branch" element={<CreateBranch />} />
-          <Route path="edit-branch" element={<EditBranch />} />
-          <Route path="list-branch" element={<BranchList />} />
+          <Route path="/admin/create-branch" element={<CreateBranch />} />
+          <Route path="/admin/edit-branch" element={<EditBranch />} />
+          <Route path="/admin/list-branch" element={<BranchList />} />
           {/* Role and  access routes */}
-          <Route path="create-role-access" element={<CreateRoleAccess />} />
-          <Route path="list-role-access" element={<RoleAndAccessList />} />
+          <Route path="/admin/create-role-access" element={<CreateRoleAccess />} />
+          <Route path="/admin/list-role-access" element={<RoleAndAccessList />} />
 
           {/* stack salary routes */}
-          <Route path="create-stack-salary" element={<CreateStackSalary />} />
-          <Route path="edit-stack-salary" element={<EditStackSalary />} />
-          <Route path="list-stack-salary" element={<StackSalaryList />} />
+          <Route path="/admin/create-stack-salary" element={<CreateStackSalary />} />
+          <Route path="/admin/edit-stack-salary" element={<EditStackSalary />} />
+          <Route path="/admin/list-stack-salary" element={<StackSalaryList />} />
 
           {/* expense rouetes */}
-          <Route path="create-expense" element={<CreateExpense />} />
-          <Route path="list-expense" element={<ExpenseList />} />
+          <Route path="/admin/create-expense" element={<CreateExpense />} />
+          <Route path="/admin/list-expense" element={<ExpenseList />} />
           {/* branch transfer routes */}
-          <Route path="create-branch-transfer" element={<CreateBranchTransfer />} />
+          <Route path="/admin/create-branch-transfer" element={<CreateBranchTransfer />} />
+
+          {/* wave routes */}
+          <Route path="/admin/create-wave" element={<CreateWave />} />
+          {/* true routes */}
+          <Route path="/admin/create-true" element={<CreateTrue />} />
+          {/* exchange routes */}
+          <Route path="/admin/create-exchange" element={<CreateExchange />} />
+
+
         </Route>
       </Routes>
     </Router>

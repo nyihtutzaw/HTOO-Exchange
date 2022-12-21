@@ -2,10 +2,13 @@ import { Box, Button, Card, Grid, Stack, TextField, Typography } from "@mui/mate
 import React from "react";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Navbar from "../navbar/Navbar";
 
 const CreateRoleAccess
     = () => {
         return (
+            <>
+            <Navbar/>
             <div
                 style={{
                     position: "absolute",
@@ -17,7 +20,7 @@ const CreateRoleAccess
             >
                 <Card sx={{ marginTop: "65px", bgcolor: '#edeff2' }} >
                     <Box sx={{ margin: "30px", }}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>Branch စာရင်းသွင်းရန်စာမျက်နှာ
+                        <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>Role
                         </Typography>
                         <Stack spacing={2} direction="row" m={2} >
                             <Grid container>
@@ -72,6 +75,8 @@ const CreateRoleAccess
 
                 </Card>
             </div>
+            </>
+            
         );
     };
 

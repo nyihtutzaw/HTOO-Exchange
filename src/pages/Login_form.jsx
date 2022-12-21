@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -9,6 +9,7 @@ import money2 from "../assets/images/money3.svg"
 import { withStyles } from '@material-ui/core/styles';
 import { getToken } from "../utils/token"
 import { useNavigate } from "react-router-dom";
+import BackDropLoading from "../components/commons/backdrop/BackDrop";
 
 const CssTextField = withStyles({
   root: {
@@ -34,139 +35,153 @@ const CssTextField = withStyles({
 
 const Login_form = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
+
   const handleLogin = () => {
+    setLoading(true);
     localStorage.setItem('Token', true)
     setTimeout(() => {
       const TOKEN = getToken();
       if (TOKEN) {
+        setLoading(false)
         navigate("/admin/list-employee");
       }
     }, 2000)
   }
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <Box
-        >
-          <Card
-
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              minHeight: "100vh"
-            }}
-          >
-            <CardMedia
-
-              sx={{ height: 240, width: 250, margin: "10px" }}
-              image={money}
-              title="green iguana"
-            />
-            <CardMedia
-              sx={{ height: 240, width: 250, margin: "10px" }}
-              image={money2}
-              title="green iguana"
-            />
-
-            <CardContent>
-
-            </CardContent>
-
-          </Card>
-        </Box>
-      </Grid>
-      <Grid item xs={6}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "100vh"
-          }}
-        >
-          <Card
-            sx={{
-              margin: "10px"
-            }}
-          >
-            <CardContent>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
-                textAlign="left"
-                mb={2}
-                color="#094708"
+    <>
+      {
+        loading ? (
+          <BackDropLoading />
+        ) : (
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <Box
               >
-                Sign In
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="p"
-                component="div"
-                textAlign="left"
-                color="green"
-                m={0}
+                <Card
+
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "100vh"
+                  }}
+                >
+                  <CardMedia
+
+                    sx={{ height: 240, width: 250, margin: "10px" }}
+                    image={money}
+                    title="green iguana"
+                  />
+                  <CardMedia
+                    sx={{ height: 240, width: 250, margin: "10px" }}
+                    image={money2}
+                    title="green iguana"
+                  />
+
+                  <CardContent>
+
+                  </CardContent>
+
+                </Card>
+              </Box >
+            </Grid >
+            <Grid item xs={6}>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  minHeight: "100vh"
+                }}
               >
-                Welcome to Htoo money exchange services?
-              </Typography>
-            </CardContent>
-            <CardContent
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <CssTextField
-                size='small'
-                label="Username"
-                fullWidth
-                className="search"
-                name="search"
-                // onChange={this.onChange}
-                type="text"
-                autoComplete=""
-                margin="normal"
-                inputProps={{
-                  style: { fontFamily: 'nunito', color: 'black' },
-                }}
-              />
+                <Card
+                  sx={{
+                    margin: "10px"
+                  }}
+                >
+                  <CardContent>
+                    <Typography
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                      textAlign="left"
+                      mb={2}
+                      color="#094708"
+                    >
+                      Sign In
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="p"
+                      component="div"
+                      textAlign="left"
+                      color="green"
+                      m={0}
+                    >
+                      Welcome to Htoo money exchange services?
+                    </Typography>
+                  </CardContent>
+                  <CardContent
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <CssTextField
+                      size='small'
+                      label="Username"
+                      fullWidth
+                      className="search"
+                      name="search"
+                      // onChange={this.onChange}
+                      type="text"
+                      autoComplete=""
+                      margin="normal"
+                      inputProps={{
+                        style: { fontFamily: 'nunito', color: 'black' },
+                      }}
+                    />
 
-              <CssTextField
-                size='small'
-                label="Password"
-                fullWidth
-                className="search"
-                name="search"
-                // onChange={this.onChange}
-                type="password"
-                autoComplete=""
-                margin="normal"
-                inputProps={{
-                  style: { fontFamily: 'nunito', color: 'black' },
-                }}
+                    <CssTextField
+                      size='small'
+                      label="Password"
+                      fullWidth
+                      className="search"
+                      name="search"
+                      // onChange={this.onChange}
+                      type="password"
+                      autoComplete=""
+                      margin="normal"
+                      inputProps={{
+                        style: { fontFamily: 'nunito', color: 'black' },
+                      }}
 
 
-              />
-              <Button variant="contained" onClick={handleLogin} fullWidth sx={{
-                marginTop: "5px",
-                backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                  bgcolor: '#094708',
-                  color: '#fff'
-                }
-              }}>
-                Sign in
-              </Button>
-            </CardContent>
-          </Card>
-        </Box>
-      </Grid>
+                    />
+                    <Button variant="contained" onClick={handleLogin} fullWidth sx={{
+                      marginTop: "5px",
+                      backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
+                        bgcolor: '#094708',
+                        color: '#fff'
+                      }
+                    }}>
+                      Sign in
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Box>
+            </Grid>
 
-    </Grid>
+          </Grid >
+        )
+      }
+
+    </>
+
 
   );
 };

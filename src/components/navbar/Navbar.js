@@ -18,20 +18,24 @@ import {
   Radio,
   Select,
   InputLabel,
-  Fade
+  Fade,
+  Card,
+  CardActionArea,
+  CardMedia,
+  CardContent
 } from "@mui/material";
 import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import DrawerComp from "../drewer/DrawerComp";
 import Customer from "../customer/CreateCustomer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreateEmployee from "../Employee/CreateEmployee";
-import CreateCustomer from "../customer/CreateCustomer";
-import CreateBankName from "../bank_name/CreateBankName";
-import CreateRoleAccess from "../roleAndAccess/CreateRoleAccess";
-import CreateExpense from "../expense/CreateExpense";
+// import CreateCustomer from "../customer/CreateCustomer";
+// import CreateBankName from "../bank_name/CreateBankName";
+// import CreateRoleAccess from "../roleAndAccess/CreateRoleAccess";
+// import CreateExpense from "../expense/CreateExpense";
 import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
-import CreateStackSalary from "../stackSalary/CreateStackSalary";
+// import CreateStackSalary from "../stackSalary/CreateStackSalary";
 import EmployeeList from "../Employee/EmployeeList";
 import CustomerList from "../customer/CustomerList";
 import BankNameList from "../bank_name/BankNameList";
@@ -39,25 +43,29 @@ import BranchList from "../branch/BranchList";
 import RoleAndAccessList from "../roleAndAccess/RoleAndAccessList";
 import StackSalaryList from "../stackSalary/StackSalaryList";
 import ExpenseList from "../expense/ExpenseList";
+import { removeToken } from "../../utils/token"
+import CreateWave from "../wave/CreateWave";
+import CreateTrue from "../true/CreateTrue";
+import CreateExchange from "../exchange/CreateExchange";
+import money4 from "../../assets/images/money.svg"
 
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Account", "Logout"];
 
 const lists = [
   {
     name: "W-Agent",
-    route: "employee",
-    element: <CreateEmployee />
+    route: "/admin/create-wave",
+    element: <CreateWave />
   },
   {
     name: "True Money",
-    route: "/customer",
-    element: <Customer />
+    route: "/admin/create-true",
+    element: <CreateTrue />
   },
   {
     name: "Exchange",
-    route: "/employee",
-    element: <CreateEmployee />
+    route: "/admin/create-exchange",
+    element: <CreateExchange />
   },
   {
     name: "Employees",
@@ -68,60 +76,58 @@ const lists = [
 
 const menus = [
   {
-    name: "Branch",
+    name: "Branches",
     route: "/admin/list-branch",
     element: <BranchList />
   },
   {
     name: "Role&Access",
-    route: "list-role-access",
+    route: "/admin/list-role-access",
     element: <RoleAndAccessList />
   },
   {
     name: "Bank",
-    route: "list-bank",
+    route: "/admin/list-bank",
     element: <BankNameList />
   },
   {
     name: "Customers",
-    route: "list-customer",
+    route: "/admin/list-customer",
     element: <CustomerList />
   },
   {
     name: "Expense",
-    route: "list-expense",
+    route: "/admin/list-expense",
     element: <ExpenseList />
   },
   {
     name: "BranchTransfer",
-    route: "create-branch-transfer",
+    route: "/admin/create-branch-transfer",
     element: <CreateBranchTransfer />
   },
   {
     name: "StackSalary",
-    route: "list-stack-salary",
+    route: "/admin/list-stack-salary",
     element: <StackSalaryList />
   }
 ];
 
 const Navbar = () => {
   const theme = useTheme();
-  // console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-  // console.log(isMatch);
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElUsers, setAnchorElUsers] = useState(null);
   const [buttonLabel, setButtonLabel] = useState("Set Up");
   const [age, setAge] = React.useState('');
-
-  // console.log(age);
-
+  const navigate = useNavigate();
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+    removeToken();
+    navigate("/auth/login", { replace: true });
   };
 
   const handleOpenUser = (event) => {
@@ -136,13 +142,12 @@ const Navbar = () => {
     setAge(e.target.value);
   };
 
-  // console.log(age);
-
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -171,13 +176,27 @@ const Navbar = () => {
             }}
           >
             <Grid item xs={1}>
-              <Typography variant="h5" color="black">
+              {/* <Typography variant="h5" color="black">
                 <AddShoppingCartIcon />
-              </Typography>
+              </Typography> */}
+              <Card >
+                <CardActionArea sx={{ display: "flex", 
+                justifyContent: "center", alignItems: "center"}}>
+                  <CardMedia
+                    component="img"
+                    height="45"
+                    image={money4}
+                    alt="green iguana"
+                  />
+                  <CardContent>
+                    
+                  </CardContent>
+                </CardActionArea>
+                
+              </Card>
             </Grid>
             <Grid item xs={6}>
               {lists.map((lab, index) => (
-                console.log("first", lab.route),
                 <Link
                   key={lab.name}
                   to={lab.route}

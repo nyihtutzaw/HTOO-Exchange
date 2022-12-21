@@ -2,10 +2,13 @@ import { Box, Button, Card, Stack, TextField, Typography } from "@mui/material";
 import React from "react";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Navbar from "../navbar/Navbar";
 
 const EditBranch
  = () =>{
   return (
+    <>
+    <Navbar/>
     <div
       style={{
         position: "absolute",
@@ -72,6 +75,8 @@ const EditBranch
 
       </Card>
     </div>
+    </>
+   
   );
 };
 

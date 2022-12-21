@@ -3,6 +3,7 @@ import { Stack } from "@mui/system";
 import React from "react";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import Navbar from "../navbar/Navbar";
 
 const CreateStackSalary
     = () => {
@@ -12,6 +13,8 @@ const CreateStackSalary
             setAge(event.target.value);
         };
         return (
+            <>
+            <Navbar/>
             <div
                 style={{
                     position: "absolute",
@@ -215,6 +218,8 @@ const CreateStackSalary
                     </Box>
                 </Card>
             </div>
+            </>
+            
         );
     };
 
