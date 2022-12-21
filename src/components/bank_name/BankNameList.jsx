@@ -55,111 +55,114 @@ const CssTextField = withStyles({
 
 
 const BankNameList
- = () => {
+    = () => {
 
-    const navigate = useNavigate();
+        const navigate = useNavigate();
 
-    const handleEdit = (e) => {
-        console.log("edit")
+        const handleEdit = (e) => {
+            console.log("edit")
+        }
+
+        const handleDelete = () => {
+            console.log("delete");
+        }
+
+        const handleDetail = () => {
+            console.log("detail")
+        }
+
+        const handleLink = () => {
+            navigate("/admin/create-bank")
+        }
+        return (
+            <div
+                style={{
+                    // position: "absolute",
+                    width: "100%",
+                    height: "80%",
+                    marginTop: "75px",
+                    display: "flex", flexDirection: "column"
+                }}
+            >
+                <Box m={2}>
+                    <Box mt={2}>
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>ဘဏ်အကောင့်စာရင်း
+                        </Typography>
+                    </Box>
+                    <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
+                        <CssTextField
+                            size='small'
+                            label="Search"
+                            className="search"
+                            name="search"
+                            // onChange={this.onChange}
+                            type="text"
+                            autoComplete=""
+                            margin="normal"
+                            inputProps={{
+                                style: { fontFamily: 'nunito', color: 'black' },
+                            }}
+
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchRoundedIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <Button variant="contained" size="small" sx={{
+                            backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
+                                bgcolor: '#1dad52',
+                                color: '#fff'
+                            }
+                        }} onClick={handleLink}>
+                            <AddCircleRoundedIcon />
+                            အသစ်ထည့်မည်</Button>
+                    </Box>
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead sx={{ backgroundColor: "#094708", }}>
+                                <TableRow>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }}>စဉ်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အကောင့်အမည်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အကောင့်နံပါတ်/ဖုန်းနံပါတ်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အကောင့်ပိုင်ရှင်အမည်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ဘဏ်ခွဲအမည်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">စာရင်းဖွင့်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">မှတ်ချက်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Action</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <TableRow
+                                        key={row.Id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {row.Id}
+                                        </TableCell>
+                                        <TableCell align="right">{row.acc_name}</TableCell>
+                                        <TableCell align="right">{row.phone}</TableCell>
+                                        <TableCell align="right">{row.acc_owner}</TableCell>
+                                        <TableCell align="right">{row.bank_other}</TableCell>
+                                        <TableCell align="right">{row.open_list}</TableCell>
+                                        <TableCell align="right">{row.remark}</TableCell>
+                                        <TableCell align="right">
+                                            <DisplaySettingsRoundedIcon onClick={handleDetail} sx={{ color: "green", fontSize: "25px" }} />
+                                            <DriveFileRenameOutlineRoundedIcon onClick={handleEdit} sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }} />
+                                            <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }} />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+
+            </div>
+        )
     }
-
-    const handleDelete = () => {
-        console.log("delete");
-    }
-
-    const handleDetail = () => {
-        console.log("detail")
-    }
-
-    const handleLink = () => {
-        navigate("/admin/create-bank")
-    }
-    return (
-        <div
-            style={{
-                // position: "absolute",
-                width: "100%",
-                height: "80%",
-                marginTop: "75px",
-                display: "flex", flexDirection: "column"
-            }}
-        >
-            <Box mt={2}>
-                <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>ဘဏ်အကောင့်စာရင်း
-                </Typography>
-            </Box>
-            <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
-                <CssTextField
-                    size='small'
-                    label="Search"
-                    className="search"
-                    name="search"
-                    // onChange={this.onChange}
-                    type="text"
-                    autoComplete=""
-                    margin="normal"
-                    inputProps={{
-                        style: { fontFamily: 'nunito', color: 'black' },
-                    }}
-
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <SearchRoundedIcon />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-                <Button variant="contained" size="small" sx={{
-                    backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
-                        bgcolor: '#1dad52',
-                        color: '#fff'
-                    }
-                }} onClick={handleLink}>
-                    <AddCircleRoundedIcon />
-                    အသစ်ထည့်မည်</Button>
-            </Box>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead sx={{ backgroundColor: "#094708", }}>
-                        <TableRow>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }}>စဉ်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အကောင့်အမည်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အကောင့်နံပါတ်/ဖုန်းနံပါတ်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အကောင့်ပိုင်ရှင်အမည်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ဘဏ်ခွဲအမည်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">စာရင်းဖွင့်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">မှတ်ချက်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                                key={row.Id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.Id}
-                                </TableCell>
-                                <TableCell align="right">{row.acc_name}</TableCell>
-                                <TableCell align="right">{row.phone}</TableCell>
-                                <TableCell align="right">{row.acc_owner}</TableCell>
-                                <TableCell align="right">{row.bank_other}</TableCell>
-                                <TableCell align="right">{row.open_list}</TableCell>
-                                <TableCell align="right">{row.remark}</TableCell>
-                                <TableCell align="right">
-                                    <DisplaySettingsRoundedIcon onClick={handleDetail} sx={{ color: "green", fontSize: "25px" }} />
-                                    <DriveFileRenameOutlineRoundedIcon onClick={handleEdit} sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }} />
-                                    <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }} />
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
-    )
-}
 
 export default BankNameList

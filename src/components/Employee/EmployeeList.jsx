@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, InputAdornment, TextField, Typography } from '@mui/material';
+import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, FormGroup, InputAdornment, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -15,6 +15,7 @@ import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRena
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import DisplaySettingsRoundedIcon from '@mui/icons-material/DisplaySettingsRounded';
 import { useNavigate } from "react-router-dom";
+import Navbar from '../navbar/Navbar';
 
 function createData(Id, name, branch, phone, address) {
     return { Id, name, branch, phone, address };
@@ -56,6 +57,7 @@ const CssTextField = withStyles({
 
 const EmployeeList = () => {
     const navigate = useNavigate();
+    const [open, setOpen] = React.useState(false);
 
     const handleEdit = (e) => {
         console.log("edit")
@@ -65,94 +67,174 @@ const EmployeeList = () => {
         console.log("delete");
     }
 
-    const handleDetail = () => {
-        console.log("detail")
-    }
+    // const handleDetail = () => {
+    //     console.log("detail")
+    // }
 
     const handleLink = () => {
         navigate("/admin/create-employee")
     }
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+
     return (
-        <div
-            style={{
-                // position: "absolute",
-                width: "100%",
-                height: "80%",
-                marginTop: "75px",
-                display: "flex", flexDirection: "column"
-            }}
-        >
-            <Box mt={2}>
-                <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>ဝန်ထမ်းစာရင်း
-                </Typography>
-            </Box>
-            <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
-                <CssTextField
-                    size='small'
-                    label="Search"
-                    className="search"
-                    name="search"
-                    // onChange={this.onChange}
-                    type="text"
-                    autoComplete=""
-                    margin="normal"
-                    inputProps={{
-                        style: { fontFamily: 'nunito', color: 'black' },
+        <>
+            <Navbar />
+            <div
+                style={{
+                    // position: "absolute",
+                    width: "100%",
+                    height: "80%",
+                    marginTop: "75px",
+                    display: "flex", flexDirection: "column"
+                }}
+            >
+
+                <Dialog
+                    fullWidth
+                    maxWidth="sm"
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                    PaperProps={{
+                        style: { borderRadius: 18 }
                     }}
 
-                    InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                                <SearchRoundedIcon />
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-                <Button variant="contained" size="small" sx={{
-                    backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
-                        bgcolor: '#1dad52',
-                        color: '#fff'
-                    }
-                }} onClick={handleLink}>
-                    <AddCircleRoundedIcon />
-                    အသစ်ထည့်မည်</Button>
-            </Box>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead sx={{ backgroundColor: "#094708", }}>
-                        <TableRow>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }}>စဉ်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အမည်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Branch</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ဖုန်းနံပါတ်</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">နေရပ်လိပ်စာ</TableCell>
-                            <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Action</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                                key={row.Id}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.Id}
-                                </TableCell>
-                                <TableCell align="right">{row.name}</TableCell>
-                                <TableCell align="right">{row.branch}</TableCell>
-                                <TableCell align="right">{row.phone}</TableCell>
-                                <TableCell align="right">{row.address}</TableCell>
-                                <TableCell align="right">
-                                    <DisplaySettingsRoundedIcon onClick={handleDetail} sx={{ color: "green", fontSize: "25px" }} />
-                                    <DriveFileRenameOutlineRoundedIcon onClick={handleEdit} sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }} />
-                                    <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }} />
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+                >
+                    <DialogTitle id="alert-dialog-title" bgcolor="#07824f" color="white" textAlign="center">
+                        {"Brand Assign ဇယား"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <CssTextField
+                            size='small'
+                            label="Search"
+                            fullWidth
+                            className="search"
+                            name="search"
+                            // onChange={this.onChange}
+                            type="text"
+                            autoComplete=""
+                            margin="normal"
+                            inputProps={{
+                                style: { fontFamily: 'nunito', color: 'black' },
+                            }}
+
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchRoundedIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <FormGroup>
+                            <FormControlLabel control={<Checkbox defaultChecked />} label="Main Branch" />
+                            <FormControlLabel control={<Checkbox defaultChecked />} label="Yangon Branch" />
+                            <FormControlLabel control={<Checkbox defaultChecked />} label="Mandalay Branch" />
+                        </FormGroup>
+                    </DialogContent>
+                    <DialogActions sx={{ display: "flex", justifyContent: "space-around", alignItems: "center", margin: "15px" }}>
+                        <Button variant="contained" size="small" sx={{
+                            backgroundColor: "#fff", color: "black", minWidth: "200px", fontSize: "14px", ':hover': {
+                                bgcolor: '#fff',
+                                color: 'black'
+                            }
+                        }} onClick={handleClose}>Cancel</Button>
+                        <Button variant="contained" size="small" sx={{
+                            backgroundColor: "#07824f", minWidth: "200px", fontSize: "14px", ':hover': {
+                                bgcolor: '#07824f',
+                                color: '#fff'
+                            }
+                        }} onClick={handleClose} autoFocus>
+                            Assign Branch
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+
+                <Box m={2}>
+                    <Box mt={2}>
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>ဝန်ထမ်းစာရင်း
+                        </Typography>
+                    </Box>
+                    <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
+                        <CssTextField
+                            size='small'
+                            label="Search"
+                            className="search"
+                            name="search"
+                            // onChange={this.onChange}
+                            type="text"
+                            autoComplete=""
+                            margin="normal"
+                            inputProps={{
+                                style: { fontFamily: 'nunito', color: 'black' },
+                            }}
+
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchRoundedIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                        <Button variant="contained" size="small" sx={{
+                            backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
+                                bgcolor: '#1dad52',
+                                color: '#fff'
+                            }
+                        }} onClick={handleLink}>
+                            <AddCircleRoundedIcon />
+                            အသစ်ထည့်မည်</Button>
+                    </Box>
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead sx={{ backgroundColor: "#094708", }}>
+                                <TableRow>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }}>စဉ်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">အမည်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Branch</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ဖုန်းနံပါတ်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">နေရပ်လိပ်စာ</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Action</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {rows.map((row) => (
+                                    <TableRow
+                                        key={row.Id}
+                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                    >
+                                        <TableCell component="th" scope="row">
+                                            {row.Id}
+                                        </TableCell>
+                                        <TableCell align="right">{row.name}</TableCell>
+                                        <TableCell align="right">{row.branch}</TableCell>
+                                        <TableCell align="right">{row.phone}</TableCell>
+                                        <TableCell align="right">{row.address}</TableCell>
+                                        <TableCell align="right">
+                                            <DisplaySettingsRoundedIcon onClick={handleClickOpen} sx={{ color: "green", fontSize: "25px" }} />
+                                            <DriveFileRenameOutlineRoundedIcon onClick={handleEdit} sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }} />
+                                            <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }} />
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
+            </div>
+        </>
     )
 }
 

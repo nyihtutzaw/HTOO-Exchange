@@ -18,7 +18,7 @@ const CreateCustomer
       >
         <Card sx={{ marginTop: "65px", bgcolor: '#edeff2'}} >
           <Box sx={{ margin: "30px", }}>
-            <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>customerစာရင်းသွင်းရန်စာမျက်နှာ
+            <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>Customerစာရင်းသွင်းရန်စာမျက်နှာ
             </Typography>
             <Stack spacing={2} direction="row" m={2}>
               <Button variant="contained" size="small" sx={{

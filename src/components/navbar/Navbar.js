@@ -51,17 +51,17 @@ const lists = [
   },
   {
     name: "True Money",
-    route: "customer",
+    route: "/customer",
     element: <Customer />
   },
   {
     name: "Exchange",
-    route: "employee",
+    route: "/employee",
     element: <CreateEmployee />
   },
   {
     name: "Employees",
-    route: "list-employee",
+    route: "/admin/list-employee",
     element: <EmployeeList />
   }
 ];
@@ -69,7 +69,7 @@ const lists = [
 const menus = [
   {
     name: "Branch",
-    route: "list-branch",
+    route: "/admin/list-branch",
     element: <BranchList />
   },
   {
@@ -177,6 +177,7 @@ const Navbar = () => {
             </Grid>
             <Grid item xs={6}>
               {lists.map((lab, index) => (
+                console.log("first", lab.route),
                 <Link
                   key={lab.name}
                   to={lab.route}

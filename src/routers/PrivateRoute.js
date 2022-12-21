@@ -1,10 +1,11 @@
-import { Navigate } from "react-router-dom";
-const PirvateRoute = ({ children }) => {
-  const token = false;
+import { Navigate, Outlet } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { getToken } from "../utils/token"
 
-  if (!token) {
-    return <Navigate to="/admin" replace />;
-  }
-  return children;
+const PirvateRoute = () => {
+  const TOKEN = getToken();
+
+  return TOKEN ? <Outlet /> : <Navigate to="/auth/login" replace />;
+
 };
 export default PirvateRoute;
