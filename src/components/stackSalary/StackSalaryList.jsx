@@ -89,7 +89,7 @@ const StackSalaryList = () => {
             >
                 <Box m={2}>
                     <Box mt={2}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>{t("stack-salary.list")}
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>{t("staff-salary.list")}
                         </Typography>
                     </Box>
                     <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
@@ -115,26 +115,31 @@ const StackSalaryList = () => {
                             }}
                         />
                         <Button variant="contained" size="small" sx={{
+                            display: "flex", justifyContent: "space-evenly", alignItems: "center",
                             backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
                                 bgcolor: '#1dad52',
                                 color: '#fff'
                             }
                         }} onClick={handleLink}>
                             <AddCircleRoundedIcon />
-                            အသစ်ထည့်မည်</Button>
+                            <Box>
+                                {t("new")}
+                            </Box>
+                            </Button>
                     </Box>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead sx={{ backgroundColor: "#094708", }}>
                                 <TableRow>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">စဉ်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">ဝန်ထမ်းအမည်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">လစာ</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">ကော်မရှင်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">ခံစားခွင့်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">စုစုပေါင်း</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">လ/ခုနှစ်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">Action</TableCell>
+                                
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("no")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center"> {t("staff-salary.staff_name")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center"> {t("staff-salary.staff_salary")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center"> {t("staff-salary.comession")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center"> {t("staff-salary.opportunity")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center"> {t("staff-salary.total")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center"> {t("staff-salary.month-year")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

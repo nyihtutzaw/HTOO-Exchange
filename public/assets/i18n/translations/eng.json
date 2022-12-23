@@ -30,7 +30,21 @@
     "branch-transfer.to-transfer-type": "To Transfer Type",
 
 
-    "stack-salary.list": "Stack Salary List",
+    "staff-salary.list": "Staff Salary List",
+    "staff-salary.staff_name": "Staff Name",
+    "staff-salary.create": "Staff Salary Create",
+    "staff-salary.staff_salary": "Salary",
+    "staff-salary.comission": "Commission",
+    "staff-salary.opportunity": "Opportunity",
+
+    "staff-salary.opportunity-1": "Opportunity-1",
+    "staff-salary.opportunity-2": "Opportunity-2",
+    "staff-salary.opportunity-3": "Opportunity-3",
+    "staff-salary.opportunity-4": "Opportunity-4",
+    "staff-salary.opportunity-5": "Opportunity-5",
+
+    "staff-salary.total": "Total",
+    "staff-salary.month-year": "Month/Year",
 
 
     "no": "No",
