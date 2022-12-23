@@ -3,11 +3,13 @@ import { Stack } from "@mui/system";
 import React from "react";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Navbar from "../navbar/Navbar";
+import { useTranslation } from "react-i18next";
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
 
 const CreateBranchTransfer
-
     = () => {
+        const { t, i18n } = useTranslation();
         const [age, setAge] = React.useState('');
 
         const handleChange = (event) => {
@@ -27,8 +29,8 @@ const CreateBranchTransfer
                 >
                     <Card sx={{ marginTop: "65px", bgcolor: '#edeff2' }} >
                         <Box sx={{ margin: "30px", }}>
-                            <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>Branch To Branch Transfer စာရင်းသွင်းရန်စာမျက်နှာ
-
+                            <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>
+                                {t("branch-transfer.list")}
                             </Typography>
                             <Stack spacing={2} direction="row" m={2}>
                                 <Button variant="contained" size="small" sx={{
@@ -36,7 +38,7 @@ const CreateBranchTransfer
                                         bgcolor: '#094708',
                                         color: '#fff'
                                     }
-                                }}>E-Money
+                                }}>{t("e-money")}
                                 </Button>
                                 <Button variant="contained" size="small" sx={{
                                     backgroundColor: "#fff", minWidth: "200px", color: 'black', fontSize: "14px",
@@ -44,7 +46,7 @@ const CreateBranchTransfer
                                         bgcolor: '#fff',
                                         color: 'black'
                                     }
-                                }}>Cash
+                                }}>{t("cash-buy")}
                                 </Button>
                             </Stack>
 
@@ -54,7 +56,8 @@ const CreateBranchTransfer
                                         bgcolor: '#094708',
                                         color: '#fff'
                                     }
-                                }}>From Branch
+                                }}>
+                                    {t("branch-transfer.from-branch")}
                                 </Button>
                                 <TextField type="text" required label="" variant="outlined" size="small" sx={{ width: "350px" }} />
                             </Stack>
@@ -65,7 +68,9 @@ const CreateBranchTransfer
                                         bgcolor: '#094708',
                                         color: '#fff'
                                     }
-                                }}>To Branch</Button>
+                                }}>
+                                    {t("branch-transfer.to-branch")}
+                                </Button>
                                 <FormControl sx={{ m: 1, minWidth: 350 }} size="small">
                                     <InputLabel id="demo-select-small">Age</InputLabel>
                                     <Select
@@ -91,7 +96,9 @@ const CreateBranchTransfer
                                         bgcolor: '#094708',
                                         color: '#fff'
                                     }
-                                }}>Amount(E-Money/Cash)</Button>
+                                }}>
+                                    {t("branch-transfer.account-cash")}
+                                </Button>
                                 <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
                             </Stack>
                             <Stack spacing={2} direction="row" m={2}>
@@ -100,8 +107,8 @@ const CreateBranchTransfer
                                         bgcolor: '#094708',
                                         color: '#fff'
                                     }
-                                }}>From Transfer Type
-
+                                }}>
+                                    {t("branch-transfer.from-transfer-type")}
                                 </Button>
                                 <FormControl sx={{ m: 1, minWidth: 350 }} size="small">
                                     <InputLabel id="demo-select-small">Age</InputLabel>
@@ -128,7 +135,8 @@ const CreateBranchTransfer
                                         bgcolor: '#094708',
                                         color: '#fff'
                                     }
-                                }}>To Transfer Type
+                                }}>
+                                    {t("branch-transfer.to-transfer-type")}
                                 </Button>
                                 <FormControl sx={{ m: 1, minWidth: 350 }} size="small">
                                     <InputLabel id="demo-select-small">Age</InputLabel>
@@ -151,31 +159,41 @@ const CreateBranchTransfer
                             </Stack>
                             <Stack spacing={2} direction="row" m={2}>
                                 <Button variant="contained" size="small" sx={{
+
                                     backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                                         bgcolor: '#094708',
                                         color: '#fff'
                                     }
-                                }}>Remark
+                                }}> {t("remark")}
                                 </Button>
                                 <TextField type="text" label="" variant="outlined" size="small" sx={{ width: "350px" }} />
 
                             </Stack>
                             <Stack spacing={2} direction="row" m={2} sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: '15px' }}>
                                 <Button variant="contained" size="small" sx={{
+                                    display: "flex", justifyContent: "space-evenly", alignItems: "center",
                                     backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
                                         bgcolor: '#fff',
                                         color: '#094708'
                                     }
                                 }}>
                                     <ExitToAppIcon />
-
-                                    မူလစာမျာက်နှာသို့</Button>
+                                    <Box>
+                                        {t("go_back")}
+                                    </Box>
+                                </Button>
                                 <Button variant="contained" size="small" sx={{
+                                    display: "flex", justifyContent: "space-evenly", alignItems: "center",
                                     backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
                                         bgcolor: '#469152',
                                         color: '#fff'
                                     }
-                                }}>Transfer</Button>
+                                }}>
+                                    <SwapHorizIcon />
+                                    <Box>
+                                        {t("transfer")}
+                                    </Box>
+                                </Button>
                             </Stack>
                         </Box>
                     </Card>

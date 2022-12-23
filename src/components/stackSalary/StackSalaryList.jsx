@@ -16,6 +16,7 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import DisplaySettingsRoundedIcon from '@mui/icons-material/DisplaySettingsRounded';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../navbar/Navbar';
+import { useTranslation } from "react-i18next";
 
 function createData(Id, name, salary, comession, opportunity, total, monthYear) {
     return { Id, name, salary, comession, opportunity, total, monthYear };
@@ -55,7 +56,7 @@ const CssTextField = withStyles({
 
 
 const StackSalaryList = () => {
-
+    const { t, i18n } = useTranslation();
     const navigate = useNavigate();
 
     const handleEdit = (e) => {
@@ -88,7 +89,7 @@ const StackSalaryList = () => {
             >
                 <Box m={2}>
                     <Box mt={2}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>ဝန်ထမ်းလစာ စာရင်း
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>{t("stack-salary.list")}
                         </Typography>
                     </Box>
                     <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
@@ -126,14 +127,14 @@ const StackSalaryList = () => {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead sx={{ backgroundColor: "#094708", }}>
                                 <TableRow>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }}>စဉ်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ဝန်ထမ်းအမည်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">လစာ</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ကော်မရှင်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ခံစားခွင့်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">စုစုပေါင်း</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">လ/ခုနှစ်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Action</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">စဉ်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">ဝန်ထမ်းအမည်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">လစာ</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">ကော်မရှင်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">ခံစားခွင့်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">စုစုပေါင်း</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">လ/ခုနှစ်</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -142,16 +143,16 @@ const StackSalaryList = () => {
                                         key={row.Id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell component="th" scope="row">
+                                        <TableCell component="th" scope="row" align="center">
                                             {row.Id}
                                         </TableCell>
-                                        <TableCell align="right">{row.name}</TableCell>
-                                        <TableCell align="right">{row.salary}</TableCell>
-                                        <TableCell align="right">{row.comession}</TableCell>
-                                        <TableCell align="right">{row.opportunity}</TableCell>
-                                        <TableCell align="right">{row.total}</TableCell>
-                                        <TableCell align="right">{row.monthYear}</TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="center">{row.name}</TableCell>
+                                        <TableCell align="center">{row.salary}</TableCell>
+                                        <TableCell align="center">{row.comession}</TableCell>
+                                        <TableCell align="center">{row.opportunity}</TableCell>
+                                        <TableCell align="center">{row.total}</TableCell>
+                                        <TableCell align="center">{row.monthYear}</TableCell>
+                                        <TableCell align="center">
                                             <DisplaySettingsRoundedIcon onClick={handleDetail} sx={{ color: "green", fontSize: "25px" }} />
                                             <DriveFileRenameOutlineRoundedIcon onClick={handleEdit} sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }} />
                                             <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }} />

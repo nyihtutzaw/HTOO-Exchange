@@ -16,6 +16,7 @@ import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 import DisplaySettingsRoundedIcon from '@mui/icons-material/DisplaySettingsRounded';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../navbar/Navbar';
+import { useTranslation } from "react-i18next";
 
 function createData(Id, branch_name, stack_qty, phone, address) {
     return { Id, branch_name, stack_qty, phone, address };
@@ -53,9 +54,8 @@ const CssTextField = withStyles({
     },
 })(TextField);
 
-
-
 const BranchList = () => {
+  const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
 
@@ -67,9 +67,9 @@ const BranchList = () => {
         console.log("delete");
     }
 
-    const handleDetail = () => {
-        console.log("detail")
-    }
+    // const handleDetail = () => {
+    //     console.log("detail")
+    // }
 
     const handleLink = () => {
         navigate("/admin/create-branch")
@@ -159,7 +159,7 @@ const BranchList = () => {
 
                 <Box m={2}>
                     <Box mt={2}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>Branch စာရင်း
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> {t("branch.list")}
                         </Typography>
                     </Box>
                     <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
@@ -185,24 +185,28 @@ const BranchList = () => {
                             }}
                         />
                         <Button variant="contained" size="small" sx={{
+                            display: "flex", justifyContent: "space-evenly", alignItems: "center",
                             backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
                                 bgcolor: '#1dad52',
                                 color: '#fff'
                             }
                         }} onClick={handleLink}>
                             <AddCircleRoundedIcon />
-                            အသစ်ထည့်မည်</Button>
+                            <Box>
+                            {t("new")}
+                            </Box>
+                            </Button>
                     </Box>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead sx={{ backgroundColor: "#094708", }}>
                                 <TableRow>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }}>စဉ်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Branch အမည်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ဝန်ထမ်းအရေအတွက်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">ဖုန်းနံပါတ်</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">နေရပ်လိပ်စာ</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">Action</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }}>{t("no")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right"> {t("branch.name")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right"> {t("branch.staff_qty")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("phone")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("address")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
