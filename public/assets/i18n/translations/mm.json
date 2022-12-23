@@ -1,0 +1,27 @@
+{
+    "employee.title": "ဝန်ထမ်းစာရင်း",
+    "employee.create_title": "ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ",
+    "customer.list": "Customerစာရင်း",
+    "new_customer": "Customer စာရင်းသွင်းရန်စာမျက်နှာ",
+    "bank.list": "ဘဏ်အကောင့်စာရင်း",
+    "bank.create": "ဘဏ်အကောင့်စာရင်းသွင်းရန်စာမျက်နှာ",
+    
+    "bank.acc_name": "အကောင့်အမည်",
+    "bank.acc_phone": "အကောင့်နံပါတ်/ဖုန်းနံပါတ်",
+    "bank.acc_owner": "အကောင့်ပိုင်ရှင်အမည်",
+    "bank.other_bank_name": "ဘဏ်ခွဲအမည်",
+    "bank.open_list": "စာရင်းဖွင့်",
+
+    "no": "စဉ်",
+    "name": "အမည်",
+    "branch": "Branch",
+    "phone": "ဖုန်းနံပါတ်",
+    "address": "နေရပ်လိပ်စာ",
+    "action": "လုပ်ဆောင်ချက်",
+    "new": "အသစ်ထည့်မည်",
+    "f_name": "Facebookအမည်",
+    "f_id": "Facebook ID",
+    "remark": "မှတ်ချက်",
+    "save": "သိမ်းမည်",
+    "go_back": "ပြန်သွားရန်"
+}

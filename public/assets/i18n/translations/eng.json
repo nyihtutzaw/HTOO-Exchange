@@ -1,0 +1,26 @@
+{
+    "employee.title": "Staff List",
+    "employee.create_title": "Create Staff ",
+    "customer.list": "Customer List",
+    "new_customer": "Customer Create",
+    "bank.list": "Bank Account List",
+    "bank.create": "Bank Account Create",
+    "bank.acc_name": "Account Name",
+    "bank.acc_phone": "Account No/Phone",
+    "bank.acc_owner": "Account Owner",
+    "bank.other_bank_name": "Other Bank Name",
+    "bank.open_list": "Open List",
+
+    "no": "No",
+    "name": "Name",
+    "branch": "Branch",
+    "phone": "Phone",
+    "address": "Address",
+    "action": "Action",
+    "new": "New",
+    "f_name": "Facebook Name",
+    "f_id": "Facebook Id",
+    "remark": "Remark",
+    "save": "Save",
+    "go_back": "Go Back"
+}

@@ -5,6 +5,7 @@ import {
   Routes,
   Navigate
 } from "react-router-dom";
+import "./i18n";
 import BankName from "./components/bank_name/CreateBankName";
 // import Navbar from "./components/navbar/Navbar";
 import Login_form from "./pages/Login_form";
@@ -33,6 +34,7 @@ import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransf
 import CreateWave from "./components/wave/CreateWave";
 import CreateTrue from "./components/true/CreateTrue";
 import CreateExchange from "./components/exchange/CreateExchange";
+import CreateBankName from "./components/bank_name/CreateBankName";
 
 
 function App() {
@@ -45,7 +47,6 @@ function App() {
             path="/"
             element={<Navigate to="/admin/list-employee"></Navigate>}
           />
-
           {/* stack routes */}
           <Route path="/admin/create-employee" element={<CreateEmployee />} />
           <Route path="/admin/edit-employee" element={<EditEmployee />} />
@@ -56,7 +57,7 @@ function App() {
           <Route path="/admin/list-customer" element={<CustomerList />} />
 
           {/* bank routes */}
-          <Route path="/admin/create-bank" element={<BankName />} />
+          <Route path="/admin/create-bank" element={<CreateBankName />} />
           <Route path="/admin/edit-bank" element={<EditBankName />} />
           <Route path="/admin/list-bank" element={<BankNameList />} />
           {/* branch routes */}

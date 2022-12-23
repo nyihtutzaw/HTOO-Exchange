@@ -4,8 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import { Button, CardMedia, Grid, TextField } from "@mui/material";
-import money from "../assets/images/money.svg"
-import money2 from "../assets/images/money3.svg"
+import money5 from "../assets/images/money5.png"
 import { withStyles } from '@material-ui/core/styles';
 import { getToken } from "../utils/token"
 import { useNavigate } from "react-router-dom";
@@ -70,16 +69,10 @@ const Login_form = () => {
                 >
                   <CardMedia
 
-                    sx={{ height: 240, width: 250, margin: "10px" }}
-                    image={money}
+                    sx={{ height: 500, width: 600, margin: "10px" }}
+                    image={money5}
                     title="green iguana"
                   />
-                  <CardMedia
-                    sx={{ height: 240, width: 250, margin: "10px" }}
-                    image={money2}
-                    title="green iguana"
-                  />
-
                   <CardContent>
 
                   </CardContent>

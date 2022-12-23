@@ -16,26 +16,15 @@ import {
   RadioGroup,
   FormControlLabel,
   Radio,
-  Select,
-  InputLabel,
-  Fade,
   Card,
   CardActionArea,
   CardMedia,
   CardContent
 } from "@mui/material";
-import React, { useState } from "react";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import React, { useState, useEffect } from "react";
 import DrawerComp from "../drewer/DrawerComp";
-import Customer from "../customer/CreateCustomer";
 import { Link, useNavigate } from "react-router-dom";
-import CreateEmployee from "../Employee/CreateEmployee";
-// import CreateCustomer from "../customer/CreateCustomer";
-// import CreateBankName from "../bank_name/CreateBankName";
-// import CreateRoleAccess from "../roleAndAccess/CreateRoleAccess";
-// import CreateExpense from "../expense/CreateExpense";
 import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
-// import CreateStackSalary from "../stackSalary/CreateStackSalary";
 import EmployeeList from "../Employee/EmployeeList";
 import CustomerList from "../customer/CustomerList";
 import BankNameList from "../bank_name/BankNameList";
@@ -43,13 +32,14 @@ import BranchList from "../branch/BranchList";
 import RoleAndAccessList from "../roleAndAccess/RoleAndAccessList";
 import StackSalaryList from "../stackSalary/StackSalaryList";
 import ExpenseList from "../expense/ExpenseList";
-import { removeToken } from "../../utils/token"
+import { removeToken } from "../../utils/token";
 import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
 import CreateExchange from "../exchange/CreateExchange";
-import money4 from "../../assets/images/money.svg"
+import logo from "../../assets/images/logo.png"
+import { useTranslation } from "react-i18next";
 
-const settings = ["Account", "Logout"];
+const settings = ["", "Logout"];
 
 const lists = [
   {
@@ -114,17 +104,43 @@ const menus = [
 
 const Navbar = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElUsers, setAnchorElUsers] = useState(null);
   const [buttonLabel, setButtonLabel] = useState("Set Up");
-  const [age, setAge] = React.useState('');
-  const navigate = useNavigate();
+  // const [age, setAge] = React.useState('');
+  const [language, setLanguage] = useState("eng");
+  const [value, setValue] = useState("eng");
+
+  const handleLanguageChange = (event) => {
+    setValue(event.target.value);
+    setLanguage(event.target.value);
+    i18n.changeLanguage(event.target.value);
+    localStorage.setItem("lng", event.target.value);
+  };
+
+  useEffect(() => {
+    const lng = localStorage.getItem("lng");
+    if (lng) {
+      setLanguage(lng);
+      setValue(lng);
+    } else {
+      setLanguage("en");
+    }
+  }, [value, language]);
+
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const handleCloseToken = () => {
     setAnchorElUser(null);
     removeToken();
     navigate("/auth/login", { replace: true });
@@ -138,24 +154,25 @@ const Navbar = () => {
     setAnchorElUsers(null);
   };
 
-  const handleChange = (e) => {
-    setAge(e.target.value);
-  };
+  // const handleChange = (e) => {
+  //   setAge(e.target.value);
+  // };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
     <AppBar
       style={{
-        backgroundColor: "#e6e6e6"
+        // backgroundColor: "#e6e6e6"
+        backgroundColor: "#fff"
       }}
       sx={{ minHeight: "75px !important" }}
     >
@@ -176,23 +193,23 @@ const Navbar = () => {
             }}
           >
             <Grid item xs={1}>
-              {/* <Typography variant="h5" color="black">
-                <AddShoppingCartIcon />
-              </Typography> */}
+
               <Card >
-                <CardActionArea sx={{ display: "flex", 
-                justifyContent: "center", alignItems: "center"}}>
+                <CardActionArea sx={{
+                  display: "flex",
+                  justifyContent: "center", alignItems: "center"
+                }}>
                   <CardMedia
                     component="img"
-                    height="45"
-                    image={money4}
+                    height="75"
+                    image={logo}
                     alt="green iguana"
                   />
                   <CardContent>
-                    
+
                   </CardContent>
                 </CardActionArea>
-                
+
               </Card>
             </Grid>
             <Grid item xs={6}>
@@ -286,13 +303,17 @@ const Navbar = () => {
                     color: "black",
                     flexWrap: "nowrap"
                   }}
+                  value={value}
+                  onChange={handleLanguageChange}
                 >
                   <FormControlLabel
+                    checked={language === "mm" ?? localStorage.getItem("lng")}
                     value="mm"
                     control={<Radio />}
                     label="MM"
                   />
                   <FormControlLabel
+                    checked={language === "eng" ?? localStorage.getItem("lng")}
                     value="eng"
                     control={<Radio />}
                     label="Eng"
@@ -335,7 +356,7 @@ const Navbar = () => {
                   onClose={handleCloseUserMenu}
                 >
                   {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem key={setting} onClick={handleCloseToken}>
                       <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                   ))}

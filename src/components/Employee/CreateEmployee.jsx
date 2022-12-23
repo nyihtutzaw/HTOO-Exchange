@@ -4,9 +4,13 @@ import React from "react";
 import SaveIcon from '@mui/icons-material/Save';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import Navbar from "../navbar/Navbar";
+import { useTranslation } from "react-i18next";
 
 const CreateEmployee
   = () => {
+    const { t, i18n } = useTranslation();
+    // console.log("t", t("employee.create_title"))
+
     return (
       <>
         <Navbar />
@@ -21,7 +25,8 @@ const CreateEmployee
         >
           <Card sx={{ marginTop: "65px", bgcolor: '#edeff2' }} >
             <Box sx={{ margin: "30px", }}>
-              <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ
+              <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>
+                {t("employee.create_title")}
               </Typography>
               <Stack spacing={2} direction="row" m={2}>
                 <Button variant="contained" size="small"
@@ -30,7 +35,7 @@ const CreateEmployee
                       bgcolor: '#094708',
                       color: '#fff'
                     }
-                  }}>ရာထူး</Button>
+                  }}>ရာထူးnnn</Button>
                 <TextField type="text" required label="" variant="outlined" size="small" sx={{ width: "350px" }} />
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
