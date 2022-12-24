@@ -66,5 +66,16 @@
     "f_id": "Facebook ID",
     "remark": "မှတ်ချက်",
     "save": "သိမ်းမည်",
-    "go_back": "ပြန်သွားရန်"
+    "go_back": "ပြန်သွားရန်",
+    "exchange": "ငွေလဲလှယ်",
+    "w-agent": "W-ကိုယ်စားလှယ်",
+    "employees": "ဝန်ထမ်းများ",
+    "set-up": "ပိုမိုကြည့်ရန်",
+    "staff-salary": "ဝန်ထမ်းလစာ",
+    "expense": "ကုန်ကျစရိတ်",
+    "branch-transfer": "Branch လွဲပြောင်း",
+    "banks": "ဘဏ်များ",
+    "role-access": "လုပ်ပိုင်ခွင့်များ",
+    "branches": "ရုံးခွဲများ"
+
 }

@@ -39,68 +39,8 @@ import CreateExchange from "../exchange/CreateExchange";
 import logo from "../../assets/images/logo.png"
 import { useTranslation } from "react-i18next";
 
-const settings = ["", "Logout"];
+const settings = ["Account", "Logout"];
 
-const lists = [
-  {
-    name: "W-Agent",
-    route: "/admin/create-wave",
-    element: <CreateWave />
-  },
-  {
-    name: "True Money",
-    route: "/admin/create-true",
-    element: <CreateTrue />
-  },
-  {
-    name: "Exchange",
-    route: "/admin/create-exchange",
-    element: <CreateExchange />
-  },
-  {
-    name: "Employees",
-    route: "/admin/list-employee",
-    element: <EmployeeList />
-  }
-];
-
-const menus = [
-  {
-    name: "Branches",
-    route: "/admin/list-branch",
-    element: <BranchList />
-  },
-  {
-    name: "Role&Access",
-    route: "/admin/list-role-access",
-    element: <RoleAndAccessList />
-  },
-  {
-    name: "Bank",
-    route: "/admin/list-bank",
-    element: <BankNameList />
-  },
-  {
-    name: "Customers",
-    route: "/admin/list-customer",
-    element: <CustomerList />
-  },
-  {
-    name: "Expense",
-    route: "/admin/list-expense",
-    element: <ExpenseList />
-  },
-  {
-    name: "BranchTransfer",
-    route: "/admin/create-branch-transfer",
-    element: <CreateBranchTransfer />
-  },
-  {
-    name: "StackSalary",
-    route: "/admin/list-stack-salary",
-    element: <StackSalaryList />
-  }
-];
 
 const Navbar = () => {
   const theme = useTheme();
@@ -109,10 +49,72 @@ const Navbar = () => {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElUsers, setAnchorElUsers] = useState(null);
-  const [buttonLabel, setButtonLabel] = useState("Set Up");
+  const [buttonLabel, setButtonLabel] = useState("Set-Up");
+  // const [buttonLabel, setButtonLabel] = useState(`${t("set-up")}`);
   // const [age, setAge] = React.useState('');
   const [language, setLanguage] = useState("eng");
   const [value, setValue] = useState("eng");
+
+  const lists = [
+    {
+      name: `${t("w-agent")}`,
+      route: "/admin/create-wave",
+      element: <CreateWave />
+    },
+    {
+      name: "True Money",
+      route: "/admin/create-true",
+      element: <CreateTrue />
+    },
+    {
+      name: `${t("exchange")}`,
+      route: "/admin/create-exchange",
+      element: <CreateExchange />
+    },
+    {
+      name: `${t("employees")}`,
+      route: "/admin/list-employee",
+      element: <EmployeeList />
+    }
+  ];
+
+  const menus = [
+    {
+      name: `${t("branches")}`,
+      route: "/admin/list-branch",
+      element: <BranchList />
+    },
+    {
+      name: `${t("role-access")}`,
+      route: "/admin/list-role-access",
+      element: <RoleAndAccessList />
+    },
+    {
+      name: `${t("banks")}`,
+      route: "/admin/list-bank",
+      element: <BankNameList />
+    },
+    {
+      name: "Customers",
+      route: "/admin/list-customer",
+      element: <CustomerList />
+    },
+    {
+      name: `${t("expense")}`,
+      route: "/admin/list-expense",
+      element: <ExpenseList />
+    },
+    {
+      name: `${t("branch-transfer")}`,
+      route: "/admin/create-branch-transfer",
+      element: <CreateBranchTransfer />
+    },
+    {
+      name: `${t("staff-salary")}`,
+      route: "/admin/list-stack-salary",
+      element: <StackSalaryList />
+    }
+  ];
 
   const handleLanguageChange = (event) => {
     setValue(event.target.value);
@@ -154,19 +156,9 @@ const Navbar = () => {
     setAnchorElUsers(null);
   };
 
-  // const handleChange = (e) => {
-  //   setAge(e.target.value);
-  // };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  // const open = Boolean(anchorEl);
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
+  const handleSetButton = (data) =>  {
+    setButtonLabel(data)
+  }
 
   return (
     <AppBar
@@ -220,6 +212,7 @@ const Navbar = () => {
                   style={{ textDecoration: "none" }}
                 >
                   <Button sx={{
+                    textTransform: "none",
                     margin: "5px", backgroundColor: "#094708", ':hover': {
                       bgcolor: '#094708',
                       color: '#fff'
@@ -242,10 +235,11 @@ const Navbar = () => {
               >
                 <Tooltip title="Open settings">
                   <Button variant="contained" sx={{
+                    textTransform: 'none',
                     margin: "5px", backgroundColor: "#094708", ':hover': {
                       bgcolor: '#094708'
                     }
-                  }} onClick={handleOpenUser}>
+                  }} onClick={handleOpenUser} >
                     {buttonLabel}
                   </Button>
                 </Tooltip>
@@ -266,11 +260,11 @@ const Navbar = () => {
                   onClose={handleCloseUser}
                 >
                   {menus.map((data) => (
-                    <MenuItem key={data.name} onClick={handleCloseUser}>
+                    <MenuItem key={data.name} >
                       <Link
                         to={data.route}
                         style={{ textDecoration: "none" }}
-                        onClick={() => setButtonLabel(data.name)}
+                        onClick={() => handleSetButton(data.name)}
                       >
                         <Typography textAlign="center" color="black">
                           {data.name}

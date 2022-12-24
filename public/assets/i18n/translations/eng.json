@@ -62,8 +62,19 @@
     "new": "New",
     "transfer": "Transfer",
     "f_name": "Facebook Name",
-    "f_id": "Facebook Id",
+    "f_id": "Facebook ID",
     "remark": "Remark",
     "save": "Save",
-    "go_back": "Go Back"
+    "go_back": "Go Back",
+    "exchange": "Exchange",
+    "w-agent": "W-Agent",
+    "employees": "Employees",
+    "set-up": "SetUp",
+    "staff-salary": "Stack Salary",
+    "expense": "Expense",
+    "branch-transfer": "Branch Transfer",
+    "banks": "Banks",
+    "role-access": "Role&Access",
+    "branches": "Branches"
+
 }

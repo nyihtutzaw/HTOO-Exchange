@@ -134,14 +134,14 @@ const CustomerList = () => {
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">
                             <TableHead sx={{ backgroundColor: "#094708", }}>
                                 <TableRow>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }}>{t("no")}</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("name")}</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right"> {t("f_name")}</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("f_id")}</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("phone")}</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("address")}</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("remark")}</TableCell>
-                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="right">{t("action")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("no")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("name")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center"> {t("f_name")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("f_id")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("phone")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("address")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("remark")}</TableCell>
+                                    <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">{t("action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -150,16 +150,16 @@ const CustomerList = () => {
                                         key={row.Id}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell component="th" scope="row">
+                                        <TableCell component="th" scope="row" align="center">
                                             {row.Id}
                                         </TableCell>
-                                        <TableCell align="right">{row.name}</TableCell>
-                                        <TableCell align="right">{row.fbName}</TableCell>
-                                        <TableCell align="right">{row.fbId}</TableCell>
-                                        <TableCell align="right">{row.phone}</TableCell>
-                                        <TableCell align="right">{row.address}</TableCell>
-                                        <TableCell align="right">{row.remark}</TableCell>
-                                        <TableCell align="right">
+                                        <TableCell align="center">{row.name}</TableCell>
+                                        <TableCell align="center">{row.fbName}</TableCell>
+                                        <TableCell align="center">{row.fbId}</TableCell>
+                                        <TableCell align="center">{row.phone}</TableCell>
+                                        <TableCell align="center">{row.address}</TableCell>
+                                        <TableCell align="center">{row.remark}</TableCell>
+                                        <TableCell align="center">
                                             <DisplaySettingsRoundedIcon onClick={handleDetail} sx={{ color: "green", fontSize: "25px" }} />
                                             <DriveFileRenameOutlineRoundedIcon onClick={handleEdit} sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }} />
                                             <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }} />

@@ -150,7 +150,7 @@ const ExpenseList = () => {
                                         <TableCell component="th" scope="row" align="center">
                                             {row.Id}
                                         </TableCell>
-                                        <TableCell align="right">{row.date}</TableCell>
+                                        <TableCell align="center">{row.date}</TableCell>
                                         <TableCell align="center">{row.expense_name}</TableCell>
                                         <TableCell align="center">{row.expense_type}</TableCell>
                                         <TableCell align="center">{row.remark}</TableCell>

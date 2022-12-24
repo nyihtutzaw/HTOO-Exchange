@@ -29,6 +29,7 @@ const CreateCustomer
               </Typography>
               <Stack spacing={2} direction="row" m={2}>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                     bgcolor: '#094708',
                     color: '#fff'
@@ -38,6 +39,7 @@ const CreateCustomer
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                     bgcolor: '#094708',
                     color: '#fff'
@@ -47,6 +49,7 @@ const CreateCustomer
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                     bgcolor: '#094708',
                     color: '#fff'
@@ -56,6 +59,7 @@ const CreateCustomer
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                     bgcolor: '#094708',
                     color: '#fff'
@@ -65,6 +69,7 @@ const CreateCustomer
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                     bgcolor: '#094708',
                     color: '#fff'
@@ -74,6 +79,7 @@ const CreateCustomer
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
                     bgcolor: '#094708',
                     color: '#fff'
@@ -86,6 +92,7 @@ const CreateCustomer
                 display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: '15px'
               }}>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   display: "flex", justifyContent: "space-evenly", alignItems: "center",
                   backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
                     bgcolor: '#fff',
@@ -99,6 +106,7 @@ const CreateCustomer
 
                 </Button>
                 <Button variant="contained" size="small" sx={{
+                  textTransform: "none",
                   display: "flex", justifyContent: "space-evenly", alignItems: "center",
                   backgroundColor: "#469152", minWidth: "200px", fontSize: "14px", ':hover': {
                     bgcolor: '#469152',
