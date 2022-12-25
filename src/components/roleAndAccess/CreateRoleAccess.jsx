@@ -1,4 +1,4 @@
-import { Box, Button, Card, FormControl, FormControlLabel, FormGroup, Grid, InputLabel, MenuItem, Select, Stack, Switch, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, FormControl, FormControlLabel, Grid, InputLabel, MenuItem, Select, Stack, Switch, Typography } from "@mui/material";
 import React from "react";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -9,7 +9,7 @@ import { styled } from '@mui/material/styles';
 
 const CreateRoleAccess
     = () => {
-        const { t, i18n } = useTranslation();
+        const { t } = useTranslation();
         const [age, setAge] = React.useState('');
 
         const handleChange = (event) => {
@@ -329,7 +329,7 @@ const CreateRoleAccess
                                     <Button variant="contained" size="small" sx={{
                                         textTransform: "none",
                                         display: "flex", justifyContent: "space-evenly", alignItems: "center",
-                                        backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
+                                        backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", ':hover': {
                                             bgcolor: '#fff',
                                             color: '#094708'
                                         }

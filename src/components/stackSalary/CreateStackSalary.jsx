@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 const CreateStackSalary
     = () => {
-        const { t, i18n } = useTranslation();
+        const { t } = useTranslation();
         const [age, setAge] = React.useState('');
 
         const handleChange = (event) => {
@@ -73,7 +73,7 @@ const CreateStackSalary
                                     }
                                 }}> {t("staff-salary.opportunity-1")}
                                 </Button>
-                                
+
                                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                                     <InputLabel id="demo-select-small">အဆောင်ခ
                                     </InputLabel>
@@ -214,7 +214,7 @@ const CreateStackSalary
                                 <Button variant="contained" size="small" sx={{
                                     textTransform: "none",
                                     display: "flex", justifyContent: "space-evenly", alignItems: "center",
-                                    backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
+                                    backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", ':hover': {
                                         bgcolor: '#fff',
                                         color: '#094708'
                                     }
