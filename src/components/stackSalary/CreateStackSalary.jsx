@@ -73,6 +73,7 @@ const CreateStackSalary
                                     }
                                 }}> {t("staff-salary.opportunity-1")}
                                 </Button>
+                                
                                 <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                                     <InputLabel id="demo-select-small">အဆောင်ခ
                                     </InputLabel>
