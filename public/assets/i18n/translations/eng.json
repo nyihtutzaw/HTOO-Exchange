@@ -49,6 +49,11 @@
 
     "no": "No",
     "name": "Name",
+    "birthday": "Birthday",
+    "nrc": "Nrc",
+    "start_work": "Start Work",
+    "end_work": "End Work",
+    "save_assign": "Save&Assign",
     "position": "Position",
     "branch": "Branch",
     "date": "Date",

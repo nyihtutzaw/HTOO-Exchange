@@ -28,28 +28,27 @@
     "branch-transfer.account-cash": "အကောင့်(E-ပိုက်ဆံ/ပိုက်ဆံ)",
     "branch-transfer.from-transfer-type": "မှ(လွဲခြင်း) အမျိူးအစား",
     "branch-transfer.to-transfer-type": "သို့(လွဲခြင်း) အမျိူးအစား",
-
     "staff-salary.list": "ဝန်ထမ်းလစာ စာရင်း ",
     "staff-salary.staff_name": "ဝန်ထမ်းအမည်",
     "staff-salary.create": "ဝန်ထမ်းလစာ စာရင်းသွင်းရန်စာမျက်နှာ",
-
     "staff-salary.staff_salary": "လစာ",
     "staff-salary.comission": "ကော်မရှင်",
     "staff-salary.opportunity": "ခံစားခွင့်",
-
     "staff-salary.opportunity-1": "ခံစားခွင့်-၁",
     "staff-salary.opportunity-2": "ခံစားခွင့်-၂",
     "staff-salary.opportunity-3": "ခံစားခွင့်-၃",
     "staff-salary.opportunity-4": "ခံစားခွင့်-၄",
     "staff-salary.opportunity-5": "ခံစားခွင့်-၅",
-
-
     "staff-salary.total": "စုစုပေါင်း",
     "staff-salary.month-year": "လ/ခုနှစ်",
-
-
     "no": "စဉ်",
     "name": "အမည်",
+    "birthday": "မွေးနေ့",
+    "nrc": "မှတ်ပုံတင်",
+    "start_work": "အလုပ်စဝင်သည့်နေ့",
+    "end_work": "အလုပ်ထွက်သည့်နေ့",
+    "save_assign": "သတ်မှတ်သိမ်းရန်",
+
     "position": "ရာထူး",
     "branch": "Branch",
     "date": "ရက်စွဲ",
@@ -77,5 +76,4 @@
     "banks": "ဘဏ်များ",
     "role-access": "လုပ်ပိုင်ခွင့်များ",
     "branches": "ရုံးခွဲများ"
-
 }

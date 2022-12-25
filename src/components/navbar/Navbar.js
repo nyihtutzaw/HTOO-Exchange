@@ -19,7 +19,10 @@ import {
   Card,
   CardActionArea,
   CardMedia,
-  CardContent
+  CardContent,
+  ListItem,
+  List,
+  ListItemText
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "../drewer/DrawerComp";
@@ -38,9 +41,9 @@ import CreateTrue from "../true/CreateTrue";
 import CreateExchange from "../exchange/CreateExchange";
 import logo from "../../assets/images/logo.png"
 import { useTranslation } from "react-i18next";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const settings = ["Account", "Logout"];
-
 
 const Navbar = () => {
   const theme = useTheme();
@@ -49,11 +52,12 @@ const Navbar = () => {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElUsers, setAnchorElUsers] = useState(null);
-  const [buttonLabel, setButtonLabel] = useState("Set-Up");
+  const [buttonLabel, setButtonLabel] = useState("SetUp");
   // const [buttonLabel, setButtonLabel] = useState(`${t("set-up")}`);
   // const [age, setAge] = React.useState('');
   const [language, setLanguage] = useState("eng");
   const [value, setValue] = useState("eng");
+
 
   const lists = [
     {
@@ -82,17 +86,17 @@ const Navbar = () => {
     {
       name: `${t("branches")}`,
       route: "/admin/list-branch",
-      element: <BranchList />
+      element: <BranchList />,
     },
     {
       name: `${t("role-access")}`,
       route: "/admin/list-role-access",
-      element: <RoleAndAccessList />
+      element: <RoleAndAccessList />,
     },
     {
       name: `${t("banks")}`,
       route: "/admin/list-bank",
-      element: <BankNameList />
+      element: <BankNameList />,
     },
     {
       name: "Customers",
@@ -156,8 +160,9 @@ const Navbar = () => {
     setAnchorElUsers(null);
   };
 
-  const handleSetButton = (data) =>  {
+  const handleSetButton = (data) => {
     setButtonLabel(data)
+    handleCloseUser()
   }
 
   return (
@@ -234,15 +239,18 @@ const Navbar = () => {
                 }}
               >
                 <Tooltip title="Open settings">
-                  <Button variant="contained" sx={{
-                    textTransform: 'none',
-                    margin: "5px", backgroundColor: "#094708", ':hover': {
-                      bgcolor: '#094708'
-                    }
-                  }} onClick={handleOpenUser} >
-                    {buttonLabel}
-                  </Button>
+                  <>
+                    <Button variant="contained" sx={{
+                      textTransform: 'none',
+                      margin: "5px", backgroundColor: "#094708", ':hover': {
+                        bgcolor: '#094708'
+                      }
+                    }} onClick={handleOpenUser} >
+                      {buttonLabel}
+                    </Button>
+                  </>
                 </Tooltip>
+                <KeyboardArrowDownIcon />
                 <Menu
                   sx={{ mt: "45px" }}
                   id="menu-appbar"
@@ -264,7 +272,10 @@ const Navbar = () => {
                       <Link
                         to={data.route}
                         style={{ textDecoration: "none" }}
-                        onClick={() => handleSetButton(data.name)}
+                        onClose={handleCloseUser}
+                        // onClick={() => setButtonLabel(data?.name)}
+                        onClick={() => handleSetButton(data?.name)}
+                      // selected= {buttonLabel}
                       >
                         <Typography textAlign="center" color="black">
                           {data.name}
@@ -274,6 +285,7 @@ const Navbar = () => {
                   ))}
                 </Menu>
               </Box>
+
             </Grid>
             <Grid item xs={1}>
               <FormControl
