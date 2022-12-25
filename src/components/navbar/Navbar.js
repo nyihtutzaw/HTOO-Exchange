@@ -20,9 +20,6 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
-  ListItem,
-  List,
-  ListItemText
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "../drewer/DrawerComp";
@@ -160,15 +157,14 @@ const Navbar = () => {
     setAnchorElUsers(null);
   };
 
-  const handleSetButton = (data) => {
-    setButtonLabel(data)
-    handleCloseUser()
-  }
+  // const handleSetButton = (data) => {
+  //   setButtonLabel(data)
+  //   handleCloseUser()
+  // }
 
   return (
     <AppBar
       style={{
-        // backgroundColor: "#e6e6e6"
         backgroundColor: "#fff"
       }}
       sx={{ minHeight: "75px !important" }}
@@ -274,8 +270,7 @@ const Navbar = () => {
                         style={{ textDecoration: "none" }}
                         onClose={handleCloseUser}
                         // onClick={() => setButtonLabel(data?.name)}
-                        onClick={() => handleSetButton(data?.name)}
-                      // selected= {buttonLabel}
+                        // onClick={() => handleSetButton(data?.name)}
                       >
                         <Typography textAlign="center" color="black">
                           {data.name}
