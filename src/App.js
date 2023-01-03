@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -6,9 +6,9 @@ import {
   Navigate
 } from "react-router-dom";
 import "./i18n";
-import BankName from "./components/bank_name/CreateBankName";
+// import BankName from "./components/bank_name/CreateBankName";
 // import Navbar from "./components/navbar/Navbar";
-import Login_form from "./pages/Login_form";
+// import Login_form from "./pages/LoginForm";
 // import AuthRoute from "./routers/AuthRoute";
 import PirvateRoute from "./routers/PrivateRoute";
 // import Admin from "./pages/Admin";
@@ -36,13 +36,14 @@ import CreateTrue from "./components/true/CreateTrue";
 import CreateExchange from "./components/exchange/CreateExchange";
 import CreateBankName from "./components/bank_name/CreateBankName";
 import BranchTransferList from "./components/branchTransfer/BranchTransferList";
+import LoginForm from "./pages/LoginForm";
 
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/auth/login" element={<Login_form />} />
+        <Route path="/auth/login" element={<LoginForm />} />
         <Route element={<PirvateRoute />} >
           <Route
             path="/"

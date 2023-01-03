@@ -49,7 +49,7 @@ const Navbar = () => {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElUsers, setAnchorElUsers] = useState(null);
-  const [buttonLabel, setButtonLabel] = useState("SetUp");
+  // const [buttonLabel, setButtonLabel] = useState("SetUp");
   // const [buttonLabel, setButtonLabel] = useState(`${t("set-up")}`);
   // const [age, setAge] = React.useState('');
   const [language, setLanguage] = useState("eng");
@@ -242,7 +242,8 @@ const Navbar = () => {
                         bgcolor: '#094708'
                       }
                     }} onClick={handleOpenUser} >
-                      {buttonLabel}
+                      {/* {buttonLabel} */}
+                      SetUp
                     </Button>
                   </>
                 </Tooltip>

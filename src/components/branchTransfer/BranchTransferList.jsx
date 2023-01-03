@@ -18,6 +18,8 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import PrintIcon from '@mui/icons-material/Print';
 import { useTranslation } from "react-i18next";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import GroupsIcon from '@mui/icons-material/Groups';
+import DvrIcon from '@mui/icons-material/Dvr';
 
 
 const useStyles = makeStyles({
@@ -52,7 +54,7 @@ const rows = [
 
 
 const BranchTransferList = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     const classes = useStyles();
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
@@ -77,28 +79,70 @@ const BranchTransferList = () => {
                     display: "flex", justifyContent: "center", flexDirection: "column"
                 }}
             >
-                {/* <Box m={2} display="flex" flexDirection="row" justifyContent="space-between">
-                    <Box mt={2}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Branch To Branch Transfer List
-                        </Typography>
-                    </Box>
-                    <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
+                <Box m={2} display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Branch To Branch Transfer List
+                    </Typography>
+                    <Button variant="contained"
+                        size="small" sx={{
+                            display: "flex", justifyContent: "space-evenly", alignItems: "center",
+                            backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
+                                bgcolor: '#1dad52',
+                                color: '#fff'
+                            }
+                        }} onClick={handleLink}>
+                        <AddCircleRoundedIcon />
+                        <Box>
+                            {t("new")}
+                        </Box>
+
+                    </Button>
+                </Box>
+                <Box m={1} display="flex" flexDirection="row" justifyContent="space-between">
+                    <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                             <DesktopDatePicker
-                                label="Start Date"
+                                label="Date"
                                 inputFormat="MM/DD/YYYY"
                                 value={value}
                                 onChange={handleChange}
                                 renderInput={(params) => <TextField {...params} sx={{ mr: 2 }} size="small" />}
                             />
-                            <DesktopDatePicker
-                                label="End Date"
-                                inputFormat="MM/DD/YYYY"
-                                value={value}
-                                onChange={handleChange}
-                                renderInput={(params) => <TextField {...params} sx={{ mr: 2 }} size="small" />}
-                            />
+
                         </LocalizationProvider>
+                        <Button variant="contained"
+                            size="small" sx={{
+                                textTransform: "none",
+                                display: "flex", justifyContent: "space-evenly", alignItems: "center",
+                                margin: "3px", padding: "7px",
+                                backgroundColor: "#1dad52", minWidth: "100px", fontSize: "14px", ':hover': {
+                                    bgcolor: '#1dad52',
+                                    color: '#fff'
+                                }
+                            }} onClick={handleLink}>
+                            <DvrIcon />
+                            <Box>
+                                Branch
+                            </Box>
+
+                        </Button>
+                        <Button variant="contained"
+                            size="small" sx={{
+                                textTransform: "none",
+                                display: "flex", justifyContent: "space-evenly", alignItems: "center",
+                                margin: "3px", padding: "7px",
+                                backgroundColor: "#1dad52", minWidth: "100px", fontSize: "14px", ':hover': {
+                                    bgcolor: '#1dad52',
+                                    color: '#fff'
+                                }
+                            }} onClick={handleLink}>
+                            <GroupsIcon />
+                            <Box>
+                                Employee
+                            </Box>
+
+                        </Button>
+                    </Box>
+                    <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
                         <Button variant="contained"
                             size="small" sx={{
                                 textTransform: "none",
@@ -133,25 +177,6 @@ const BranchTransferList = () => {
                         </Button>
 
                     </Box>
-                </Box> */}
-
-                <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Branch To Branch Transfer List
-                    </Typography>
-                    <Button variant="contained"
-                        size="small" sx={{
-                            display: "flex", justifyContent: "space-evenly", alignItems: "center",
-                            backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
-                                bgcolor: '#1dad52',
-                                color: '#fff'
-                            }
-                        }} onClick={handleLink}>
-                        <AddCircleRoundedIcon />
-                        <Box>
-                            {t("new")}
-                        </Box>
-
-                    </Button>
                 </Box>
                 <Box display="flex" justifyContent="center" alignItems="center">
                     <TableContainer style={{ width: 1400, marginTop: "5px" }}>

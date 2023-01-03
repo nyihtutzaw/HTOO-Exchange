@@ -55,7 +55,7 @@ const CssTextField = withStyles({
 })(TextField);
 
 const BranchList = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
 

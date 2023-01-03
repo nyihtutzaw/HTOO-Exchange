@@ -1,4 +1,4 @@
-import { Box, Button, Card, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, Card,TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
@@ -9,12 +9,14 @@ import { useTranslation } from "react-i18next";
 
 const CreateExpense
     = () => {
-        const { t, i18n } = useTranslation();
-        const [age, setAge] = React.useState('');
+        const { t } = useTranslation();
+        // const [age, setAge] = React.useState('');
 
-        const handleChange = (event) => {
-            setAge(event.target.value);
-        };
+        // const handleChange = (event) => {
+        //     setAge(event.target.value);
+        // };
+        // console.log(age);
+        
         return (
             <>
                 <Navbar />
@@ -118,7 +120,7 @@ const CreateExpense
                                 <Button variant="contained" size="small" sx={{
                                     textTransform: "none",
                                     display: "flex", justifyContent: "space-evenly", alignItems: "center",
-                                    backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
+                                    backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", ':hover': {
                                         bgcolor: '#fff',
                                         color: '#094708'
                                     }

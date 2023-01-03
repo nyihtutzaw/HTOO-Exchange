@@ -1,5 +1,5 @@
 import React from "react";
-import { Circles, ThreeDots } from "react-loader-spinner";
+import { Circles } from "react-loader-spinner";
 import Card from "@mui/material/Card";
 
 const LoadingData = () => {

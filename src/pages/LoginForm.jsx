@@ -32,7 +32,7 @@ const CssTextField = withStyles({
   },
 })(TextField);
 
-const Login_form = () => {
+const LoginForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false)
 
@@ -179,4 +179,4 @@ const Login_form = () => {
   );
 };
 
-export default Login_form;
+export default LoginForm;

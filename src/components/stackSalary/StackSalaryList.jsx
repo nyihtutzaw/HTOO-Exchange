@@ -56,7 +56,7 @@ const CssTextField = withStyles({
 
 
 const StackSalaryList = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const handleEdit = (e) => {

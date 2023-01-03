@@ -56,7 +56,7 @@ const CssTextField = withStyles({
 
 
 const RoleAndAccessList = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     const handleEdit = (e) => {

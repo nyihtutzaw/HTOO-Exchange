@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const CreateBranch
   = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
 
     return (
       <>
@@ -67,7 +67,7 @@ const CreateBranch
                 <Button variant="contained" size="small" sx={{
                   textTransform: "none",
                   display: "flex", justifyContent: "space-evenly", alignItems: "center",
-                  backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", textTransform: "none", ':hover': {
+                  backgroundColor: "#fff", minWidth: "200px", fontSize: "14px", color: "green", ':hover': {
                     bgcolor: '#fff',
                     color: '#094708'
                   }

@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormControlLabel, FormGroup, InputAdornment, TextField, Typography } from '@mui/material';
+import { Button, Checkbox, Dialog, DialogActions, DialogContent, DialogTitle, FormControlLabel, FormGroup, InputAdornment, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
@@ -57,7 +57,7 @@ const CssTextField = withStyles({
 
 
 const EmployeeList = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
 

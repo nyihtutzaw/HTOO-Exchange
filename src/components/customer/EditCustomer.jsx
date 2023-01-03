@@ -1,7 +1,7 @@
 import { Box, Button, Card, TextField, Typography } from "@mui/material";
 import { Stack } from "@mui/system";
 import React from "react";
-import EditEmployee from "../Employee/EditEmployee";
+// import EditEmployee from "../Employee/EditEmployee";
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import Navbar from "../navbar/Navbar";

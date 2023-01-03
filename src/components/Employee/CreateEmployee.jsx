@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 
 const CreateEmployee
   = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     // console.log("t", t("employee.create_title"))
 
     return (
