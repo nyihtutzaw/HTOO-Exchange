@@ -107,7 +107,7 @@ const Navbar = () => {
     },
     {
       name: `${t("branch-transfer")}`,
-      route: "/admin/create-branch-transfer",
+      route: "/admin/list-branch-transfer",
       element: <CreateBranchTransfer />
     },
     {

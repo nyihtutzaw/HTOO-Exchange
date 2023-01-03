@@ -16,6 +16,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import PrintIcon from '@mui/icons-material/Print';
+import { useTranslation } from "react-i18next";
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 
 
 const useStyles = makeStyles({
@@ -31,25 +33,27 @@ const useStyles = makeStyles({
 });
 
 
-function createData(no, datetime, branchBankIn, branchBankOut, amountIn, amountOut, eMoneyComession,
-    cashComession, remark, customerName, employeename) {
+function createData(no, datetime, fromBranch, toBranch, type, amount, fromTransferType,
+    toTransferType, remark, Employee) {
     return {
-        no, datetime, branchBankIn, branchBankOut, amountIn, amountOut, eMoneyComession,
-        cashComession, remark, customerName, employeename
+        no, datetime, fromBranch, toBranch, type, amount, fromTransferType,
+        toTransferType, remark, Employee
     };
 }
 
 const rows = [
-    createData(1, "12-08-2022 12-30PM", "KBZ(MDY)", "Yoma", 20000, 1000, 4000, 3500, "Hello How", "Mg Kyaw", "U Maung Maung"),
-    createData(2, "12-08-2022 12-30PM", "KBZ(MDY)", "Yoma", 20000, 1000, 4000, 3500, "Hello How", "Mg Kyaw", "U Maung Maung"),
-    createData(3, "12-08-2022 12-30PM", "KBZ(MDY)", "Yoma", 20000, 1000, 4000, 3500, "Hello How", "Mg Kyaw", "U Maung Maung"),
-    createData(4, "12-08-2022 12-30PM", "KBZ(MDY)", "Yoma", 20000, 1000, 4000, 3500, "Hello How", "Mg Kyaw", "U Maung Maung"),
-    createData(5, "12-08-2022 12-30PM", "KBZ(MDY)", "Yoma", 20000, 1000, 4000, 3500, "Hello How", "Mg Kyaw", "U Maung Maung"),
-    createData(6, "12-08-2022 12-30PM", "KBZ(MDY)", "Yoma", 20000, 1000, 4000, 3500, "Hello How", "Mg Kyaw", "U Maung Maung"),
+    createData(1, "12-08-2022 12-30PM", "Mdy Branch)", "Ygn Branch", "E-Money", 1000, "Kpay(Mg Mg)", "Kpay(Su Su)", "Hello How", "Mg Kyaw"),
+    createData(2, "12-08-2022 12-30PM", "Mdy Branch)", "Ygn Branch", "E-Money", 1000, "Kpay(Mg Mg)", "Kpay(Su Su)", "Hello How", "Mg Kyaw"),
+    createData(3, "12-08-2022 12-30PM", "Mdy Branch)", "Ygn Branch", "E-Money", 1000, "Kpay(Mg Mg)", "Kpay(Su Su)", "Hello How", "Mg Kyaw"),
+    createData(4, "12-08-2022 12-30PM", "Mdy Branch)", "Ygn Branch", "E-Money", 1000, "Kpay(Mg Mg)", "Kpay(Su Su)", "Hello How", "Mg Kyaw"),
+    createData(5, "12-08-2022 12-30PM", "Mdy Branch)", "Ygn Branch", "E-Money", 1000, "Kpay(Mg Mg)", "Kpay(Su Su)", "Hello How", "Mg Kyaw"),
+    createData(6, "12-08-2022 12-30PM", "Mdy Branch)", "Ygn Branch", "E-Money", 1000, "Kpay(Mg Mg)", "Kpay(Su Su)", "Hello How", "Mg Kyaw"),
 ];
 
 
-const CreateExchange = () => {
+const BranchTransferList = () => {
+    const { t, i18n } = useTranslation();
+
     const classes = useStyles();
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
 
@@ -73,9 +77,9 @@ const CreateExchange = () => {
                     display: "flex", justifyContent: "center", flexDirection: "column"
                 }}
             >
-                <Box m={2} display="flex" flexDirection="row" justifyContent="space-between">
+                {/* <Box m={2} display="flex" flexDirection="row" justifyContent="space-between">
                     <Box mt={2}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Exchange
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Branch To Branch Transfer List
                         </Typography>
                     </Box>
                     <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
@@ -129,6 +133,25 @@ const CreateExchange = () => {
                         </Button>
 
                     </Box>
+                </Box> */}
+
+                <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
+                    <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Branch To Branch Transfer List
+                    </Typography>
+                    <Button variant="contained"
+                        size="small" sx={{
+                            display: "flex", justifyContent: "space-evenly", alignItems: "center",
+                            backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
+                                bgcolor: '#1dad52',
+                                color: '#fff'
+                            }
+                        }} onClick={handleLink}>
+                        <AddCircleRoundedIcon />
+                        <Box>
+                            {t("new")}
+                        </Box>
+
+                    </Button>
                 </Box>
                 <Box display="flex" justifyContent="center" alignItems="center">
                     <TableContainer style={{ width: 1400, marginTop: "5px" }}>
@@ -137,15 +160,15 @@ const CreateExchange = () => {
                                 <TableRow>
                                     <TableCell className={classes.tHColor}>No</TableCell>
                                     <TableCell className={classes.tHColor} align="center">DateTime</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">BranchBank(in)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">BranchBank(out)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Amount(in)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Amount(out)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">E-Money Comession</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Cash Comession</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">From Branch</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">To Branch</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">Type</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">Amount</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">From Transfer Type</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">To Transfer Type</TableCell>
                                     <TableCell className={classes.tHColor} align="center">Remark</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Customer Name</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Employee Name</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">Employee</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">Action</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -155,15 +178,15 @@ const CreateExchange = () => {
                                             {row.no}
                                         </TableCell>
                                         <TableCell align="center">{row.datetime}</TableCell>
-                                        <TableCell align="center">{row.branchBankIn}</TableCell>
-                                        <TableCell align="center">{row.branchBankOut}</TableCell>
-                                        <TableCell align="center">{row.amountIn}</TableCell>
-                                        <TableCell align="center">{row.amountOut}</TableCell>
-                                        <TableCell align="center">{row.eMoneyComession}</TableCell>
-                                        <TableCell align="center">{row.cashComession}</TableCell>
+                                        <TableCell align="center">{row.fromBranch}</TableCell>
+                                        <TableCell align="center">{row.toBranch}</TableCell>
+                                        <TableCell align="center">{row.type}</TableCell>
+                                        <TableCell align="center">{row.amount}</TableCell>
+                                        <TableCell align="center">{row.fromTransferType}</TableCell>
+                                        <TableCell align="center">{row.toTransferType}</TableCell>
                                         <TableCell align="center">{row.remark}</TableCell>
-                                        <TableCell align="center">{row.customerName}</TableCell>
-                                        <TableCell align="center">{row.employeename}</TableCell>
+                                        <TableCell align="center">{row.Employee}</TableCell>
+                                        <TableCell align="center"></TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -176,4 +199,4 @@ const CreateExchange = () => {
     )
 }
 
-export default CreateExchange
+export default BranchTransferList

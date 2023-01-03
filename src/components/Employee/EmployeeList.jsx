@@ -192,7 +192,6 @@ const EmployeeList = () => {
                         />
                         
                         <Button variant="contained"
-
                             size="small" sx={{
                                 display: "flex", justifyContent: "space-evenly", alignItems: "center",
                                 backgroundColor: "#1dad52", minWidth: "200px", fontSize: "14px", ':hover': {
