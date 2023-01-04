@@ -16,6 +16,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import GetAppIcon from '@mui/icons-material/GetApp';
 import PrintIcon from '@mui/icons-material/Print';
+import { useTranslation } from "react-i18next";
+
 
 
 const useStyles = makeStyles({
@@ -50,6 +52,7 @@ const rows = [
 
 
 const CreateExchange = () => {
+    const { t } = useTranslation();
     const classes = useStyles();
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
 
@@ -135,17 +138,17 @@ const CreateExchange = () => {
                         <Table className={classes.table} aria-label="simple table">
                             <TableHead className={classes.thead}>
                                 <TableRow>
-                                    <TableCell className={classes.tHColor}>No</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">DateTime</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">BranchBank(in)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">BranchBank(out)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Amount(in)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Amount(out)</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">E-Money Comession</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Cash Comession</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Remark</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Customer Name</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Employee Name</TableCell>
+                                    <TableCell className={classes.tHColor}>{t('no')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('date-time')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('branch-bank-in')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('branch-bank-out')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('amount-money-in')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('amount-money-out')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('e-comission')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('cash-comission')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('about')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('customer.name')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('employee.name')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

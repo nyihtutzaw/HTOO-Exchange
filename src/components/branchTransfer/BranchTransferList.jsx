@@ -20,6 +20,10 @@ import { useTranslation } from "react-i18next";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import GroupsIcon from '@mui/icons-material/Groups';
 import DvrIcon from '@mui/icons-material/Dvr';
+import { useNavigate } from 'react-router-dom';
+// import DisplaySettingsRoundedIcon from '@mui/icons-material/DisplaySettingsRounded';
+import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
+import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
 
 
 const useStyles = makeStyles({
@@ -55,7 +59,7 @@ const rows = [
 
 const BranchTransferList = () => {
     const { t } = useTranslation();
-
+    const navigate = useNavigate()
     const classes = useStyles();
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
 
@@ -64,7 +68,15 @@ const BranchTransferList = () => {
     };
 
     const handleLink = () => {
-        // navigate("/admin/create-employee")
+        navigate("/admin/create-branch-transfer")
+    }
+
+    const handleEdit = (e) => {
+        console.log("edit")
+    }
+
+    const handleDelete = () => {
+        console.log("delete");
     }
 
     return (
@@ -80,7 +92,7 @@ const BranchTransferList = () => {
                 }}
             >
                 <Box m={2} display="flex" justifyContent="space-between" alignItems="center">
-                    <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Branch To Branch Transfer List
+                    <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> {t("branch-transfer.list")}
                     </Typography>
                     <Button variant="contained"
                         size="small" sx={{
@@ -101,7 +113,7 @@ const BranchTransferList = () => {
                     <Box mt={2} display="flex" justifyContent="space-between" alignItems="center">
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                             <DesktopDatePicker
-                                label="Date"
+                                label={t("date")}
                                 inputFormat="MM/DD/YYYY"
                                 value={value}
                                 onChange={handleChange}
@@ -121,7 +133,7 @@ const BranchTransferList = () => {
                             }} onClick={handleLink}>
                             <DvrIcon />
                             <Box>
-                                Branch
+                                {t("branch")}
                             </Box>
 
                         </Button>
@@ -137,7 +149,7 @@ const BranchTransferList = () => {
                             }} onClick={handleLink}>
                             <GroupsIcon />
                             <Box>
-                                Employee
+                                {t("employees")}
                             </Box>
 
                         </Button>
@@ -155,7 +167,7 @@ const BranchTransferList = () => {
                             }} onClick={handleLink}>
                             <GetAppIcon />
                             <Box>
-                                Excel Export
+                                {t("excel")}
                             </Box>
 
                         </Button>
@@ -183,17 +195,17 @@ const BranchTransferList = () => {
                         <Table className={classes.table} aria-label="simple table">
                             <TableHead className={classes.thead}>
                                 <TableRow>
-                                    <TableCell className={classes.tHColor}>No</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">DateTime</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">From Branch</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">To Branch</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Type</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Amount</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">From Transfer Type</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">To Transfer Type</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Remark</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Employee</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">Action</TableCell>
+                                    <TableCell className={classes.tHColor}>{t("no")} </TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("date-time")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("branch-transfer.from-branch")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("branch-transfer.to-branch")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("type")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("amount")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("branch-transfer.from-transfer-type")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("branch-transfer.to-transfer-type")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("remark")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("employees")}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t("action")}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -211,7 +223,11 @@ const BranchTransferList = () => {
                                         <TableCell align="center">{row.toTransferType}</TableCell>
                                         <TableCell align="center">{row.remark}</TableCell>
                                         <TableCell align="center">{row.Employee}</TableCell>
-                                        <TableCell align="center"></TableCell>
+                                        <TableCell align="center">
+                                            {/* <DisplaySettingsRoundedIcon onClick={handleClickOpen} sx={{ color: "green", fontSize: "25px" }} /> */}
+                                            <DriveFileRenameOutlineRoundedIcon onClick={handleEdit} sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }} />
+                                            <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }} />
+                                        </TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>

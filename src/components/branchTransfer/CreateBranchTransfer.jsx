@@ -30,7 +30,7 @@ const CreateBranchTransfer
                     <Card sx={{ marginTop: "65px", bgcolor: '#edeff2' }} >
                         <Box sx={{ margin: "30px", }}>
                             <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>
-                                {t("branch-transfer.list")}
+                                {t("branch-transfer.create")}
                             </Typography>
                             <Stack spacing={2} direction="row" m={2}>
                                 <Button variant="contained" size="small" sx={{
