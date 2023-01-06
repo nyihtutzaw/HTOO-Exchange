@@ -37,6 +37,7 @@ const LoginForm = () => {
   const [loading, setLoading] = useState(false)
 
   const handleLogin = () => {
+    
     setLoading(true);
     localStorage.setItem('Token', true)
     setTimeout(() => {

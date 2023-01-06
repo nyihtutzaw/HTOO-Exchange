@@ -37,6 +37,7 @@ import CreateExchange from "./components/exchange/CreateExchange";
 import CreateBankName from "./components/bank_name/CreateBankName";
 import BranchTransferList from "./components/branchTransfer/BranchTransferList";
 import LoginForm from "./pages/LoginForm";
+import ListExchange from "./components/exchange/ListExchange";
 
 
 function App() {
@@ -86,8 +87,10 @@ function App() {
           <Route path="/admin/create-wave" element={<CreateWave />} />
           {/* true routes */}
           <Route path="/admin/create-true" element={<CreateTrue />} />
+          
           {/* exchange routes */}
           <Route path="/admin/create-exchange" element={<CreateExchange />} />
+          <Route path="/admin/list-exchange" element={<ListExchange />} />
 
 
         </Route>

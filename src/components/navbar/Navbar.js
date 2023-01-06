@@ -69,7 +69,7 @@ const Navbar = () => {
     },
     {
       name: `${t("exchange")}`,
-      route: "/admin/create-exchange",
+      route: "/admin/list-exchange",
       element: <CreateExchange />
     },
     {
@@ -80,6 +80,11 @@ const Navbar = () => {
   ];
 
   const menus = [
+    {
+      name: `${t("exchange")}`,
+      route: "/admin/create-exchange",
+      element: <CreateExchange />
+    },
     {
       name: `${t("branches")}`,
       route: "/admin/list-branch",
