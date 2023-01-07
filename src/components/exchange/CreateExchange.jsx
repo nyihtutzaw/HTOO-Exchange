@@ -18,8 +18,6 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import PrintIcon from '@mui/icons-material/Print';
 import { useTranslation } from "react-i18next";
 
-
-
 const useStyles = makeStyles({
     table: {
         minWidth: 650

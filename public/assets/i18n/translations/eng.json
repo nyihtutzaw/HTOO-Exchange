@@ -60,6 +60,8 @@
     "position": "Position",
     "branch": "Branch",
     "date": "Date",
+    "start-date": "Start Date",
+    "end-date": "End Date",
     "date-time": "DateTime",
     "office-use": "Office Use",
     "cash-buy": "Cash Buy",
