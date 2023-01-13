@@ -76,20 +76,20 @@ const CreateExchange = () => {
             >
                 <Box m={2} display="flex" flexDirection="row" justifyContent="space-between">
                     <Box mt={2}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Exchange
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> {t('exchange-list')}
                         </Typography>
                     </Box>
                     <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                             <DesktopDatePicker
-                                label="Start Date"
+                                label={t('start-date')}
                                 inputFormat="MM/DD/YYYY"
                                 value={value}
                                 onChange={handleChange}
                                 renderInput={(params) => <TextField {...params} sx={{ mr: 2 }} size="small" />}
                             />
                             <DesktopDatePicker
-                                label="End Date"
+                                label={t('end-date')}
                                 inputFormat="MM/DD/YYYY"
                                 value={value}
                                 onChange={handleChange}

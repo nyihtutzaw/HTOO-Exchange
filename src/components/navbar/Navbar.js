@@ -39,6 +39,11 @@ import CreateExchange from "../exchange/CreateExchange";
 import logo from "../../assets/images/logo.png"
 import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ExchangeCreate from "../exchange/ExchangeCreate";
+import ListExchange from "../exchange/ListExchange";
+import TotalMoney from "../bank_money/TotalMoney";
+import TrueMoney from "../bank_money/TrueMoney";
+import YomaBank from "../bank_money/YomaBank";
 
 const settings = ["Account", "Logout"];
 
@@ -67,6 +72,11 @@ const Navbar = () => {
       route: "/admin/create-true",
       element: <CreateTrue />
     },
+    // {
+    //   name: `${t("exchange")}`,
+    //   route: "/admin/list-exchange",
+    //   element: <CreateExchange />
+    // },
     {
       name: `${t("exchange")}`,
       route: "/admin/list-exchange",
@@ -83,7 +93,7 @@ const Navbar = () => {
     // {
     //   name: `${t("exchange")}`,
     //   route: "/admin/create-exchange",
-    //   element: <CreateExchange />
+    //   element: <ExchangeCreate />
     // },
     {
       name: `${t("branches")}`,
@@ -119,7 +129,23 @@ const Navbar = () => {
       name: `${t("staff-salary")}`,
       route: "/admin/list-stack-salary",
       element: <StackSalaryList />
+    },
+    {
+      name: `TotalMoney`,
+      route: "/admin/total-money",
+      element: <TotalMoney />
+    },
+    {
+      name: `TrueMoney`,
+      route: "/admin/true-money",
+      element: <TrueMoney />
+    },
+    {
+      name: `YomaMoney`,
+      route: "/admin/yoma-money",
+      element: <YomaBank />
     }
+
   ];
 
   const handleLanguageChange = (event) => {

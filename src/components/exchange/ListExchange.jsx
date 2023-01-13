@@ -383,6 +383,7 @@ const ListExchange = () => {
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                             <DesktopDatePicker
                                 label={t('start-date')}
+                                
                                 inputFormat="MM/DD/YYYY"
                                 value={value}
                                 onChange={handleChange}
