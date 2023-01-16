@@ -33,7 +33,7 @@ import ExpenseList from "./components/expense/ExpenseList";
 import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransfer";
 import CreateWave from "./components/wave/CreateWave";
 import CreateTrue from "./components/true/CreateTrue";
-import CreateExchange from "./components/exchange/CreateExchange";
+import CreateExchange from "./components/exchange/ExchangeLists";
 import CreateBankName from "./components/bank_name/CreateBankName";
 import BranchTransferList from "./components/branchTransfer/BranchTransferList";
 import LoginForm from "./pages/LoginForm";
@@ -43,6 +43,9 @@ import ExchangeEdit from "./components/exchange/ExchangeEdit";
 import TotalMoney from "./components/bank_money/TotalMoney";
 import TrueMoney from "./components/bank_money/TrueMoney";
 import YomaBank from "./components/bank_money/YomaBank";
+import ListExchange from "./components/exchange/ListExchange";
+import ExchangeLists from "./components/exchange/ExchangeLists";
+import ListWave from "./components/wave/ListWave";
 
 
 function App() {
@@ -90,6 +93,8 @@ function App() {
 
           {/* wave routes */}
           <Route path="/admin/create-wave" element={<CreateWave />} />
+          <Route path="/admin/list-wave" element={<ListWave />} />
+          
           {/* true routes */}
           <Route path="/admin/create-true" element={<CreateTrue />} />
 
@@ -98,7 +103,7 @@ function App() {
           <Route path="/admin/create-exchange" element={<ExchangeCreate />} />
           <Route path="/admin/edit-exchange" element={<ExchangeEdit />} />
           {/* <Route path="/admin/list-exchange" element={<ListExchange />} /> */}
-          <Route path="/admin/list-exchange" element={<CreateExchange />} />
+          <Route path="/admin/list-exchange" element={<ExchangeLists />} />
 
           {/* bank_money_left */}
           <Route path="/admin/total-money" element={<TotalMoney />} />

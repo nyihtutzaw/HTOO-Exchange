@@ -128,7 +128,7 @@ const CustomerList = () => {
                             <Box>
                                 {t("new")}
                             </Box>
-                            </Button>
+                        </Button>
                     </Box>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 650 }} aria-label="simple table">

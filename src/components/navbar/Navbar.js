@@ -35,7 +35,7 @@ import ExpenseList from "../expense/ExpenseList";
 import { removeToken } from "../../utils/token";
 import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
-import CreateExchange from "../exchange/CreateExchange";
+import CreateExchange from "../exchange/ExchangeLists";
 import logo from "../../assets/images/logo.png"
 import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -44,6 +44,7 @@ import ListExchange from "../exchange/ListExchange";
 import TotalMoney from "../bank_money/TotalMoney";
 import TrueMoney from "../bank_money/TrueMoney";
 import YomaBank from "../bank_money/YomaBank";
+import ListWave from "../wave/ListWave";
 
 const settings = ["Account", "Logout"];
 
@@ -64,8 +65,8 @@ const Navbar = () => {
   const lists = [
     {
       name: `${t("w-agent")}`,
-      route: "/admin/create-wave",
-      element: <CreateWave />
+      route: "/admin/list-wave",
+      element: <ListWave />
     },
     {
       name: "True Money",
