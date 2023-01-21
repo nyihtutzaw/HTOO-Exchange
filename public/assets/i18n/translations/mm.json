@@ -39,10 +39,9 @@
     "transition-id": "ငွေလွှဲ ID",
     "transfer-amount": "ငွေလွှဲမည့်ပမာဏ",
     "transfer-fee": "ငွေလွှဲခ",
-    "export-amount": "ထုပ်မည့်ပမာဏ",
+    "export-amount": "ထုပ်မည့်ငွေပမာဏ",
     "export-fee": "ငွေထုပ်ခ",
     "wave-acc": "Wacesအကောင့်များ",
-    "comission": "Comission",
     "otm": "OTM(%)",
     "wave-acc-left-money": "Wave အကောင့်လက်ကျန်",
     "total-e-money": "Total E-Money",
@@ -94,6 +93,20 @@
     "exchange-list": "Exchange စာရင်း",
     "create-exchange": "Exchange အသစ်ထည့်မည်",
     "edit-exchange": "Exchange ပြုပြင်ရန်",
+    "true-list": "True Money Agent ဇယား",
+    "true-account": "True Account",
+    "true-account-left": "True အကောင့်လက်ကျန်",
+    "true-transfer-phone": "ငွေလွှဲသူဖုန်းနံပါတ်",
+    "true-export-phone": "ငွေထုတ်သူဖုန်းနံပါတ်",
+    "transfer-id": "TransferID",
+    "comm-type": "Comm-Type",
+    "comission": "ကော်မရှင်",
+    "omt": "OMT(%)",
+    "create-true-money": "True Money အသစ်ထည့်မည်",
+
+
+
+
     "w-agent": "W-ကိုယ်စားလှယ်",
     "employees": "ဝန်ထမ်းများ",
     "excel": "Excel ထုပ်ရန်",

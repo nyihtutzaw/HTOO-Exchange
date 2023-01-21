@@ -7,7 +7,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-// import Paper from "@material-ui/core/Paper";
 import { Box, Button, Card, FormControl, InputLabel, MenuItem, Select, Stack, TextareaAutosize, Typography } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
@@ -18,11 +17,8 @@ import GetAppIcon from '@mui/icons-material/GetApp';
 import PrintIcon from '@mui/icons-material/Print';
 import { useTranslation } from "react-i18next";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
-// import Modal from '@mui/joy/Modal';
-// import { Stack } from '@mui/joy';
 import DriveFileRenameOutlineRoundedIcon from '@mui/icons-material/DriveFileRenameOutlineRounded';
 import DeleteForeverRoundedIcon from '@mui/icons-material/DeleteForeverRounded';
-import DisplaySettingsRoundedIcon from '@mui/icons-material/DisplaySettingsRounded';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -30,6 +26,9 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import SaveIcon from '@mui/icons-material/Save';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
+import { withStyles } from "@material-ui/core/styles";
+import { green } from '@material-ui/core/colors';
+
 
 const useStyles = makeStyles({
     table: {
@@ -42,6 +41,15 @@ const useStyles = makeStyles({
         color: "#fff",
     }
 });
+
+const CustomTableCell = withStyles(theme => ({
+    head: {
+        color: theme.palette.common.white
+    },
+    body: {
+        fontSize: 14
+    }
+}))(TableCell);
 
 
 function createData(no, datetime, branchBankIn, branchBankOut, amountIn, amountOut, eMoneyComession,
@@ -67,6 +75,12 @@ const ExchangeLists = () => {
     const classes = useStyles();
     const [age, setAge] = useState('');
     const [value, setValue] = useState(dayjs('2014-08-18T21:11:54'));
+
+    const customColumnStyle = {
+        wordWrap: "break-word",
+        minWidth: "150px",
+        // backgroundColor: green[900]
+    };
 
     const handleChange = (newValue) => {
         setValue(newValue);
@@ -98,7 +112,7 @@ const ExchangeLists = () => {
         }
     }, [open]);
 
-    const handleEdit = (scrollType) => () =>  {
+    const handleEdit = (scrollType) => () => {
         setOpen(true);
         setScroll(scrollType);
         console.log("edit")
@@ -196,53 +210,54 @@ const ExchangeLists = () => {
 
                     </Box>
                 </Box>
-                <Box display="flex" justifyContent="center" alignItems="center">
-                    <TableContainer style={{ width: 1400, marginTop: "5px" }}>
-                        <Table className={classes.table} aria-label="simple table">
-                            <TableHead className={classes.thead}>
-                                <TableRow>
-                                    <TableCell className={classes.tHColor}>{t('no')}</TableCell>
-                                    <TableCell width={120} className={classes.tHColor} align="center">{t('date-time')}</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">{t('branch-bank-in')}</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">{t('branch-bank-out')}</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">{t('amount-money-in')}</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">{t('amount-money-out')}</TableCell>
-                                    <TableCell width={90} className={classes.tHColor} align="center">{t('e-comission')}</TableCell>
-                                    <TableCell width={105} className={classes.tHColor} align="center">{t('cash-comission')}</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">{t('about')}</TableCell>
-                                    <TableCell width={105} className={classes.tHColor} align="center">{t('customer.name')}</TableCell>
-                                    <TableCell width={109} className={classes.tHColor} align="center">{t('employee.name')}</TableCell>
-                                    <TableCell width={90} className={classes.tHColor} align="center">{t('action')}</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {rows.map((row) => (
-                                    <TableRow key={row.no}>
-                                        <TableCell component="th" scope="row">
-                                            {row.no}
-                                        </TableCell>
-                                        <TableCell align="center">{row.datetime}</TableCell>
-                                        <TableCell align="center">{row.branchBankIn}</TableCell>
-                                        <TableCell align="center">{row.branchBankOut}</TableCell>
-                                        <TableCell align="center">{row.amountIn}</TableCell>
-                                        <TableCell align="center">{row.amountOut}</TableCell>
-                                        <TableCell align="center">{row.eMoneyComession}</TableCell>
-                                        <TableCell align="center">{row.cashComession}</TableCell>
-                                        <TableCell align="center">{row.remark}</TableCell>
-                                        <TableCell align="center">{row.customerName}</TableCell>
-                                        <TableCell align="center">{row.employeename}</TableCell>
-                                        <TableCell align="center">
-                                            <DriveFileRenameOutlineRoundedIcon onClick={handleEdit('paper')} sx={{ color: "#36353d", fontSize: "25px" }} />
-                                            <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "10px" }} />
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Box>
+
 
             </div>
+            <Box display="flex" justifyContent="center" alignItems="center">
+                <TableContainer style={{ marginTop: "5px" }}>
+                    <Table className={classes.table} aria-label="simple table">
+                        <TableHead className={classes.thead}>
+                            <TableRow>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('no')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('date-time')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('branch-bank-in')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('branch-bank-out')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('amount-money-in')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('amount-money-out')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('e-comission')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('cash-comission')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('about')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('customer.name')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('employee.name')}</CustomTableCell>
+                                <CustomTableCell style={customColumnStyle} className={classes.tHColor} align="center">{t('action')}</CustomTableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map((row) => (
+                                <TableRow key={row.no}>
+                                    <TableCell component="th" scope="row">
+                                        {row.no}
+                                    </TableCell>
+                                    <TableCell align="center">{row.datetime}</TableCell>
+                                    <TableCell align="center">{row.branchBankIn}</TableCell>
+                                    <TableCell align="center">{row.branchBankOut}</TableCell>
+                                    <TableCell align="center">{row.amountIn}</TableCell>
+                                    <TableCell align="center">{row.amountOut}</TableCell>
+                                    <TableCell align="center">{row.eMoneyComession}</TableCell>
+                                    <TableCell align="center">{row.cashComession}</TableCell>
+                                    <TableCell align="center">{row.remark}</TableCell>
+                                    <TableCell align="center">{row.customerName}</TableCell>
+                                    <TableCell align="center">{row.employeename}</TableCell>
+                                    <TableCell align="center">
+                                        <DriveFileRenameOutlineRoundedIcon onClick={handleEdit('paper')} sx={{ color: "#36353d", fontSize: "25px" }} />
+                                        <DeleteForeverRoundedIcon onClick={handleDelete} sx={{ color: "red", fontSize: "25px", marginLeft: "10px" }} />
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Box>
 
             <Dialog
                 open={open}

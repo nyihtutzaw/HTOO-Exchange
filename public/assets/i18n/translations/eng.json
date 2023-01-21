@@ -42,11 +42,10 @@
     "export-amount": "Export Amount",
     "export-fee": "Export Fee",
     "wave-acc": "Wace Accounts",
-    "comission": "Comission",
     "otm": "OTM(%)",
     "wave-acc-left-money": "Wace Account Left Money",
     "total-e-money": "Total E-Money",
-    "total-cash-money": "Total Cash-Money",
+    "total-cash-money": "Total-Cash",
 
 
     "staff-salary.list": "Staff Salary List",
@@ -97,6 +96,19 @@
     "exchange-list": "Exchange List",
     "create-exchange": "Create Exchange",
     "edit-exchange": "Edit Exchange",
+    "true-list": "True Money List",
+    "true-transfer-phone": "Transfer Phone",
+    "true-export-phone": "Export Phone",
+    "true-account": "True Account",
+    "true-account-left": "True Account Left",
+    "transfer-id": "TransferID",
+    "comm-type": "Comm-Type",
+    "comission": "Comission",
+    "omt": "OMT(%)",
+    "create-true-money": "Create True Money",
+
+
+
     "w-agent": "W-Agent",
     "employees": "Employees",
     "excel": "Excel Export",
