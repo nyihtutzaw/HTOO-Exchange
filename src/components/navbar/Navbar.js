@@ -33,18 +33,19 @@ import RoleAndAccessList from "../roleAndAccess/RoleAndAccessList";
 import StackSalaryList from "../stackSalary/StackSalaryList";
 import ExpenseList from "../expense/ExpenseList";
 import { removeToken } from "../../utils/token";
-import CreateWave from "../wave/CreateWave";
+// import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
 import CreateExchange from "../exchange/ExchangeLists";
 import logo from "../../assets/images/logo.png"
 import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import ExchangeCreate from "../exchange/ExchangeCreate";
-import ListExchange from "../exchange/ListExchange";
+// import ExchangeCreate from "../exchange/ExchangeCreate";
+// import ListExchange from "../exchange/ListExchange";
 import TotalMoney from "../bank_money/TotalMoney";
 import TrueMoney from "../bank_money/TrueMoney";
 import YomaBank from "../bank_money/YomaBank";
 import ListWave from "../wave/ListWave";
+import TransitionRecord from "../transition_record/TransitionRecord";
 
 const settings = ["Account", "Logout"];
 
@@ -73,11 +74,7 @@ const Navbar = () => {
       route: "/admin/create-true",
       element: <CreateTrue />
     },
-    // {
-    //   name: `${t("exchange")}`,
-    //   route: "/admin/list-exchange",
-    //   element: <CreateExchange />
-    // },
+    
     {
       name: `${t("exchange")}`,
       route: "/admin/list-exchange",
@@ -87,7 +84,12 @@ const Navbar = () => {
       name: `${t("employees")}`,
       route: "/admin/list-employee",
       element: <EmployeeList />
-    }
+    },
+    {
+      name: `${t("transition-record")}`,
+      route: "/admin/list-transitions",
+      element: <TransitionRecord />
+    },
   ];
 
   const menus = [

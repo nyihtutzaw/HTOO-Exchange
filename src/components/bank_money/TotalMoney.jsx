@@ -8,14 +8,14 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 // import Paper from "@material-ui/core/Paper";
-import { Box, Button, Typography } from '@mui/material';
+import { Box, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import GetAppIcon from '@mui/icons-material/GetApp';
-import PrintIcon from '@mui/icons-material/Print';
+// import GetAppIcon from '@mui/icons-material/GetApp';
+// import PrintIcon from '@mui/icons-material/Print';
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles({
@@ -53,14 +53,19 @@ const TotalMoney = () => {
     const { t } = useTranslation();
     const classes = useStyles();
     const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
+    const [age, setAge] = React.useState('');
 
     const handleChange = (newValue) => {
         setValue(newValue);
     };
 
-    const handleLink = () => {
-        // navigate("/admin/create-employee")
-    }
+    // const handleLink = () => {
+    //     // navigate("/admin/create-employee")
+    // }
+
+    const handleChangeAge = (event) => {
+        setAge(event.target.value);
+    };
 
     return (
         <>
@@ -76,10 +81,29 @@ const TotalMoney = () => {
             >
                 <Box m={2} display="flex" flexDirection="row" justifyContent="space-between">
                     <Box mt={2}>
-                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}> Total Money
+                        <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
+                            {t('total-money')}
                         </Typography>
                     </Box>
                     <Box m={1} display="flex" justifyContent="space-between" alignItems="center">
+                        <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
+                            <InputLabel id="demo-select-small">{t('branch')}
+                            </InputLabel>
+                            <Select
+                                labelId="demo-select-small"
+                                id="demo-select-small"
+                                value={age}
+                                label="Age"
+                                onChange={handleChangeAge}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={10}>Branch 1</MenuItem>
+                                <MenuItem value={20}>Branch 2</MenuItem>
+                                <MenuItem value={30}>Branch 3</MenuItem>
+                            </Select>
+                        </FormControl>
                         <LocalizationProvider dateAdapter={AdapterDayjs} >
                             <DesktopDatePicker
                                 label={t('start-date')}
@@ -103,10 +127,9 @@ const TotalMoney = () => {
                         <Table className={classes.table} aria-label="simple table">
                             <TableHead className={classes.thead}>
                                 <TableRow>
-                                    {/* <TableCell className={classes.tHColor}>{t('no')}</TableCell> */}
-                                    <TableCell className={classes.tHColor} align="center">ဘဏ်အမည်</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">စာရင်းဖွင့်</TableCell>
-                                    <TableCell className={classes.tHColor} align="center">လက်ကျန်</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('bank.name')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('open-list-money')}</TableCell>
+                                    <TableCell className={classes.tHColor} align="center">{t('leave-list-money')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
@@ -124,8 +147,8 @@ const TotalMoney = () => {
                         </Table>
                     </TableContainer>
                 </Box>
-                <Box display="flex" justifyContent="space-evenly" alignItems="center" sx={{ marginTop: "20px"}}>
-                    <Typography variant="h6" color="#094708" mr={15} mb={1} mt={0}> စုစုပေါင်း
+                <Box display="flex" justifyContent="space-evenly" alignItems="center" sx={{ marginTop: "20px" }}>
+                    <Typography variant="h6" color="#094708" mr={15} mb={1} mt={0}> {t('total')}
                     </Typography>
                     <Typography variant="h6" color="#094708" mr={15} mb={1} mt={0}> 1000000
                     </Typography>

@@ -12,6 +12,7 @@
     "bank.acc_phone": "အကောင့်နံပါတ်/ဖုန်းနံပါတ်",
     "bank.acc_owner": "အကောင့်ပိုင်ရှင်အမည်",
     "bank.other_bank_name": "ဘဏ်ခွဲအမည်",
+    "bank.name": "ဘဏ်အမည်",
     "bank.open_list": "စာရင်းဖွင့်",
     "branch.list": "Branch စာရင်း",
     "branch.name": "Branch အမည်",
@@ -103,7 +104,7 @@
     "comission": "ကော်မရှင်",
     "omt": "OMT(%)",
     "create-true-money": "True Money အသစ်ထည့်မည်",
-
+    "transition-record": "နေ့စဉ်ကော်မရှင်မှတ်တမ်း",
 
 
 
@@ -121,6 +122,18 @@
     "amount-money-out": "ငွေပမာဏ(အထွက်)",
     "e-comission": "E-Money-ကော်မရှင်",
     "cash-comission": "Cash-ကော်မရှင်",
+    "wave-comission": "Wave ကော်မရှင်",
+    "true-comission": "True ကော်မရှင်",
+    "total-comission": "Total ကော်မရှင်",
+    "total-expense": "ကုန်ကျစရိတ်စုစုပေါင်း",
+    "total-netprofit": "NetProfitစုစုပေါင်း",
+    "total-money": "ငွေစာရင်းစုစုပေါင်း",
+    "total": "စုစုပေါင်း",
+    "open-list-money": "စာရင်းဖွင့်",
+    "leave-list-money": "လက်ကျန်",
+    "true-balance": "True Moneyလက်ကျန်",
+    "yoma-balance": "Yoma Bank လက်ကျန်",
+
     "role-access": "လုပ်ပိုင်ခွင့်များ",
     "branches": "ရုံးခွဲများ",
     "type": "အမျိူးအစား",
