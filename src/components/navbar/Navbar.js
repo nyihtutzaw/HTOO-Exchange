@@ -46,10 +46,30 @@ import TrueMoney from "../bank_money/TrueMoney";
 import YomaBank from "../bank_money/YomaBank";
 import ListWave from "../wave/ListWave";
 import TransitionRecord from "../transition_record/TransitionRecord";
+import { useGetUserDetailsQuery } from '../../app/service/auth/authService'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout, setCredentials } from '../../features/auth/authSlice'
 
 const settings = ["Account", "Logout"];
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  // const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.auth)
+  // automatically authenticate user if token is found
+  const { data, isFetching } = useGetUserDetailsQuery('userDetails', {
+    // perform a refetch every 15mins
+    pollingInterval: 900000,
+    // pollingInterval: 900000,
+  })
+
+  console.log("in nvvabar header", userInfo)
+
+  useEffect(() => {
+    if (data) dispatch(setCredentials(data))
+  }, [data, dispatch])
+
+
   const theme = useTheme();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -74,7 +94,7 @@ const Navbar = () => {
       route: "/admin/create-true",
       element: <CreateTrue />
     },
-    
+
     {
       name: `${t("exchange")}`,
       route: "/admin/list-exchange",
@@ -179,7 +199,8 @@ const Navbar = () => {
 
   const handleCloseToken = () => {
     setAnchorElUser(null);
-    removeToken();
+    dispatch(logout())
+    // removeToken();
     navigate("/auth/login", { replace: true });
   };
 
@@ -304,8 +325,8 @@ const Navbar = () => {
                         to={data.route}
                         style={{ textDecoration: "none" }}
                         onClose={handleCloseUser}
-                        // onClick={() => setButtonLabel(data?.name)}
-                        // onClick={() => handleSetButton(data?.name)}
+                      // onClick={() => setButtonLabel(data?.name)}
+                      // onClick={() => handleSetButton(data?.name)}
                       >
                         <Typography textAlign="center" color="black">
                           {data.name}
@@ -394,6 +415,13 @@ const Navbar = () => {
                   {settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseToken}>
                       <Typography textAlign="center">{setting}</Typography>
+                      <span>
+                        {isFetching
+                          ? `Fetching your profile...`
+                          : userInfo !== null
+                            ? `Logged in as ${userInfo.email}`
+                            : "You're not logged in"}
+                      </span>
                     </MenuItem>
                   ))}
                 </Menu>

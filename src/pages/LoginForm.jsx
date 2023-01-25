@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
@@ -9,6 +9,10 @@ import { withStyles } from '@material-ui/core/styles';
 import { getToken } from "../utils/token"
 import { useNavigate } from "react-router-dom";
 import BackDropLoading from "../components/commons/backdrop/BackDrop";
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogin } from '../features/auth/authActions'
+
+
 
 const CssTextField = withStyles({
   root: {
@@ -33,21 +37,38 @@ const CssTextField = withStyles({
 })(TextField);
 
 const LoginForm = () => {
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+  const {loading, error, userInfo, userToken } = useSelector((state) => state.auth)
+
+  const dispatch = useDispatch()
+
+
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false)
+  const [loadings, setLoading] = useState(false)
+  const TOKEN = getToken();
 
   const handleLogin = () => {
-    
-    setLoading(true);
-    localStorage.setItem('Token', true)
-    setTimeout(() => {
-      const TOKEN = getToken();
-      if (TOKEN) {
-        setLoading(false)
-        navigate("/admin/list-employee");
-      }
-    }, 2000)
+    dispatch(userLogin({email, password}))
+    // setLoading(true);
+    // localStorage.setItem('Token', true)
+    // setTimeout(() => {
+    //   if (TOKEN) {
+    //     setLoading(false)
+    //     navigate("/admin/list-employee");
+    //   }
+    // }, 2000)
+
   }
+
+  useEffect(() => {
+    if (TOKEN) {
+      navigate("/admin/list-employee");
+    }
+  }, [TOKEN])
+
+
 
   return (
     <>
@@ -132,6 +153,7 @@ const LoginForm = () => {
                       className="search"
                       name="search"
                       // onChange={this.onChange}
+                      onChange={(e) =>setEmail(e.target.value)}
                       type="text"
                       autoComplete=""
                       margin="normal"
@@ -146,6 +168,7 @@ const LoginForm = () => {
                       fullWidth
                       className="search"
                       name="search"
+                      onChange={(e) =>setPassword(e.target.value)}
                       // onChange={this.onChange}
                       type="password"
                       autoComplete=""
@@ -163,7 +186,7 @@ const LoginForm = () => {
                         color: '#fff'
                       }
                     }}>
-                      Sign in
+                      Sign insss
                     </Button>
                   </CardContent>
                 </Card>

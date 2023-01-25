@@ -1,7 +1,14 @@
+// export function getToken() {
+//     return localStorage.getItem("Token");
+//   }
+
 export function getToken() {
-    return localStorage.getItem("Token");
+    return localStorage.getItem("userToken");
   }
   
+  // export function removeToken() {
+  //   return localStorage.removeItem("Token");
+  // }
   export function removeToken() {
-    return localStorage.removeItem("Token");
+    return localStorage.removeItem("userToken");
   }
