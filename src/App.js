@@ -99,7 +99,7 @@ function App() {
           <Route path="/admin/list-branch-transfer" element={<BranchTransferList />} />
 
           {/* wave routes */}
-          {/* <Route path="/admin/create-wave" element={<CreateWave />} /> */}
+          <Route path="/admin/create-wave" element={<CreateWave />} />
           <Route path="/admin/list-wave" element={<ListWave />} />
 
           {/* true routes */}
