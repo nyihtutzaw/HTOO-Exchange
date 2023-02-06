@@ -38,6 +38,15 @@ const CssTextField = withStyles({
 })(TextField);
 
 const LoginForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { loading, error, userInfo, userToken } = useSelector(
+    (state) => state.auth
+  );
+
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
 
@@ -67,6 +76,12 @@ const LoginForm = () => {
     },
     [dispatch, navigate, reset]
   );
+
+  useEffect(() => {
+    if (TOKEN) {
+      navigate("/admin/list-employee");
+    }
+  }, [TOKEN]);
 
   return (
     <>
