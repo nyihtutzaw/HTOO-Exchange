@@ -1,32 +1,37 @@
-import React, { useState } from "react";
+import { useState, useCallback } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import { Button, CardMedia, Grid, TextField } from "@mui/material";
-import money5 from "../assets/images/money5.png"
-import { withStyles } from '@material-ui/core/styles';
-import { getToken } from "../utils/token"
+import money5 from "../assets/images/money5.png";
+import { withStyles } from "@material-ui/core/styles";
 import { useNavigate } from "react-router-dom";
 import BackDropLoading from "../components/commons/backdrop/BackDrop";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as AuthService from "./../services/authService";
+import { useDispatch } from "react-redux";
+import { setToken, setUser } from "../store/reducer.auth";
 
 const CssTextField = withStyles({
   root: {
-    '& label.Mui-focused': {
-      color: 'green',
+    "& label.Mui-focused": {
+      color: "green",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "green",
     },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor: 'green',
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "green",
       },
-      '&:hover fieldset': {
-        borderColor: 'green',
+      "&:hover fieldset": {
+        borderColor: "green",
       },
-      '&.Mui-focused fieldset': {
-        borderColor: 'green',
+      "&.Mui-focused fieldset": {
+        borderColor: "green",
       },
     },
   },
@@ -34,65 +39,73 @@ const CssTextField = withStyles({
 
 const LoginForm = () => {
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = () => {
-    
-    setLoading(true);
-    localStorage.setItem('Token', true)
-    setTimeout(() => {
-      const TOKEN = getToken();
-      if (TOKEN) {
-        setLoading(false)
-        navigate("/admin/list-employee");
-      }
-    }, 2000)
-  }
+  const schema = yup.object().shape({
+    email: yup.string().email().required(),
+    password: yup.string().required(),
+  });
+
+  const dispatch = useDispatch();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const handleLogin = useCallback(
+    async (values) => {
+      const response = await AuthService.login(values);
+      dispatch(setToken(response.data.token));
+      dispatch(setUser(response.data.admin));
+      navigate("/admin/list-wave");
+      reset();
+    },
+    [dispatch, navigate, reset]
+  );
 
   return (
     <>
-      {
-        loading ? (
-          <BackDropLoading />
-        ) : (
+      {loading ? (
+        <BackDropLoading />
+      ) : (
+        <form onSubmit={handleSubmit(handleLogin)}>
           <Grid container spacing={2}>
             <Grid item xs={6}>
-              <Box
-              >
+              <Box>
                 <Card
-
                   sx={{
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    minHeight: "100vh"
+                    minHeight: "100vh",
                   }}
                 >
                   <CardMedia
-
                     sx={{ height: 500, width: 600, margin: "10px" }}
                     image={money5}
                     title="green iguana"
                   />
-                  <CardContent>
-
-                  </CardContent>
-
+                  <CardContent></CardContent>
                 </Card>
-              </Box >
-            </Grid >
+              </Box>
+            </Grid>
             <Grid item xs={6}>
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  minHeight: "100vh"
+                  minHeight: "100vh",
                 }}
               >
                 <Card
                   sx={{
-                    margin: "10px"
+                    margin: "10px",
                   }}
                 >
                   <CardContent>
@@ -126,57 +139,64 @@ const LoginForm = () => {
                     }}
                   >
                     <CssTextField
-                      size='small'
-                      label="Username"
+                      size="small"
+                      label="Email"
                       fullWidth
                       className="search"
-                      name="search"
-                      // onChange={this.onChange}
-                      type="text"
+                      name="email"
+                      {...register("email")}
+                      type="email"
                       autoComplete=""
                       margin="normal"
+                      error={errors.email?.message}
+                      helperText={errors.email?.message}
                       inputProps={{
-                        style: { fontFamily: 'nunito', color: 'black' },
+                        style: { fontFamily: "nunito", color: "black" },
                       }}
                     />
 
                     <CssTextField
-                      size='small'
+                      size="small"
                       label="Password"
                       fullWidth
                       className="search"
-                      name="search"
-                      // onChange={this.onChange}
+                      name="password"
+                      {...register("password")}
                       type="password"
                       autoComplete=""
                       margin="normal"
+                      error={errors.password?.message}
+                      helperText={errors.password?.message}
                       inputProps={{
-                        style: { fontFamily: 'nunito', color: 'black' },
+                        style: { fontFamily: "nunito", color: "black" },
                       }}
-
-
                     />
-                    <Button variant="contained" onClick={handleLogin} fullWidth sx={{
-                      marginTop: "5px",
-                      backgroundColor: "#094708", minWidth: "200px", fontSize: "14px", ':hover': {
-                        bgcolor: '#094708',
-                        color: '#fff'
-                      }
-                    }}>
+
+                    <Button
+                      variant="contained"
+                      fullWidth
+                      type="submit"
+                      sx={{
+                        marginTop: "5px",
+                        backgroundColor: "#094708",
+                        minWidth: "200px",
+                        fontSize: "14px",
+                        ":hover": {
+                          bgcolor: "#094708",
+                          color: "#fff",
+                        },
+                      }}
+                    >
                       Sign in
                     </Button>
                   </CardContent>
                 </Card>
               </Box>
             </Grid>
-
-          </Grid >
-        )
-      }
-
+          </Grid>
+        </form>
+      )}
     </>
-
-
   );
 };
 

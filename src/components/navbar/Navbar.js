@@ -21,6 +21,7 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
+import { removeCache } from "../../utils/cache";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "../drewer/DrawerComp";
 import { Link, useNavigate } from "react-router-dom";
@@ -28,11 +29,11 @@ import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
 import EmployeeList from "../Employee/EmployeeList";
 import CustomerList from "../customer/CustomerList";
 import BankNameList from "../bank_name/BankNameList";
-import BranchList from "../branch/BranchList";
-import RoleAndAccessList from "../roleAndAccess/RoleAndAccessList";
+import BranchList from "../../pages/branch/BranchList";
+import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";
 import StackSalaryList from "../stackSalary/StackSalaryList";
 import ExpenseList from "../expense/ExpenseList";
-import { removeToken } from "../../utils/token";
+
 // import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
 import CreateExchange from "../exchange/ExchangeLists";
@@ -74,7 +75,7 @@ const Navbar = () => {
       route: "/admin/create-true",
       element: <CreateTrue />
     },
-    
+
     {
       name: `${t("exchange")}`,
       route: "/admin/list-exchange",
@@ -179,7 +180,9 @@ const Navbar = () => {
 
   const handleCloseToken = () => {
     setAnchorElUser(null);
-    removeToken();
+
+    removeCache('user')
+    removeCache('access_token')
     navigate("/auth/login", { replace: true });
   };
 
@@ -304,8 +307,8 @@ const Navbar = () => {
                         to={data.route}
                         style={{ textDecoration: "none" }}
                         onClose={handleCloseUser}
-                        // onClick={() => setButtonLabel(data?.name)}
-                        // onClick={() => handleSetButton(data?.name)}
+                      // onClick={() => setButtonLabel(data?.name)}
+                      // onClick={() => handleSetButton(data?.name)}
                       >
                         <Typography textAlign="center" color="black">
                           {data.name}

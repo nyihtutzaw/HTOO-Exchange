@@ -6,6 +6,7 @@ import {
   Navigate
 } from "react-router-dom";
 import "./i18n";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
 // import BankName from "./components/bank_name/CreateBankName";
 // import Navbar from "./components/navbar/Navbar";
 // import Login_form from "./pages/LoginForm";
@@ -20,11 +21,6 @@ import EditCustomer from "./components/customer/EditCustomer";
 import CustomerList from "./components/customer/CustomerList";
 import EditBankName from "./components/bank_name/EditBankName";
 import BankNameList from "./components/bank_name/BankNameList";
-import CreateBranch from "./components/branch/CreateBranch";
-import EditBranch from "./components/branch/EditBranch";
-import BranchList from "./components/branch/BranchList";
-import CreateRoleAccess from "./components/roleAndAccess/CreateRoleAccess";
-import RoleAndAccessList from "./components/roleAndAccess/RoleAndAccessList";
 import CreateStackSalary from "./components/stackSalary/CreateStackSalary";
 import EditStackSalary from "./components/stackSalary/EditStackSalary";
 import StackSalaryList from "./components/stackSalary/StackSalaryList";
@@ -36,7 +32,7 @@ import CreateTrue from "./components/true/CreateTrue";
 // import CreateExchange from "./components/exchange/ExchangeLists";
 import CreateBankName from "./components/bank_name/CreateBankName";
 import BranchTransferList from "./components/branchTransfer/BranchTransferList";
-import LoginForm from "./pages/LoginForm";
+
 // import ListExchange from "./components/exchange/ListExchange";
 import ExchangeCreate from "./components/exchange/ExchangeCreate";
 import ExchangeEdit from "./components/exchange/ExchangeEdit";
@@ -47,6 +43,15 @@ import YomaBank from "./components/bank_money/YomaBank";
 import ExchangeLists from "./components/exchange/ExchangeLists";
 import ListWave from "./components/wave/ListWave";
 import TransitionRecord from "./components/transition_record/TransitionRecord";
+
+import CreateBranch from "./pages/branch/CreateBranch";
+import EditBranch from "./pages/branch/EditBranch";
+import BranchList from "./pages/branch/BranchList";
+import LoginForm from "./pages/LoginForm";
+import CreateRoleAccess from "./pages/roleAndAccess/CreateRoleAccess";
+import EditRoleAccess from "./pages/roleAndAccess/EditRoleAccess";
+import RoleAndAccessList from "./pages/roleAndAccess/RoleAndAccessList";
+
 
 
 function App() {
@@ -74,10 +79,11 @@ function App() {
           <Route path="/admin/list-bank" element={<BankNameList />} />
           {/* branch routes */}
           <Route path="/admin/create-branch" element={<CreateBranch />} />
-          <Route path="/admin/edit-branch" element={<EditBranch />} />
+          <Route path="/admin/edit-branch/:id" element={<EditBranch />} />
           <Route path="/admin/list-branch" element={<BranchList />} />
           {/* Role and  access routes */}
           <Route path="/admin/create-role-access" element={<CreateRoleAccess />} />
+          <Route path="/admin/edit-role-access/:id" element={<EditRoleAccess />} />
           <Route path="/admin/list-role-access" element={<RoleAndAccessList />} />
 
           {/* stack salary routes */}
@@ -116,6 +122,7 @@ function App() {
 
         </Route>
       </Routes>
+      <NotificationContainer />
     </Router>
   );
 }

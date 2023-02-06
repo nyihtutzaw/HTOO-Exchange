@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
 import React from 'react'
-import { getToken } from "../utils/token"
+import { getCache } from "../utils/cache";
 
 const PirvateRoute = () => {
-  const TOKEN = getToken();
+  const TOKEN = getCache('access_token');
 
   return TOKEN ? <Outlet /> : <Navigate to="/auth/login" replace />;
 
