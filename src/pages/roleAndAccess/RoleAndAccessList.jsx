@@ -1,25 +1,18 @@
-import React, { useEffect, useMemo } from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import React, { useEffect, useMemo, useState } from "react";
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { withStyles } from "@material-ui/core/styles";
-import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
-import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { useTranslation } from "react-i18next";
 import * as RoleService from "./../../services/roleService";
-import { setRoles } from "../../store/reducer.role";
+import { deleteRole, setRoles } from "../../store/reducer.role";
 import { useDispatch, useSelector } from "react-redux";
+import List from "./List";
+import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 
 const CssTextField = withStyles({
   root: {
@@ -47,11 +40,14 @@ const RoleAndAccessList = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showDelete, setShowDelete] = useState(false);
+  const [editData, setEditData] = useState(false);
 
   const roles = useSelector((state) => state.role.roles);
 
-  const handleDelete = () => {
-    console.log("delete");
+  const handleDelete = async (id) => {
+    await RoleService.deleteRole(id);
+    dispatch(deleteRole(id));
   };
 
   const handleLink = () => {
@@ -134,74 +130,25 @@ const RoleAndAccessList = () => {
             </Button>
           </Box>
 
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead sx={{ backgroundColor: "#094708" }}>
-                <TableRow>
-                  <TableCell
-                    sx={{ color: "white", fontSize: "16px" }}
-                    align="center"
-                  >
-                    {t("no")}
-                  </TableCell>
-                  <TableCell
-                    sx={{ color: "white", fontSize: "16px" }}
-                    align="center"
-                  >
-                    {t("name")}
-                  </TableCell>
-                  <TableCell
-                    sx={{ color: "white", fontSize: "16px" }}
-                    align="center"
-                  >
-                    {t("position")}
-                  </TableCell>
-
-                  <TableCell
-                    sx={{ color: "white", fontSize: "16px" }}
-                    align="center"
-                  >
-                    {t("action")}
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {roles?.map((row, index) => (
-                  <TableRow
-                    key={row.id}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <TableCell component="th" scope="row" align="center">
-                      {index + 1}
-                    </TableCell>
-                    <TableCell align="center">{row.name}</TableCell>
-                    <TableCell align="center">{row.position}</TableCell>
-                    <TableCell align="center">
-                      <DriveFileRenameOutlineRoundedIcon
-                        onClick={() => {
-                          navigate("/admin/edit-role-access/" + row.id);
-                        }}
-                        sx={{
-                          color: "#36353d",
-                          fontSize: "25px",
-                          marginLeft: "5px",
-                        }}
-                      />
-                      <DeleteForeverRoundedIcon
-                        onClick={handleDelete}
-                        sx={{
-                          color: "red",
-                          fontSize: "25px",
-                          marginLeft: "5px",
-                        }}
-                      />
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <List
+            data={roles}
+            onDelete={(row) => {
+              setEditData(row);
+              setShowDelete(true);
+            }}
+          />
         </Box>
+        {showDelete && (
+          <ConfirmDialog
+            title={`Delete Role`}
+            body={`Are you sure to delete ${editData?.name}?`}
+            onToggle={() => setShowDelete(false)}
+            onConfirm={() => {
+              setShowDelete(false);
+              handleDelete(editData?.id);
+            }}
+          />
+        )}
       </div>
     </>
   );
