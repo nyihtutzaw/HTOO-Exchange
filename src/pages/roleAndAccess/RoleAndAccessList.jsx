@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { useTranslation } from "react-i18next";
 import * as RoleService from "./../../services/roleService";
-import { setRoles } from "../../store/reducer.role";
+import { deleteRole, setRoles } from "../../store/reducer.role";
 import { useDispatch, useSelector } from "react-redux";
 
 const CssTextField = withStyles({
@@ -50,8 +50,9 @@ const RoleAndAccessList = () => {
 
   const roles = useSelector((state) => state.role.roles);
 
-  const handleDelete = () => {
-    console.log("delete");
+  const handleDelete = async (id) => {
+    await RoleService.deleteRole(id);
+    dispatch(deleteRole(id));
   };
 
   const handleLink = () => {
@@ -188,7 +189,9 @@ const RoleAndAccessList = () => {
                         }}
                       />
                       <DeleteForeverRoundedIcon
-                        onClick={handleDelete}
+                        onClick={() => {
+                          handleDelete(row.id);
+                        }}
                         sx={{
                           color: "red",
                           fontSize: "25px",

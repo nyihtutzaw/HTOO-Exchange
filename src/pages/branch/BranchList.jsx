@@ -31,7 +31,7 @@ import Navbar from "../../components/navbar/Navbar";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import * as BranchService from "./../../services/branchService";
-import { setBranches } from "../../store/reducer.branch";
+import { setBranches, deleteBranch } from "../../store/reducer.branch";
 
 const CssTextField = withStyles({
   root: {
@@ -77,8 +77,9 @@ const BranchList = () => {
     navigate("/admin/edit-branch/" + e.id);
   };
 
-  const handleDelete = () => {
-    console.log("delete");
+  const handleDelete = async (id) => {
+    await BranchService.deleteBranch(id);
+    dispatch(deleteBranch(id));
   };
 
   // const handleDetail = () => {
@@ -336,7 +337,9 @@ const BranchList = () => {
                         }}
                       />
                       <DeleteForeverRoundedIcon
-                        onClick={handleDelete}
+                        onClick={() => {
+                          handleDelete(row.id);
+                        }}
                         sx={{
                           color: "red",
                           fontSize: "25px",
