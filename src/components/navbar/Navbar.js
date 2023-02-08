@@ -26,7 +26,7 @@ import React, { useState, useEffect } from "react";
 import DrawerComp from "../drewer/DrawerComp";
 import { Link, useNavigate } from "react-router-dom";
 import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
-import EmployeeList from "../Employee/EmployeeList";
+import EmployeeList from "../../pages/Employee/EmployeeList";
 import CustomerList from "../customer/CustomerList";
 import BankNameList from "../bank_name/BankNameList";
 import BranchList from "../../pages/branch/BranchList";
