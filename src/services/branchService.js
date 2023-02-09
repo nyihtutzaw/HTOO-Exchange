@@ -50,3 +50,13 @@ export async function deleteBranch(id, values) {
     return false;
   }
 }
+
+export async function assignEmployees(id, values) {
+  try {
+    let response = await sendData("assign-to-employee/" + id, values);
+    return response;
+  } catch (e) {
+    NotificationManager.error("Failed");
+    return false;
+  }
+}

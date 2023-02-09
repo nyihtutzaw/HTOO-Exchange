@@ -30,7 +30,7 @@ function List({ data, handleClickOpen, handleEdit, onDelete }) {
             </TableCell>
             <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">
               {" "}
-              {t("position")}
+              {t("phone")}
             </TableCell>
             <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">
               {" "}
@@ -43,21 +43,25 @@ function List({ data, handleClickOpen, handleEdit, onDelete }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((row,index) => (
+          {data.map((row, index) => (
             <TableRow
-              key={row.id}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row" align="center">
-              {index + 1}
+                {index + 1}
               </TableCell>
               <TableCell align="center">{row.name}</TableCell>
-              <TableCell align="center">{row.branch}</TableCell>
-              <TableCell align="center">{row.position}</TableCell>
+              <TableCell align="center">
+                {row.branches.map((branch) => {
+                  return <p>{branch.name}</p>;
+                })}
+              </TableCell>
+              <TableCell align="center">{row.phone}</TableCell>
               <TableCell align="center">{row.address}</TableCell>
               <TableCell align="center">
                 <DisplaySettingsRoundedIcon
-                  onClick={handleClickOpen}
+                  onClick={() => handleClickOpen(row)}
                   sx={{ color: "green", fontSize: "25px" }}
                 />
                 <DriveFileRenameOutlineRoundedIcon
