@@ -85,7 +85,7 @@ const BranchList = () => {
   };
 
   const handleLink = () => {
-    navigate("/admin/create-employee");
+    navigate("/admin/create-branch");
   };
 
   const handleClickOpen = (e) => {

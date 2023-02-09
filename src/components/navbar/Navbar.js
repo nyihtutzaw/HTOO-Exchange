@@ -307,8 +307,7 @@ const Navbar = () => {
                         to={data.route}
                         style={{ textDecoration: "none" }}
                         onClose={handleCloseUser}
-                      // onClick={() => setButtonLabel(data?.name)}
-                      // onClick={() => handleSetButton(data?.name)}
+
                       >
                         <Typography textAlign="center" color="black">
                           {data.name}
