@@ -17,10 +17,11 @@ const InputForm = ({ editData }) => {
     name: yup.string().required(),
     position: yup.string().required(),
     birthday: yup.string().required(),
+    phone: yup.string().required(),
     nrc: yup.string().required(),
     start_work: yup.string().required(),
-    end_work: yup.string().required(),
-    remark: yup.string().required(),
+    // end_work: yup.string().required(),
+    // remark: yup.string().required(),
     address: yup.string().required(),
   });
 
@@ -138,6 +139,34 @@ const InputForm = ({ editData }) => {
                   {...register("name")}
                   error={errors.name?.message}
                   helperText={errors.name?.message}
+                />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    textTransform: "none",
+                    backgroundColor: "#094708",
+                    minWidth: "200px",
+                    fontSize: "14px",
+                    ":hover": {
+                      bgcolor: "#094708",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  {t("phone")}
+                </Button>
+                <TextField
+                  type="text"
+                  label=""
+                  variant="outlined"
+                  size="small"
+                  sx={{ width: "350px" }}
+                  {...register("phone")}
+                  error={errors.phone?.message}
+                  helperText={errors.phone?.message}
                 />
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
@@ -278,8 +307,8 @@ const InputForm = ({ editData }) => {
                   size="small"
                   sx={{ width: "350px" }}
                   {...register("end_work")}
-                  error={errors.end_work?.message}
-                  helperText={errors.end_work?.message}
+                  // error={errors.end_work?.message}
+                  // helperText={errors.end_work?.message}
                 />
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
@@ -306,8 +335,8 @@ const InputForm = ({ editData }) => {
                   size="small"
                   sx={{ width: "350px" }}
                   {...register("remark")}
-                  error={errors.remark?.message}
-                  helperText={errors.remark?.message}
+                  // error={errors.remark?.message}
+                  // helperText={errors.remark?.message}
                 />
               </Stack>
               <Stack

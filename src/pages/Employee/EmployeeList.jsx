@@ -1,17 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Checkbox,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControlLabel,
-  FormGroup,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, InputAdornment, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
@@ -22,10 +10,12 @@ import { useTranslation } from "react-i18next";
 import List from "./List";
 import { useDispatch, useSelector } from "react-redux";
 import * as EmployeeService from "./../../services/employeeService";
-import { setEmployees , deleteEmployee} from "../../store/reducer.employee";
+import * as BranchService from "./../../services/branchService";
+import { setEmployees, deleteEmployee } from "../../store/reducer.employee";
 import { useEffect } from "react";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
-
+import { setBranches } from "../../store/reducer.branch";
+import AssignDialog from "./AssignDialog";
 
 const CssTextField = withStyles({
   root: {
@@ -55,14 +45,19 @@ const EmployeeList = () => {
   const [open, setOpen] = React.useState(false);
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
+  const [selectedBranchIds, setSelectedBranchIds] = useState([]);
 
   const dispatch = useDispatch();
 
   const employees = useSelector((state) => state.employee.employees);
+  const branches = useSelector((state) => state.branch.branches);
 
   const loadData = async () => {
     const response = await EmployeeService.getAll();
     dispatch(setEmployees(response));
+
+    const result = await BranchService.getAll();
+    dispatch(setBranches(result));
   };
 
   useEffect(() => {
@@ -78,16 +73,36 @@ const EmployeeList = () => {
     dispatch(deleteEmployee(id));
   };
 
-  // const handleDetail = () => {
-  //     console.log("detail")
-  // }
+  const handleChange = (event) => {
+    let selectedId = parseInt(event.target.value);
+    if (selectedBranchIds.find((id) => id === selectedId)) {
+      setSelectedBranchIds(selectedBranchIds.filter((id) => id !== selectedId));
+    } else {
+      setSelectedBranchIds([...selectedBranchIds, selectedId]);
+    }
+  };
 
   const handleLink = () => {
     navigate("/admin/create-employee");
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e) => {
     setOpen(true);
+    setEditData(e);
+    let employee = employees.find((employee) => employee.id === e.id);
+    setSelectedBranchIds(
+      employee.branches.map((branch) => {
+        return branch.id;
+      })
+    );
+  };
+
+  const handleAssign = async () => {
+    await EmployeeService.assignToBranches(editData.id, {
+      branches: selectedBranchIds,
+    });
+    const response = await EmployeeService.getAll();
+    dispatch(setEmployees(response));
   };
 
   const handleClose = () => {
@@ -107,107 +122,6 @@ const EmployeeList = () => {
           flexDirection: "column",
         }}
       >
-        <Dialog
-          fullWidth
-          maxWidth="sm"
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-          PaperProps={{
-            style: { borderRadius: 18 },
-          }}
-        >
-          <DialogTitle
-            id="alert-dialog-title"
-            bgcolor="#07824f"
-            color="white"
-            textAlign="center"
-          >
-            {"Brand Assign ဇယား"}
-          </DialogTitle>
-          <DialogContent>
-            <CssTextField
-              size="small"
-              label="Search"
-              fullWidth
-              className="search"
-              name="search"
-              // onChange={this.onChange}
-              type="text"
-              autoComplete=""
-              margin="normal"
-              inputProps={{
-                style: { fontFamily: "nunito", color: "black" },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchRoundedIcon />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Main Branch"
-              />
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Yangon Branch"
-              />
-              <FormControlLabel
-                control={<Checkbox defaultChecked />}
-                label="Mandalay Branch"
-              />
-            </FormGroup>
-          </DialogContent>
-          <DialogActions
-            sx={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              margin: "15px",
-            }}
-          >
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                backgroundColor: "#fff",
-                color: "black",
-                minWidth: "200px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#fff",
-                  color: "black",
-                },
-              }}
-              onClick={handleClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                backgroundColor: "#07824f",
-                minWidth: "200px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#07824f",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleClose}
-              autoFocus
-            >
-              Assign Branch
-            </Button>
-          </DialogActions>
-        </Dialog>
-
         <Box m={2}>
           <Box mt={2}>
             <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
@@ -284,6 +198,15 @@ const EmployeeList = () => {
             }}
           />
         )}
+        <AssignDialog
+          open={open}
+          handleClose={handleClose}
+          CssTextField={CssTextField}
+          data={branches}
+          selectedBranchIds={selectedBranchIds}
+          handleChange={handleChange}
+          handleAssign={handleAssign}
+        />
       </div>
     </>
   );

@@ -78,7 +78,7 @@ function List ({
                 <TableCell align="center">{row.address}</TableCell>
                 <TableCell align="center">
                   <DisplaySettingsRoundedIcon
-                    onClick={handleClickOpen}
+                    onClick={() => handleClickOpen(row)}
                     sx={{ color: "green", fontSize: "25px" }}
                   />
                   <DriveFileRenameOutlineRoundedIcon
