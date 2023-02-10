@@ -5,7 +5,7 @@ import { Box } from "@mui/system";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { withStyles } from "@material-ui/core/styles";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import List from "./List";
 import * as EmployeeService from "./../../services/employeeService";
 import { setEmployees } from "../../store/reducer.employee";
 import AssignDialog from "./AssignDialog";
+import queryString from "query-string";
 
 const CssTextField = withStyles({
   root: {
@@ -46,7 +47,7 @@ const BranchList = () => {
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
   const [selectedEmployeeIds, setSelectedEmployeeIds] = useState([]);
-
+  const location = useLocation();
   const dispatch = useDispatch();
 
   const branches = useSelector((state) => state.branch.branches);
@@ -110,6 +111,14 @@ const BranchList = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const onSearch = async (e) => {
+    if (e.key === "Enter") {
+      const query = queryString.parse(location.search);
+      query.search = e.target.value;
+      const response = await BranchService.getAll(queryString.stringify(query));
+      dispatch(setBranches(response));
+    }
+  };
 
   return (
     <>
@@ -142,7 +151,7 @@ const BranchList = () => {
               label="Search"
               className="search"
               name="search"
-              // onChange={this.onChange}
+              onKeyDown={onSearch}
               type="text"
               autoComplete=""
               margin="normal"
