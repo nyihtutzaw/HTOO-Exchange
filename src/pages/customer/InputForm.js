@@ -21,7 +21,6 @@ const InputForm = ({ editData }) => {
     fb_id: yup.string().required(),
     phone: yup.string().required(),
     address: yup.string().required(),
-    start_work: yup.string().required(),
   });
 
   const {

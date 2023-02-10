@@ -52,7 +52,7 @@ function List({ data, handleEdit, onDelete }) {
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell component="th" scope="row" align="center">
-                {row.Id}
+                {index + 1}
               </TableCell>
               <TableCell align="center">{row.name}</TableCell>
               <TableCell align="center">{row.fb_name}</TableCell>
