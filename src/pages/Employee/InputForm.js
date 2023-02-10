@@ -8,7 +8,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import * as EmployeeService from "./../../services/employeeService";
 import * as yup from "yup";
-
+import { Controller } from "react-hook-form";
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 const InputForm = ({ editData }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -30,10 +33,18 @@ const InputForm = ({ editData }) => {
     handleSubmit: formHandleSubmit,
     formState: { errors },
     reset,
+    control,
     setValue,
   } = useForm({
-    resolver: yupResolver(schema),
+    defaultValues: {
+      birthday: new Date(),
+      start_work: new Date(),
+      end_work: ""
+    },
+    resolver: yupResolver(schema)
   });
+
+  console.log(errors);
 
   const handleSubmit = useCallback(
     async (values) => {
@@ -104,7 +115,7 @@ const InputForm = ({ editData }) => {
                 </Button>
                 <TextField
                   type="text"
-                  required
+
                   label=""
                   variant="outlined"
                   size="small"
@@ -187,16 +198,33 @@ const InputForm = ({ editData }) => {
                 >
                   {t("birthday")}
                 </Button >
-                <TextField
-                  type="text"
-                  label=""
-                  variant="outlined"
-                  size="small"
-                  sx={{ width: "350px" }}
-                  {...register("birthday")}
-                  error={errors.birthday?.message}
-                  helperText={errors.birthday?.message}
+
+                <Controller
+                  name="birthday"
+                  control={control}
+                  render={
+                    ({ field: { onChange, ...restField } }) =>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                        <DesktopDatePicker
+                          label="Birthday"
+                          inputFormat="MM/DD/YYYY"
+                          error={errors.birthday?.message}
+                          helperText={errors.birthday?.message}
+                          onChange={(event) => { onChange(event); }}
+                          renderInput={(params) =>
+                            <TextField
+                              {...params}
+                              sx={{ width: "350px" }}
+                            />}
+                          {...restField}
+                        />
+                      </LocalizationProvider>
+
+                  }
                 />
+
+
               </Stack >
               <Stack spacing={2} direction="row" m={2}>
                 <Button
@@ -272,15 +300,30 @@ const InputForm = ({ editData }) => {
                   {" "}
                   {t("start_work")}
                 </Button>
-                <TextField
-                  type="text"
-                  label=""
-                  variant="outlined"
-                  size="small"
-                  sx={{ width: "350px" }}
-                  {...register("start_work")}
-                  error={errors.start_work?.message}
-                  helperText={errors.start_work?.message}
+
+                <Controller
+                  name="start_work"
+                  control={control}
+                  render={
+                    ({ field: { onChange, ...restField } }) =>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                        <DesktopDatePicker
+                          label="Start Work"
+                          inputFormat="MM/DD/YYYY"
+                          error={errors.start_work?.message}
+                          helperText={errors.start_work?.message}
+                          onChange={(event) => { onChange(event); }}
+                          renderInput={(params) =>
+                            <TextField
+                              {...params}
+                              sx={{ width: "350px" }}
+                            />}
+                          {...restField}
+                        />
+                      </LocalizationProvider>
+
+                  }
                 />
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
@@ -301,15 +344,29 @@ const InputForm = ({ editData }) => {
                   {" "}
                   {t("end_work")}
                 </Button>
-                <TextField
-                  type="text"
-                  label=""
-                  variant="outlined"
-                  size="small"
-                  sx={{ width: "350px" }}
-                  {...register("end_work")}
-                // error={errors.end_work?.message}
-                // helperText={errors.end_work?.message}
+                <Controller
+                  name="end_work"
+                  control={control}
+                  render={
+                    ({ field: { onChange, ...restField } }) =>
+                      <LocalizationProvider dateAdapter={AdapterDayjs}>
+
+                        <DesktopDatePicker
+                          label="End Work"
+                          inputFormat="MM/DD/YYYY"
+                          error={errors.end_work?.message}
+                          helperText={errors.end_work?.message}
+                          onChange={(event) => { onChange(event); }}
+                          renderInput={(params) =>
+                            <TextField
+                              {...params}
+                              sx={{ width: "350px" }}
+                            />}
+                          {...restField}
+                        />
+                      </LocalizationProvider>
+
+                  }
                 />
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
@@ -346,32 +403,12 @@ const InputForm = ({ editData }) => {
                 m={2}
                 sx={{
                   display: "flex",
-                  justifyContent: "space-between",
+                  justifyContent: "center",
                   alignItems: "center",
                   marginTop: "15px",
                 }}
               >
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                    backgroundColor: "#fff",
-                    minWidth: "200px",
-                    fontSize: "14px",
-                    color: "green",
-                    textTransform: "none",
-                    ":hover": {
-                      bgcolor: "#fff",
-                      color: "#094708",
-                    },
-                  }}
-                >
-                  <SaveAsIcon />
-                  {t("save_assign")}
-                </Button>
+
                 <Button
                   type="submit"
                   variant="contained"
