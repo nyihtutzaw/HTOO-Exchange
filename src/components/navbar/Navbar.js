@@ -27,7 +27,7 @@ import DrawerComp from "../drewer/DrawerComp";
 import { Link, useNavigate } from "react-router-dom";
 import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
 import EmployeeList from "../../pages/Employee/EmployeeList";
-import CustomerList from "../customer/CustomerList";
+import CustomerList from "../../pages/customer/CustomerList";
 import BankNameList from "../bank_name/BankNameList";
 import BranchList from "../../pages/branch/BranchList";
 import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";

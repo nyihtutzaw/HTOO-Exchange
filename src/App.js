@@ -16,9 +16,9 @@ import PirvateRoute from "./routers/PrivateRoute";
 import CreateEmployee from "./pages/Employee/CreateEmployee";
 import EditEmployee from "./pages/Employee/EditEmployee";
 import EmployeeList from "./pages/Employee/EmployeeList";
-import CreateCustomer from "./components/customer/CreateCustomer";
-import EditCustomer from "./components/customer/EditCustomer";
-import CustomerList from "./components/customer/CustomerList";
+import CreateCustomer from "./pages/customer/CreateCustomer";
+import EditCustomer from "./pages/customer/EditCustomer";
+import CustomerList from "./pages/customer/CustomerList";
 import EditBankName from "./components/bank_name/EditBankName";
 import BankNameList from "./components/bank_name/BankNameList";
 import CreateStackSalary from "./components/stackSalary/CreateStackSalary";
@@ -70,7 +70,7 @@ function App() {
           <Route path="/admin/list-employee" element={<EmployeeList />} />
           {/* customer routes */}
           <Route path="/admin/create-customer" element={<CreateCustomer />} />
-          <Route path="/admin/edit-customer" element={<EditCustomer />} />
+          <Route path="/admin/edit-customer/:id" element={<EditCustomer />} />
           <Route path="/admin/list-customer" element={<CustomerList />} />
 
           {/* bank routes */}
