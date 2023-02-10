@@ -4,7 +4,6 @@ import { Box } from "@mui/system";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { withStyles } from "@material-ui/core/styles";
-import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { useTranslation } from "react-i18next";
 import List from "./List";
@@ -12,6 +11,8 @@ import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import { useDispatch, useSelector } from "react-redux";
 import * as CustomerService from "./../../services/customerService";
 import { deleteCustomer, setCustomers } from "../../store/reducer.customer";
+import queryString from "query-string";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CssTextField = withStyles({
   root: {
@@ -41,7 +42,7 @@ const CustomerList = () => {
   const dispatch = useDispatch();
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
-
+  const location = useLocation();
   const customers = useSelector((state) => state.customer.customers);
 
   const handleDelete = async (id) => {
@@ -54,7 +55,8 @@ const CustomerList = () => {
   };
 
   const loadData = async () => {
-    const response = await CustomerService.getAll();
+    const query = queryString.parse(location.search);
+    const response = await CustomerService.getAll(query);
     dispatch(setCustomers(response));
   };
 
@@ -64,6 +66,17 @@ const CustomerList = () => {
 
   const handleEdit = (e) => {
     navigate("/admin/edit-customer/" + e.id);
+  };
+
+  const onSearch = async (e) => {
+    if (e.key === "Enter") {
+      const query = queryString.parse(location.search);
+      query.search = e.target.value;
+      const response = await CustomerService.getAll(
+        queryString.stringify(query)
+      );
+      dispatch(setCustomers(response));
+    }
   };
 
   return (
@@ -96,7 +109,7 @@ const CustomerList = () => {
               label="Search"
               className="search"
               name="search"
-              // onChange={this.onChange}
+              onKeyDown={onSearch}
               type="text"
               autoComplete=""
               margin="normal"

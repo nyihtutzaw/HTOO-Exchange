@@ -5,7 +5,7 @@ import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import { withStyles } from "@material-ui/core/styles";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { useTranslation } from "react-i18next";
 import * as RoleService from "./../../services/roleService";
@@ -13,6 +13,7 @@ import { deleteRole, setRoles } from "../../store/reducer.role";
 import { useDispatch, useSelector } from "react-redux";
 import List from "./List";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
+import queryString from "query-string";
 
 const CssTextField = withStyles({
   root: {
@@ -42,7 +43,7 @@ const RoleAndAccessList = () => {
   const dispatch = useDispatch();
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
-
+  const location = useLocation();
   const roles = useSelector((state) => state.role.roles);
 
   const handleDelete = async (id) => {
@@ -62,6 +63,15 @@ const RoleAndAccessList = () => {
   useEffect(() => {
     loadData();
   }, []);
+
+  const onSearch = async (e) => {
+    if (e.key === "Enter") {
+      const query = queryString.parse(location.search);
+      query.search = e.target.value;
+      const response = await RoleService.getAll(queryString.stringify(query));
+      dispatch(setRoles(response));
+    }
+  };
 
   return (
     <>
@@ -93,7 +103,7 @@ const RoleAndAccessList = () => {
               label="Search"
               className="search"
               name="search"
-              // onChange={this.onChange}
+              onKeyDown={onSearch}
               type="text"
               autoComplete=""
               margin="normal"
