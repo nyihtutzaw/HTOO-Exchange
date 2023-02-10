@@ -61,16 +61,12 @@ function List({ data, handleEdit, onDelete }) {
               <TableCell align="center">{row.address}</TableCell>
               <TableCell align="center">{row.remark}</TableCell>
               <TableCell align="center">
-                <DisplaySettingsRoundedIcon
-                  onClick={() => handleEdit(row)}
-                  sx={{ color: "green", fontSize: "25px" }}
-                />
                 <DriveFileRenameOutlineRoundedIcon
                   onClick={() => handleEdit(row)}
                   sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }}
                 />
                 <DeleteForeverRoundedIcon
-                  onClick={()=> onDelete(row)}
+                  onClick={() => onDelete(row)}
                   sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }}
                 />
               </TableCell>

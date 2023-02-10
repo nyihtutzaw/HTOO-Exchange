@@ -302,9 +302,11 @@ const Navbar = () => {
                   onClose={handleCloseUser}
                 >
                   {menus.map((data) => (
-                    <MenuItem key={data.name} >
+                    <MenuItem key={data.name} onClick={() => {
+                      window.location = data.route;
+                    }}>
                       <Link
-                        to={data.route}
+
                         style={{ textDecoration: "none" }}
                         onClose={handleCloseUser}
 
