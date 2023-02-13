@@ -20,8 +20,9 @@ import {
   CardActionArea,
   CardMedia,
   CardContent,
+  Divider,
 } from "@mui/material";
-import { removeCache } from "../../utils/cache";
+import { removeCache, storeCache } from "../../utils/cache";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "../drewer/DrawerComp";
 import { Link, useNavigate } from "react-router-dom";
@@ -47,6 +48,8 @@ import TrueMoney from "../bank_money/TrueMoney";
 import YomaBank from "../bank_money/YomaBank";
 import ListWave from "../wave/ListWave";
 import TransitionRecord from "../transition_record/TransitionRecord";
+import AdminList from "../../pages/Admin/AdminList";
+import { useSelector } from "react-redux";
 
 const settings = ["Account", "Logout"];
 
@@ -57,11 +60,13 @@ const Navbar = () => {
   const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElUsers, setAnchorElUsers] = useState(null);
-  // const [buttonLabel, setButtonLabel] = useState("SetUp");
-  // const [buttonLabel, setButtonLabel] = useState(`${t("set-up")}`);
-  // const [age, setAge] = React.useState('');
   const [language, setLanguage] = useState("eng");
   const [value, setValue] = useState("eng");
+
+  const user = useSelector((state) => state.auth.user);
+  const activeBranch = useSelector((state) => state.auth.activeBranch);
+
+
 
 
   const lists = [
@@ -99,6 +104,11 @@ const Navbar = () => {
     //   route: "/admin/create-exchange",
     //   element: <ExchangeCreate />
     // },
+    {
+      name: `${t("admin")}`,
+      route: "/admin/list-admin",
+      element: <AdminList />,
+    },
     {
       name: `${t("branches")}`,
       route: "/admin/list-branch",
@@ -158,6 +168,11 @@ const Navbar = () => {
     i18n.changeLanguage(event.target.value);
     localStorage.setItem("lng", event.target.value);
   };
+
+  const handleBranchChange = (branch) => {
+    storeCache("activeBranch", JSON.stringify(branch));
+    window.location.reload();
+  }
 
   useEffect(() => {
     const lng = localStorage.getItem("lng");
@@ -372,12 +387,18 @@ const Navbar = () => {
                 }}
               >
                 <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="/static/images/avatar/2.jpg"
-                    />
-                  </IconButton>
+
+                  <Button
+                    onClick={handleOpenUserMenu}
+                    sx={{
+                      textTransform: "none",
+                      margin: "5px", backgroundColor: "#094708", ':hover': {
+                        bgcolor: '#094708',
+                        color: '#fff'
+                      }
+                    }} variant="contained" >
+                    {activeBranch?.name}
+                  </Button>
                 </Tooltip>
                 <Menu
                   sx={{ mt: "45px" }}
@@ -395,11 +416,25 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseToken}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
+
+                  <MenuItem>
+                    <Typography textAlign="center">{user?.employee?.name}</Typography>
+                  </MenuItem>
+                  <Divider />
+                  {
+                    user?.employee.branches?.map((branch) => (
+                      <MenuItem onClick={() => handleBranchChange(branch)}>
+                        <Typography textAlign="center">{branch.name}
+                          {activeBranch.id === branch.id && <span style={{ color: "red" }}>*</span>}
+                        </Typography>
+                      </MenuItem>
+                    ))
+                  }
+                  <Divider />
+                  <MenuItem onClick={handleCloseToken}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+
                 </Menu>
               </Box>
             </Grid>

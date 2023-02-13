@@ -16,6 +16,11 @@ import PirvateRoute from "./routers/PrivateRoute";
 import CreateEmployee from "./pages/Employee/CreateEmployee";
 import EditEmployee from "./pages/Employee/EditEmployee";
 import EmployeeList from "./pages/Employee/EmployeeList";
+
+import CreateAdmin from "./pages/Admin/CreateAdmin";
+import EditAdmin from "./pages/Admin/EditAdmin";
+import AdminList from "./pages/Admin/AdminList";
+
 import CreateCustomer from "./pages/customer/CreateCustomer";
 import EditCustomer from "./pages/customer/EditCustomer";
 import CustomerList from "./pages/customer/CustomerList";
@@ -68,6 +73,12 @@ function App() {
           <Route path="/admin/create-employee" element={<CreateEmployee />} />
           <Route path="/admin/edit-employee/:id" element={<EditEmployee />} />
           <Route path="/admin/list-employee" element={<EmployeeList />} />
+
+          {/* admin routes */}
+          <Route path="/admin/create-admin" element={<CreateAdmin />} />
+          <Route path="/admin/edit-admin/:id" element={<EditAdmin />} />
+          <Route path="/admin/list-admin" element={<AdminList />} />
+
           {/* customer routes */}
           <Route path="/admin/create-customer" element={<CreateCustomer />} />
           <Route path="/admin/edit-customer/:id" element={<EditCustomer />} />

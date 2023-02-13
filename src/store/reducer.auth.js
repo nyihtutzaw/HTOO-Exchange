@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getCache } from "../utils/cache";
 
 export const authReducer = createSlice({
     name: "counter",
     initialState: {
-        user: {},
+        user: getCache("user") ? JSON.parse(getCache("user")) : {},
+        activeBranch: getCache("activeBranch") ? JSON.parse(getCache("activeBranch")) : {},
         token: null
     },
     reducers: {
@@ -12,7 +14,7 @@ export const authReducer = createSlice({
         },
         setToken: (state, action) => {
             state.token = action.payload;
-        }
+        },
     }
 });
 

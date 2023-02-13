@@ -6,6 +6,7 @@ export async function login(values) {
     try {
         let response = await sendData('admin/login', values)
         storeCache('user', JSON.stringify(response.data.admin))
+        storeCache("activeBranch", JSON.stringify(response.data.admin.employee.branches[0]))
         storeCache('access_token', response.data.token)
         return response
     } catch (e) {

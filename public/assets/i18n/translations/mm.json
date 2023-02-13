@@ -1,6 +1,7 @@
 {
     "employee.title": "ဝန်ထမ်းစာရင်း",
     "employee.name": "ဝန်ထမ်းအမည်",
+    "admin.list": "Admin List",
     "employee.create_title": "ဝန်ထမ်းစာရင်းသွင်းရန်စာမျက်နှာ",
     "customer.list": "Customerစာရင်း",
     "customer.name": "Customer အမည်",
@@ -137,7 +138,10 @@
     "role-access": "လုပ်ပိုင်ခွင့်များ",
     "branches": "ရုံးခွဲများ",
     "type": "အမျိူးအစား",
-    "amount": "ပမာဏ"
+    "amount": "ပမာဏ",
+    "email":"Email",
+    "password":"Password",
+    "employee":"Employee"
 
 
 }
