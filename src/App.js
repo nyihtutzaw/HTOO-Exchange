@@ -21,11 +21,15 @@ import CreateAdmin from "./pages/Admin/CreateAdmin";
 import EditAdmin from "./pages/Admin/EditAdmin";
 import AdminList from "./pages/Admin/AdminList";
 
+import CreateBank from "./pages/bank/CreateBank";
+import EditBank from "./pages/bank/EditBank";
+import BankList from "./pages/bank/BankList";
+
 import CreateCustomer from "./pages/customer/CreateCustomer";
 import EditCustomer from "./pages/customer/EditCustomer";
 import CustomerList from "./pages/customer/CustomerList";
-import EditBankName from "./components/bank_name/EditBankName";
-import BankNameList from "./components/bank_name/BankNameList";
+
+
 import CreateStackSalary from "./components/stackSalary/CreateStackSalary";
 import EditStackSalary from "./components/stackSalary/EditStackSalary";
 import StackSalaryList from "./components/stackSalary/StackSalaryList";
@@ -34,8 +38,7 @@ import ExpenseList from "./components/expense/ExpenseList";
 import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransfer";
 import CreateWave from "./components/wave/CreateWave";
 import CreateTrue from "./components/true/CreateTrue";
-// import CreateExchange from "./components/exchange/ExchangeLists";
-import CreateBankName from "./components/bank_name/CreateBankName";
+
 import BranchTransferList from "./components/branchTransfer/BranchTransferList";
 
 // import ListExchange from "./components/exchange/ListExchange";
@@ -87,9 +90,9 @@ function App() {
           <Route path="/admin/list-customer" element={<CustomerList />} />
 
           {/* bank routes */}
-          <Route path="/admin/create-bank" element={<CreateBankName />} />
-          <Route path="/admin/edit-bank" element={<EditBankName />} />
-          <Route path="/admin/list-bank" element={<BankNameList />} />
+          <Route path="/admin/create-bank" element={<CreateBank />} />
+          <Route path="/admin/edit-bank/:id" element={<EditBank />} />
+          <Route path="/admin/list-bank" element={<BankList />} />
           {/* branch routes */}
           <Route path="/admin/create-branch" element={<CreateBranch />} />
           <Route path="/admin/edit-branch/:id" element={<EditBranch />} />
