@@ -67,7 +67,8 @@
 
     "staff-salary.total": "Total",
     "staff-salary.month-year": "Month/Year",
-
+    "staff-salary.month": "Month",
+    "staff-salary.year": "Year",
 
     "no": "No",
     "name": "Name",
@@ -116,7 +117,7 @@
     "employees": "Employees",
     "excel": "Excel Export",
     "set-up": "SetUp",
-    "staff-salary": "Stack Salary",
+    "staff-salary": "Salary",
     "expense": "Expense",
     "branch-transfer": "Branch Transfer",
     "banks": "Banks",

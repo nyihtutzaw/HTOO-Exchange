@@ -10,6 +10,7 @@ import bankReducer from './reducer.bank.js';
 
 
 import allowanceReducer from './reducer.allowance.js';
+import salaryReducer from './reducer.salary.js';
 
 
 const store = configureStore({
@@ -20,7 +21,7 @@ const store = configureStore({
         branch: branchReducer,
         employee: employeeReducer,
         customer: customerReducer,
-
+        salary: salaryReducer,
         bank: bankReducer,
 
         allowance: allowanceReducer,

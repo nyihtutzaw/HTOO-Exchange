@@ -29,10 +29,10 @@ import CreateCustomer from "./pages/customer/CreateCustomer";
 import EditCustomer from "./pages/customer/EditCustomer";
 import CustomerList from "./pages/customer/CustomerList";
 
+import CreateStaffSalary from "./pages/salary/CreateStaffSalary";
+import EditStaffSalary from "./pages/salary/EditStaffSalary";
+import SalaryList from "./pages/salary/SalaryList";
 
-import CreateStackSalary from "./components/stackSalary/CreateStackSalary";
-import EditStackSalary from "./components/stackSalary/EditStackSalary";
-import StackSalaryList from "./components/stackSalary/StackSalaryList";
 import CreateExpense from "./components/expense/CreateExpense";
 import ExpenseList from "./components/expense/ExpenseList";
 import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransfer";
@@ -116,15 +116,15 @@ function App() {
           {/* stack salary routes */}
           <Route
             path="/admin/create-stack-salary"
-            element={<CreateStackSalary />}
+            element={<CreateStaffSalary />}
           />
           <Route
-            path="/admin/edit-stack-salary"
-            element={<EditStackSalary />}
+            path="/admin/edit-stack-salary/:id"
+            element={<EditStaffSalary />}
           />
           <Route
             path="/admin/list-stack-salary"
-            element={<StackSalaryList />}
+            element={<SalaryList />}
           />
 
           {/* expense rouetes */}
