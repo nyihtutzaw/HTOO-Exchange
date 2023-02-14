@@ -21,7 +21,7 @@ const store = configureStore({
         employee: employeeReducer,
         customer: customerReducer,
 
-        bank: bankReducer
+        bank: bankReducer,
 
         allowance: allowanceReducer,
 
