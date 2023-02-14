@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 import "./i18n";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
@@ -60,14 +60,16 @@ import CreateRoleAccess from "./pages/roleAndAccess/CreateRoleAccess";
 import EditRoleAccess from "./pages/roleAndAccess/EditRoleAccess";
 import RoleAndAccessList from "./pages/roleAndAccess/RoleAndAccessList";
 
-
+import AllowanceList from "./pages/allowance/AllowanceList";
+import CreateAllowance from "./pages/allowance/CreateAllowance";
+import EditAllowance from "./pages/allowance/EditAllowance";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/auth/login" element={<LoginForm />} />
-        <Route element={<PirvateRoute />} >
+        <Route element={<PirvateRoute />}>
           <Route
             path="/"
             element={<Navigate to="/admin/list-employee"></Navigate>}
@@ -96,21 +98,45 @@ function App() {
           <Route path="/admin/edit-branch/:id" element={<EditBranch />} />
           <Route path="/admin/list-branch" element={<BranchList />} />
           {/* Role and  access routes */}
-          <Route path="/admin/create-role-access" element={<CreateRoleAccess />} />
-          <Route path="/admin/edit-role-access/:id" element={<EditRoleAccess />} />
-          <Route path="/admin/list-role-access" element={<RoleAndAccessList />} />
+          <Route
+            path="/admin/create-role-access"
+            element={<CreateRoleAccess />}
+          />
+          <Route
+            path="/admin/edit-role-access/:id"
+            element={<EditRoleAccess />}
+          />
+          <Route
+            path="/admin/list-role-access"
+            element={<RoleAndAccessList />}
+          />
 
           {/* stack salary routes */}
-          <Route path="/admin/create-stack-salary" element={<CreateStackSalary />} />
-          <Route path="/admin/edit-stack-salary" element={<EditStackSalary />} />
-          <Route path="/admin/list-stack-salary" element={<StackSalaryList />} />
+          <Route
+            path="/admin/create-stack-salary"
+            element={<CreateStackSalary />}
+          />
+          <Route
+            path="/admin/edit-stack-salary"
+            element={<EditStackSalary />}
+          />
+          <Route
+            path="/admin/list-stack-salary"
+            element={<StackSalaryList />}
+          />
 
           {/* expense rouetes */}
           <Route path="/admin/create-expense" element={<CreateExpense />} />
           <Route path="/admin/list-expense" element={<ExpenseList />} />
           {/* branch transfer routes */}
-          <Route path="/admin/create-branch-transfer" element={<CreateBranchTransfer />} />
-          <Route path="/admin/list-branch-transfer" element={<BranchTransferList />} />
+          <Route
+            path="/admin/create-branch-transfer"
+            element={<CreateBranchTransfer />}
+          />
+          <Route
+            path="/admin/list-branch-transfer"
+            element={<BranchTransferList />}
+          />
 
           {/* wave routes */}
           <Route path="/admin/create-wave" element={<CreateWave />} />
@@ -132,8 +158,15 @@ function App() {
           <Route path="/admin/yoma-money" element={<YomaBank />} />
 
           {/* transition-records */}
-          <Route path="/admin/list-transitions" element={<TransitionRecord />} />
+          <Route
+            path="/admin/list-transitions"
+            element={<TransitionRecord />}
+          />
 
+          {/* allowance routes */}
+          <Route path="/admin/create-allowance" element={<CreateAllowance />} />
+          <Route path="/admin/edit-allowance/:id" element={<EditAllowance />} />
+          <Route path="/admin/list-allowance" element={<AllowanceList />} />
         </Route>
       </Routes>
       <NotificationContainer />

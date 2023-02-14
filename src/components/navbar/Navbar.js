@@ -50,6 +50,7 @@ import ListWave from "../wave/ListWave";
 import TransitionRecord from "../transition_record/TransitionRecord";
 import AdminList from "../../pages/Admin/AdminList";
 import { useSelector } from "react-redux";
+import AllowanceList from "../../pages/allowance/AllowanceList";
 
 const settings = ["Account", "Logout"];
 
@@ -158,6 +159,11 @@ const Navbar = () => {
       name: `YomaMoney`,
       route: "/admin/yoma-money",
       element: <YomaBank />
+    },
+    {
+      name: `Allowance`,
+      route: "/admin/list-allowance",
+      element: <AllowanceList />
     }
 
   ];

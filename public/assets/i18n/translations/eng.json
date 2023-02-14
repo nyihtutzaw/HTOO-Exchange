@@ -33,6 +33,8 @@
     "branch-transfer.account-cash": "Amount(E-Money/Cash)",
     "branch-transfer.from-transfer-type": "From Transfer Type",
     "branch-transfer.to-transfer-type": "To Transfer Type",
+    "new_allowance": "Allowance Create",
+    "allowance.list": "Allowance List",
 
     "from-bank": "From Bank",
     "to-bank": "To Bank",
