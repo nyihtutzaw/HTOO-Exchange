@@ -32,7 +32,7 @@ import CustomerList from "../../pages/customer/CustomerList";
 import BankList from "../../pages/bank/BankList";
 import BranchList from "../../pages/branch/BranchList";
 import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";
-import StackSalaryList from "../stackSalary/StackSalaryList";
+import SalaryList from "../../pages/salary/SalaryList";
 import ExpenseList from "../expense/ExpenseList";
 
 // import CreateWave from "../wave/CreateWave";
@@ -141,7 +141,7 @@ const Navbar = () => {
     {
       name: `${t("staff-salary")}`,
       route: "/admin/list-stack-salary",
-      element: <StackSalaryList />
+      element: <SalaryList />
     },
     {
       name: `TotalMoney`,

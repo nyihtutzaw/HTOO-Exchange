@@ -139,5 +139,7 @@
   "amount": "ပမာဏ",
   "email": "Email",
   "password": "Password",
-  "employee": "Employee"
+  "employee": "Employee", 
+  "staff-salary.month": "Month",
+  "staff-salary.year": "Year"
 }
