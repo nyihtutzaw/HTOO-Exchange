@@ -51,4 +51,14 @@ export async function deleteBank(id, values) {
     }
 }
 
+export async function addMoney(values, id) {
+    try {
+        let response = await sendData("add-to-bank-account/" + id, values, "PUT");
+        return response;
+    } catch (e) {
+        NotificationManager.error("Failed");
+        return false;
+    }
+}
+
 

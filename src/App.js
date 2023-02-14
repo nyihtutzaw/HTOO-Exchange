@@ -63,6 +63,7 @@ import RoleAndAccessList from "./pages/roleAndAccess/RoleAndAccessList";
 import AllowanceList from "./pages/allowance/AllowanceList";
 import CreateAllowance from "./pages/allowance/CreateAllowance";
 import EditAllowance from "./pages/allowance/EditAllowance";
+import AddMoney from "./pages/bank/AddMoney";
 
 function App() {
   return (
@@ -92,6 +93,7 @@ function App() {
           {/* bank routes */}
           <Route path="/admin/create-bank" element={<CreateBank />} />
           <Route path="/admin/edit-bank/:id" element={<EditBank />} />
+          <Route path="/admin/add-money-to-bank/:id" element={<AddMoney />} />
           <Route path="/admin/list-bank" element={<BankList />} />
           {/* branch routes */}
           <Route path="/admin/create-branch" element={<CreateBranch />} />

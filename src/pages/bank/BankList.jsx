@@ -77,6 +77,10 @@ const BankList = () => {
     }
   };
 
+  const handleAddMoney = async (e) => {
+    navigate("/admin/add-money-to-bank/" + e.id);
+  };
+
   return (
     <>
       <Navbar />
@@ -147,6 +151,7 @@ const BankList = () => {
           <List
             data={banks}
             handleEdit={handleEdit}
+            handleAddMoney={handleAddMoney}
             onDelete={(row) => {
               setEditData(row);
               setShowDelete(true);

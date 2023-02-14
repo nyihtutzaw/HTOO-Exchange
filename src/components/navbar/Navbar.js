@@ -68,8 +68,6 @@ const Navbar = () => {
   const activeBranch = useSelector((state) => state.auth.activeBranch);
 
 
-
-
   const lists = [
     {
       name: `${t("w-agent")}`,
