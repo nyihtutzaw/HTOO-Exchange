@@ -8,7 +8,7 @@ import {
   Select,
   FormHelperText,
 } from "@mui/material";
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Navbar from "../../components/navbar/Navbar";
@@ -17,22 +17,24 @@ import * as yup from "yup";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as BankService from "./../../services/bankService";
+import * as ExpenseService from "./../../services/expenseService";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import MenuItem from "@mui/material/MenuItem";
-import { accountNames } from "../../contants";
+import { expenseTypes } from "../../contants";
+import { setBanks } from "../../store/reducer.bank";
 
 const InputForm = ({ editData }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const activeBranch = useSelector((state) => state.auth.activeBranch);
 
   const schema = yup.object().shape({
     name: yup.string().required(),
-    phone: yup.string().required(),
-    account_name: yup.string().required(),
-    amount: editData ? yup.string() : yup.string().required(),
+    type: yup.string().required(),
+    bank_account_id: editData ? yup.number() : yup.number().required(),
+    total: editData ? yup.number() : yup.number().required(),
   });
 
   const {
@@ -45,30 +47,42 @@ const InputForm = ({ editData }) => {
     resolver: yupResolver(schema),
   });
 
+  const loadData = async () => {
+    const query = { branch_id: activeBranch.id };
+    const response = await BankService.getAll(query);
+    dispatch(setBanks(response));
+  };
+
   useEffect(() => {
     if (editData) {
       reset({
-        account_name: editData?.account_name,
         name: editData?.name,
-        phone: editData.phone,
+        type: editData.type,
         remark: editData?.remark,
       });
     } else {
       reset();
     }
+    loadData();
   }, [editData, reset]);
 
   const handleSubmit = useCallback(
     async (values) => {
       editData
-        ? await BankService.update(values, editData?.id)
-        : await BankService.store({ ...values, branch_id: activeBranch.id });
+        ? await ExpenseService.update(values, editData?.id)
+        : await ExpenseService.store({ ...values, branch_id: activeBranch.id });
 
       reset();
-      navigate("/admin/list-bank");
+      navigate("/admin/list-expense");
     },
-    [editData, navigate, reset]
+    [editData, reset]
   );
+  const banks = useSelector((state) => state.bank.banks);
+
+  const bankAccounts = banks?.map((element) => ({
+    value: element.id,
+    label: element.account_name,
+  }));
 
   return (
     <>
@@ -88,7 +102,8 @@ const InputForm = ({ editData }) => {
           <Card sx={{ marginTop: "65px", bgcolor: "#edeff2" }}>
             <Box sx={{ margin: "30px" }}>
               <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>
-                {t("bank.create")}
+                {" "}
+                {t("expense.create")}
               </Typography>
               <Stack spacing={2} direction="row" m={2}>
                 <Button
@@ -105,16 +120,16 @@ const InputForm = ({ editData }) => {
                     },
                   }}
                 >
-                  {t("bank.acc_name")}
+                  {t("expense.type")}
                 </Button>
                 <Controller
-                  name="account_name"
-                  id="account_name"
+                  name="type"
+                  id="type"
                   control={control}
                   render={({ field }) => (
-                    <Select labelId="account_name-label" {...field} fullWidth>
-                      {accountNames.map((accountName) => (
-                        <MenuItem value={accountName}>{accountName}</MenuItem>
+                    <Select labelId="expense-type-label" {...field} fullWidth>
+                      {expenseTypes.map((type) => (
+                        <MenuItem value={type}>{type}</MenuItem>
                       ))}
                     </Select>
                   )}
@@ -123,6 +138,7 @@ const InputForm = ({ editData }) => {
                   {errors.account_name?.message}
                 </FormHelperText>
               </Stack>
+
               <Stack spacing={2} direction="row" m={2}>
                 <Button
                   variant="contained"
@@ -138,10 +154,11 @@ const InputForm = ({ editData }) => {
                     },
                   }}
                 >
-                  {t("bank.acc_owner")}
+                  {t("expense.name")}
                 </Button>
                 <TextField
                   type="text"
+                  required
                   label=""
                   variant="outlined"
                   size="small"
@@ -151,66 +168,78 @@ const InputForm = ({ editData }) => {
                   helperText={errors.name?.message}
                 />
               </Stack>
-              <Stack spacing={2} direction="row" m={2}>
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "#094708",
-                    minWidth: "200px",
-                    fontSize: "14px",
-                    ":hover": {
-                      bgcolor: "#094708",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  {" "}
-                  {t("bank.acc_phone")}
-                </Button>
-                <TextField
-                  type="text"
-                  label=""
-                  variant="outlined"
-                  size="small"
-                  sx={{ width: "350px" }}
-                  {...register("phone")}
-                  error={errors.phone?.message}
-                  helperText={errors.phone?.message}
-                />
-              </Stack>
-
               {!editData && (
-                <Stack spacing={2} direction="row" m={2}>
-                  <Button
-                    variant="contained"
-                    size="small"
-                    sx={{
-                      textTransform: "none",
-                      backgroundColor: "#094708",
-                      minWidth: "200px",
-                      fontSize: "14px",
-                      ":hover": {
-                        bgcolor: "#094708",
-                        color: "#fff",
-                      },
-                    }}
-                  >
-                    {t("bank.open_list")}
-                  </Button>
-                  <TextField
-                    type="text"
-                    label=""
-                    variant="outlined"
-                    size="small"
-                    sx={{ width: "350px" }}
-                    {...register("amount")}
-                    error={errors.amount?.message}
-                    helperText={errors.amount?.message}
-                  />
-                </Stack>
+                <>
+                  <Stack spacing={2} direction="row" m={2}>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{
+                        textTransform: "none",
+                        backgroundColor: "#094708",
+                        minWidth: "200px",
+                        fontSize: "14px",
+                        ":hover": {
+                          bgcolor: "#094708",
+                          color: "#fff",
+                        },
+                      }}
+                    >
+                      {t("bank.account")}
+                    </Button>
+                    <Controller
+                      name="bank_account_id"
+                      id="bank_account_id"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          labelId="bank_account_id-label"
+                          {...field}
+                          fullWidth
+                        >
+                          {bankAccounts.map((bankAccount) => (
+                            <MenuItem value={bankAccount.value}>
+                              {bankAccount.label}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      )}
+                    />
+                    <FormHelperText error={true}>
+                      {errors.account_name?.message}
+                    </FormHelperText>
+                  </Stack>
+                  <Stack spacing={2} direction="row" m={2}>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{
+                        textTransform: "none",
+                        backgroundColor: "#094708",
+                        minWidth: "200px",
+                        fontSize: "14px",
+                        ":hover": {
+                          bgcolor: "#094708",
+                          color: "#fff",
+                        },
+                      }}
+                    >
+                      {t("expense.total")}
+                    </Button>
+                    <TextField
+                      type="text"
+                      label=""
+                      variant="outlined"
+                      size="small"
+                      sx={{ width: "350px" }}
+                      {...register("total")}
+                      error={errors.total?.message}
+                      helperText={errors.total?.message}
+                    />
+                  </Stack>
+                </>
               )}
+
               <Stack spacing={2} direction="row" m={2}>
                 <Button
                   variant="contained"
@@ -226,7 +255,7 @@ const InputForm = ({ editData }) => {
                     },
                   }}
                 >
-                  {t("remark")}
+                  {t("about")}
                 </Button>
                 <TextField
                   type="text"
@@ -239,7 +268,6 @@ const InputForm = ({ editData }) => {
                   helperText={errors.remark?.message}
                 />
               </Stack>
-
               <Stack
                 spacing={2}
                 direction="row"
@@ -255,7 +283,7 @@ const InputForm = ({ editData }) => {
                   variant="contained"
                   size="small"
                   onClick={() => {
-                    navigate("/admin/list-bank");
+                    navigate("/admin/list-expense");
                   }}
                   sx={{
                     textTransform: "none",
