@@ -15,7 +15,7 @@ const AddMoneyForm = ({ editData }) => {
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
-    amount: yup.string().required(),
+    amount: yup.number().required(),
   });
 
   const {
@@ -29,7 +29,6 @@ const AddMoneyForm = ({ editData }) => {
 
   const handleSubmit = useCallback(
     async (values) => {
-      values.amount = parseInt(values.amount);
       await BankService.addMoney(values, editData?.id);
       reset();
       navigate("/admin/list-bank");

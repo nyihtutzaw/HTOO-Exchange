@@ -33,14 +33,15 @@ import BankList from "../../pages/bank/BankList";
 import BranchList from "../../pages/branch/BranchList";
 import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";
 import StackSalaryList from "../stackSalary/StackSalaryList";
-import ExpenseList from "../expense/ExpenseList";
+import ExpenseList from "../../pages/expense/ExpenseList";
+
 
 // import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
 import CreateExchange from "../exchange/ExchangeLists";
-import logo from "../../assets/images/logo.png"
+import logo from "../../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import ExchangeCreate from "../exchange/ExchangeCreate";
 // import ListExchange from "../exchange/ListExchange";
 import TotalMoney from "../bank_money/TotalMoney";
@@ -67,33 +68,32 @@ const Navbar = () => {
   const user = useSelector((state) => state.auth.user);
   const activeBranch = useSelector((state) => state.auth.activeBranch);
 
-
   const lists = [
     {
       name: `${t("w-agent")}`,
       route: "/admin/list-wave",
-      element: <ListWave />
+      element: <ListWave />,
     },
     {
       name: "True Money",
       route: "/admin/create-true",
-      element: <CreateTrue />
+      element: <CreateTrue />,
     },
 
     {
       name: `${t("exchange")}`,
       route: "/admin/list-exchange",
-      element: <CreateExchange />
+      element: <CreateExchange />,
     },
     {
       name: `${t("employees")}`,
       route: "/admin/list-employee",
-      element: <EmployeeList />
+      element: <EmployeeList />,
     },
     {
       name: `${t("transition-record")}`,
       route: "/admin/list-transitions",
-      element: <TransitionRecord />
+      element: <TransitionRecord />,
     },
   ];
 
@@ -126,44 +126,43 @@ const Navbar = () => {
     {
       name: "Customers",
       route: "/admin/list-customer",
-      element: <CustomerList />
+      element: <CustomerList />,
     },
     {
       name: `${t("expense")}`,
       route: "/admin/list-expense",
-      element: <ExpenseList />
+      element: <ExpenseList />,
     },
     {
       name: `${t("branch-transfer")}`,
       route: "/admin/list-branch-transfer",
-      element: <CreateBranchTransfer />
+      element: <CreateBranchTransfer />,
     },
     {
       name: `${t("staff-salary")}`,
       route: "/admin/list-stack-salary",
-      element: <StackSalaryList />
+      element: <StackSalaryList />,
     },
     {
       name: `TotalMoney`,
       route: "/admin/total-money",
-      element: <TotalMoney />
+      element: <TotalMoney />,
     },
     {
       name: `TrueMoney`,
       route: "/admin/true-money",
-      element: <TrueMoney />
+      element: <TrueMoney />,
     },
     {
       name: `YomaMoney`,
       route: "/admin/yoma-money",
-      element: <YomaBank />
+      element: <YomaBank />,
     },
     {
       name: `Allowance`,
       route: "/admin/list-allowance",
-      element: <AllowanceList />
-    }
-
+      element: <AllowanceList />,
+    },
   ];
 
   const handleLanguageChange = (event) => {
@@ -176,7 +175,7 @@ const Navbar = () => {
   const handleBranchChange = (branch) => {
     storeCache("activeBranch", JSON.stringify(branch));
     window.location.reload();
-  }
+  };
 
   useEffect(() => {
     const lng = localStorage.getItem("lng");
@@ -187,7 +186,6 @@ const Navbar = () => {
       setLanguage("en");
     }
   }, [value, language]);
-
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -200,8 +198,8 @@ const Navbar = () => {
   const handleCloseToken = () => {
     setAnchorElUser(null);
 
-    removeCache('user')
-    removeCache('access_token')
+    removeCache("user");
+    removeCache("access_token");
     navigate("/auth/login", { replace: true });
   };
 
@@ -221,7 +219,7 @@ const Navbar = () => {
   return (
     <AppBar
       style={{
-        backgroundColor: "#fff"
+        backgroundColor: "#fff",
       }}
       sx={{ minHeight: "75px !important" }}
     >
@@ -238,27 +236,26 @@ const Navbar = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              textAlign: "center"
+              textAlign: "center",
             }}
           >
             <Grid item xs={1}>
-
-              <Card >
-                <CardActionArea sx={{
-                  display: "flex",
-                  justifyContent: "center", alignItems: "center"
-                }}>
+              <Card>
+                <CardActionArea
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <CardMedia
                     component="img"
                     height="75"
                     image={logo}
                     alt="green iguana"
                   />
-                  <CardContent>
-
-                  </CardContent>
+                  <CardContent></CardContent>
                 </CardActionArea>
-
               </Card>
             </Grid>
             <Grid item xs={6}>
@@ -268,13 +265,18 @@ const Navbar = () => {
                   to={lab.route}
                   style={{ textDecoration: "none" }}
                 >
-                  <Button sx={{
-                    textTransform: "none",
-                    margin: "5px", backgroundColor: "#094708", ':hover': {
-                      bgcolor: '#094708',
-                      color: '#fff'
-                    }
-                  }} variant="contained" >
+                  <Button
+                    sx={{
+                      textTransform: "none",
+                      margin: "5px",
+                      backgroundColor: "#094708",
+                      ":hover": {
+                        bgcolor: "#094708",
+                        color: "#fff",
+                      },
+                    }}
+                    variant="contained"
+                  >
                     {lab.name}
                   </Button>
                 </Link>
@@ -287,17 +289,23 @@ const Navbar = () => {
                   mr: 3,
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 <Tooltip title="Open settings">
                   <>
-                    <Button variant="contained" sx={{
-                      textTransform: 'none',
-                      margin: "5px", backgroundColor: "#094708", ':hover': {
-                        bgcolor: '#094708'
-                      }
-                    }} onClick={handleOpenUser} >
+                    <Button
+                      variant="contained"
+                      sx={{
+                        textTransform: "none",
+                        margin: "5px",
+                        backgroundColor: "#094708",
+                        ":hover": {
+                          bgcolor: "#094708",
+                        },
+                      }}
+                      onClick={handleOpenUser}
+                    >
                       {/* {buttonLabel} */}
                       SetUp
                     </Button>
@@ -310,25 +318,26 @@ const Navbar = () => {
                   anchorEl={anchorElUsers}
                   anchorOrigin={{
                     vertical: "top",
-                    horizontal: "right"
+                    horizontal: "right",
                   }}
                   keepMounted
                   transformOrigin={{
                     vertical: "top",
-                    horizontal: "right"
+                    horizontal: "right",
                   }}
                   open={Boolean(anchorElUsers)}
                   onClose={handleCloseUser}
                 >
                   {menus.map((data) => (
-                    <MenuItem key={data.name} onClick={() => {
-                      window.location = data.route;
-                    }}>
+                    <MenuItem
+                      key={data.name}
+                      onClick={() => {
+                        window.location = data.route;
+                      }}
+                    >
                       <Link
-
                         style={{ textDecoration: "none" }}
                         onClose={handleCloseUser}
-
                       >
                         <Typography textAlign="center" color="black">
                           {data.name}
@@ -338,7 +347,6 @@ const Navbar = () => {
                   ))}
                 </Menu>
               </Box>
-
             </Grid>
             <Grid item xs={1}>
               <FormControl
@@ -346,7 +354,7 @@ const Navbar = () => {
                   display: "flex",
                   flexDirection: "row",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 <RadioGroup
@@ -360,7 +368,7 @@ const Navbar = () => {
                     alignItems: "center",
                     textAlign: "center",
                     color: "black",
-                    flexWrap: "nowrap"
+                    flexWrap: "nowrap",
                   }}
                   value={value}
                   onChange={handleLanguageChange}
@@ -387,20 +395,23 @@ const Navbar = () => {
                   mr: 3,
                   display: "flex",
                   justifyContent: "end",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
               >
                 <Tooltip title="Open settings">
-
                   <Button
                     onClick={handleOpenUserMenu}
                     sx={{
                       textTransform: "none",
-                      margin: "5px", backgroundColor: "#094708", ':hover': {
-                        bgcolor: '#094708',
-                        color: '#fff'
-                      }
-                    }} variant="contained" >
+                      margin: "5px",
+                      backgroundColor: "#094708",
+                      ":hover": {
+                        bgcolor: "#094708",
+                        color: "#fff",
+                      },
+                    }}
+                    variant="contained"
+                  >
                     {activeBranch?.name}
                   </Button>
                 </Tooltip>
@@ -410,35 +421,36 @@ const Navbar = () => {
                   anchorEl={anchorElUser}
                   anchorOrigin={{
                     vertical: "top",
-                    horizontal: "right"
+                    horizontal: "right",
                   }}
                   keepMounted
                   transformOrigin={{
                     vertical: "top",
-                    horizontal: "right"
+                    horizontal: "right",
                   }}
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-
                   <MenuItem>
-                    <Typography textAlign="center">{user?.employee?.name}</Typography>
+                    <Typography textAlign="center">
+                      {user?.employee?.name}
+                    </Typography>
                   </MenuItem>
                   <Divider />
-                  {
-                    user?.employee.branches?.map((branch) => (
-                      <MenuItem onClick={() => handleBranchChange(branch)}>
-                        <Typography textAlign="center">{branch.name}
-                          {activeBranch.id === branch.id && <span style={{ color: "red" }}>*</span>}
-                        </Typography>
-                      </MenuItem>
-                    ))
-                  }
+                  {user?.employee.branches?.map((branch) => (
+                    <MenuItem onClick={() => handleBranchChange(branch)}>
+                      <Typography textAlign="center">
+                        {branch.name}
+                        {activeBranch.id === branch.id && (
+                          <span style={{ color: "red" }}>*</span>
+                        )}
+                      </Typography>
+                    </MenuItem>
+                  ))}
                   <Divider />
                   <MenuItem onClick={handleCloseToken}>
                     <Typography textAlign="center">Logout</Typography>
                   </MenuItem>
-
                 </Menu>
               </Box>
             </Grid>
