@@ -35,6 +35,9 @@ import SalaryList from "./pages/salary/SalaryList";
 
 import CreateExpense from "./components/expense/CreateExpense";
 import ExpenseList from "./components/expense/ExpenseList";
+
+import CreateExpense from "./pages/expense/CreateExpense";
+import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransfer";
 import CreateWave from "./components/wave/CreateWave";
 import CreateTrue from "./components/true/CreateTrue";
@@ -64,6 +67,7 @@ import AllowanceList from "./pages/allowance/AllowanceList";
 import CreateAllowance from "./pages/allowance/CreateAllowance";
 import EditAllowance from "./pages/allowance/EditAllowance";
 import AddMoney from "./pages/bank/AddMoney";
+import EditExpense from "./pages/expense/EditExpense";
 
 function App() {
   return (
@@ -130,6 +134,7 @@ function App() {
           {/* expense rouetes */}
           <Route path="/admin/create-expense" element={<CreateExpense />} />
           <Route path="/admin/list-expense" element={<ExpenseList />} />
+          <Route path="/admin/edit-expense/:id" element={<EditExpense />} />
           {/* branch transfer routes */}
           <Route
             path="/admin/create-branch-transfer"
