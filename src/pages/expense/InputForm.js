@@ -23,13 +23,14 @@ import { useDispatch, useSelector } from "react-redux";
 import MenuItem from "@mui/material/MenuItem";
 import { expenseTypes } from "../../contants";
 import { setBanks } from "../../store/reducer.bank";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 const InputForm = ({ editData }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const activeBranch = useSelector((state) => state.auth.activeBranch);
-
+  const banks = useSelector((state) => state.bank.banks);
   const schema = yup.object().shape({
     name: yup.string().required(),
     type: yup.string().required(),
@@ -68,6 +69,13 @@ const InputForm = ({ editData }) => {
 
   const handleSubmit = useCallback(
     async (values) => {
+      const selectedBank = banks.find((bank) => Number(bank.id) === Number(values.bank_account_id));
+
+      if (selectedBank.amount < Number(values.total)) {
+        NotificationManager.error('Expense amount is larger than bank balance')
+        return;
+      }
+
       editData
         ? await ExpenseService.update(values, editData?.id)
         : await ExpenseService.store({ ...values, branch_id: activeBranch.id });
@@ -75,14 +83,11 @@ const InputForm = ({ editData }) => {
       reset();
       navigate("/admin/list-expense");
     },
-    [editData, reset]
+    [activeBranch.id, banks, editData, navigate, reset]
   );
-  const banks = useSelector((state) => state.bank.banks);
 
-  const bankAccounts = banks?.map((element) => ({
-    value: element.id,
-    label: element.account_name,
-  }));
+
+
 
   return (
     <>
@@ -197,9 +202,9 @@ const InputForm = ({ editData }) => {
                           {...field}
                           fullWidth
                         >
-                          {bankAccounts.map((bankAccount) => (
-                            <MenuItem value={bankAccount.value}>
-                              {bankAccount.label}
+                          {banks.map((bankAccount) => (
+                            <MenuItem value={bankAccount.id}>
+                              {bankAccount.name} ({bankAccount.amount})
                             </MenuItem>
                           ))}
                         </Select>

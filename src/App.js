@@ -33,8 +33,7 @@ import CreateStaffSalary from "./pages/salary/CreateStaffSalary";
 import EditStaffSalary from "./pages/salary/EditStaffSalary";
 import SalaryList from "./pages/salary/SalaryList";
 
-import CreateExpense from "./components/expense/CreateExpense";
-import ExpenseList from "./components/expense/ExpenseList";
+
 
 import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
