@@ -141,5 +141,6 @@
   "password": "Password",
   "employee": "Employee", 
   "staff-salary.month": "Month",
-  "staff-salary.year": "Year"
+  "staff-salary.year": "Year",
+  "new_admin":"New Admin"
 }

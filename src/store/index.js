@@ -10,6 +10,7 @@ import allowanceReducer from './reducer.allowance.js';
 import salaryReducer from './reducer.salary.js';
 import bankReducer from "./reducer.bank.js";
 import expenseReducer from "./reducer.expense.js";
+import exchangeReducer from "./reducer.exchange.js";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ const store = configureStore({
     bank: bankReducer,
     allowance: allowanceReducer,
     expense: expenseReducer,
+    exchange: exchangeReducer,
   },
 });
 export default store;
