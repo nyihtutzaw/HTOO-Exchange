@@ -165,12 +165,12 @@ const Navbar = () => {
       element: <AllowanceList />,
     },
     {
-      name: `Wave Money Transfer`,
+      name: `${t("wave_money_transfer.list")}`,
       route: "/admin/list-wave-money-transfer",
       element: <WaveMoneyTransferList />,
     },
     {
-      name: `True Money Transfer`,
+      name: `${t("true_money_transfer.list")}`,
       route: "/admin/list-true-money-transfer",
       element: <TrueMoneyTransferList />,
     },

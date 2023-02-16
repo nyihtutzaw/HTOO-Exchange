@@ -35,10 +35,10 @@
     "branch-transfer.to-transfer-type": "To Transfer Type",
     "new_allowance": "Allowance Create",
     "allowance.list": "Allowance List",
-    "new_wave_money_transfer": "Wave Money Transfer Create",
-    "wave_money_transfer.list": "Wave Money Transfer List",
-    "new_true_money_transfer": "True Money Transfer Create",
-    "true_money_transfer.list": "True Money Transfer List",
+    "new_wave_money_transfer": "Wave Money Commissionr Create",
+    "wave_money_transfer.list": "Wave Money Commissionr List",
+    "new_true_money_transfer": "True Money Commissionr Create",
+    "true_money_transfer.list": "True Money Commission",
 
     "from-bank": "From Bank",
     "to-bank": "To Bank",
@@ -155,5 +155,6 @@
     "email":"Email",
     "password":"Password",
     "employee":"Employee"
+    
 
 }
