@@ -12,6 +12,7 @@ import bankReducer from "./reducer.bank.js";
 import expenseReducer from "./reducer.expense.js";
 import waveMoneyTransferReducer from "./reducer.waveMoneyTransfer.js";
 import trueMoneyTransferReducer from "./reducer.trueMoneyTransfer.js";
+import cashWalletReducer from "./reducer.cashWallet.js";
 
 const store = configureStore({
   reducer: {
@@ -27,6 +28,7 @@ const store = configureStore({
     expense: expenseReducer,
     waveMoneyTransfer: waveMoneyTransferReducer,
     trueMoneyTransfer: trueMoneyTransferReducer,
+    cashWallet: cashWalletReducer,
   },
 });
 export default store;

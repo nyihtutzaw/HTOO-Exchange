@@ -39,6 +39,8 @@
     "wave_money_transfer.list": "Wave Money Commissionr List",
     "new_true_money_transfer": "True Money Commissionr Create",
     "true_money_transfer.list": "True Money Commission",
+    "new_cash_wallet": "Cash Wallet Create",
+    "cash_wallet.list": "Cash Wallet",
 
     "from-bank": "From Bank",
     "to-bank": "To Bank",
