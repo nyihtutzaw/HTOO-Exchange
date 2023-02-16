@@ -37,7 +37,7 @@ import ExpenseList from "../../pages/expense/ExpenseList";
 
 // import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
-import CreateExchange from "../exchange/ExchangeLists";
+
 import logo from "../../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -51,9 +51,13 @@ import TransitionRecord from "../transition_record/TransitionRecord";
 import AdminList from "../../pages/Admin/AdminList";
 import { useSelector } from "react-redux";
 import AllowanceList from "../../pages/allowance/AllowanceList";
+
+import CreateExchange from "../../pages/exchange/ExchangeLists";
+
 import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransferList";
 import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
 import CashWalletList from "../../pages/cashWallet/CashWalletList";
+
 
 const settings = ["Account", "Logout"];
 
@@ -145,21 +149,7 @@ const Navbar = () => {
       route: "/admin/list-stack-salary",
       element: <SalaryList />,
     },
-    {
-      name: `TotalMoney`,
-      route: "/admin/total-money",
-      element: <TotalMoney />,
-    },
-    {
-      name: `TrueMoney`,
-      route: "/admin/true-money",
-      element: <TrueMoney />,
-    },
-    {
-      name: `YomaMoney`,
-      route: "/admin/yoma-money",
-      element: <YomaBank />,
-    },
+
     {
       name: `Allowance`,
       route: "/admin/list-allowance",

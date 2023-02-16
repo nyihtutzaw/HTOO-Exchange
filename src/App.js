@@ -42,13 +42,12 @@ import CreateTrue from "./components/true/CreateTrue";
 import BranchTransferList from "./components/branchTransfer/BranchTransferList";
 
 // import ListExchange from "./components/exchange/ListExchange";
-import ExchangeCreate from "./components/exchange/ExchangeCreate";
-import ExchangeEdit from "./components/exchange/ExchangeEdit";
+
 import TotalMoney from "./components/bank_money/TotalMoney";
 import TrueMoney from "./components/bank_money/TrueMoney";
 import YomaBank from "./components/bank_money/YomaBank";
 // import ListExchange from "./components/exchange/ListExchange";
-import ExchangeLists from "./components/exchange/ExchangeLists";
+
 import ListWave from "./components/wave/ListWave";
 import TransitionRecord from "./components/transition_record/TransitionRecord";
 
@@ -66,6 +65,11 @@ import EditAllowance from "./pages/allowance/EditAllowance";
 import AddMoney from "./pages/bank/AddMoney";
 import EditExpense from "./pages/expense/EditExpense";
 
+
+import ExchangeCreate from "./pages/exchange/ExchangeCreate";
+import ExchangeEdit from "./pages/exchange/ExchangeEdit";
+import ExchangeLists from "./pages/exchange/ExchangeLists";
+
 import WaveMoneyTransferList from "./pages/waveMoneyTransfer/WaveMoneyTransferList";
 import CreateWaveMoneyTransfer from "./pages/waveMoneyTransfer/CreateWaveMoneyTransfer";
 import EditWaveMoneyTransfer from "./pages/waveMoneyTransfer/EditWaveMoneyTransfer";
@@ -76,6 +80,7 @@ import EditTrueMoneyTransfer from "./pages/trueMoneyTransfer/EditTrueMoneyTransf
 
 import CashWalletList from "./pages/cashWallet/CashWalletList";
 import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
+
 
 function App() {
   return (
