@@ -2,7 +2,9 @@ import axios from 'axios'
 import { getCache } from '../utils/cache'
 import { NotificationManager } from 'react-notifications'
 
-const apiEndpoint = "http://localhost:3100/api/"
+// const apiEndpoint = "http://localhost:3100/api/"
+const apiEndpoint = "http://150.95.31.137:7702/api/"
+
 const headers = {
     'Content-Type': 'application/json',
     Accept: 'application/json',
