@@ -35,7 +35,6 @@ import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";
 import SalaryList from "../../pages/salary/SalaryList";
 import ExpenseList from "../../pages/expense/ExpenseList";
 
-
 // import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
 import CreateExchange from "../exchange/ExchangeLists";
@@ -52,6 +51,8 @@ import TransitionRecord from "../transition_record/TransitionRecord";
 import AdminList from "../../pages/Admin/AdminList";
 import { useSelector } from "react-redux";
 import AllowanceList from "../../pages/allowance/AllowanceList";
+import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransferList";
+import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
 
 const settings = ["Account", "Logout"];
 
@@ -141,7 +142,7 @@ const Navbar = () => {
     {
       name: `${t("staff-salary")}`,
       route: "/admin/list-stack-salary",
-      element: <SalaryList />
+      element: <SalaryList />,
     },
     {
       name: `TotalMoney`,
@@ -162,6 +163,16 @@ const Navbar = () => {
       name: `Allowance`,
       route: "/admin/list-allowance",
       element: <AllowanceList />,
+    },
+    {
+      name: `Wave Money Transfer`,
+      route: "/admin/list-wave-money-transfer",
+      element: <WaveMoneyTransferList />,
+    },
+    {
+      name: `True Money Transfer`,
+      route: "/admin/list-true-money-transfer",
+      element: <TrueMoneyTransferList />,
     },
   ];
 

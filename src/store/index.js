@@ -6,10 +6,12 @@ import employeeReducer from "./reducer.employee.js";
 import customerReducer from "./reducer.customer.js";
 import adminReducer from "./reducer.admin.js";
 
-import allowanceReducer from './reducer.allowance.js';
-import salaryReducer from './reducer.salary.js';
+import allowanceReducer from "./reducer.allowance.js";
+import salaryReducer from "./reducer.salary.js";
 import bankReducer from "./reducer.bank.js";
 import expenseReducer from "./reducer.expense.js";
+import waveMoneyTransferReducer from "./reducer.waveMoneyTransfer.js";
+import trueMoneyTransferReducer from "./reducer.trueMoneyTransfer.js";
 
 const store = configureStore({
   reducer: {
@@ -23,6 +25,8 @@ const store = configureStore({
     bank: bankReducer,
     allowance: allowanceReducer,
     expense: expenseReducer,
+    waveMoneyTransfer: waveMoneyTransferReducer,
+    trueMoneyTransfer: trueMoneyTransferReducer,
   },
 });
 export default store;
