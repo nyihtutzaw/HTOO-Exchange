@@ -41,7 +41,7 @@ export async function update(values, id) {
     }
 }
 
-export async function deleteBank(id, values) {
+export async function deleteData(id, values) {
     try {
         let response = await sendData("exchange/" + id, values, "DELETE");
         return response;

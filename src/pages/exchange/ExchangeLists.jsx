@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
-
+import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import {
   Box,
@@ -22,20 +22,21 @@ import { useDispatch, useSelector } from "react-redux";
 import * as ExchangeService from "./../../services/exchangeService";
 import List from "./List";
 import Filter from "./Filter";
-import { setExchanges } from "../../store/reducer.exchange";
+import { setExchanges, deleteExchange } from "../../store/reducer.exchange";
 import AddDialog from "./AddDialog";
 
 const ExchangeLists = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const [age, setAge] = useState("");
+  const [showDelete, setShowDelete] = useState(false);
+  const [editData, setEditData] = useState(false);
 
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
 
   const handleClose = () => {
-    setOpen(false);
+    window.location.reload();
   };
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
@@ -72,12 +73,9 @@ const ExchangeLists = () => {
     console.log("edit");
   };
 
-  const handleDelete = () => {
-    console.log("delete");
-  };
-
-  const handleChangeAge = (event) => {
-    setAge(event.target.value);
+  const handleDelete = async (id) => {
+    await ExchangeService.deleteData(id);
+    dispatch(deleteExchange(id));
   };
 
   return (
@@ -200,8 +198,37 @@ const ExchangeLists = () => {
           </Box>
         </Box>
       </div>
-      <List rows={exchanges} />
-      <AddDialog open={open} handleClose={handleClose} scroll={scroll} />
+      <List
+        rows={exchanges}
+        handleDelete={(row) => {
+          setEditData(row);
+          setShowDelete(true);
+        }}
+        handleEdit={(row) => {
+          setEditData(row);
+          setOpen(true);
+        }}
+      />
+      <AddDialog
+        open={open}
+        editData={editData}
+        handleClose={() => {
+          handleClose();
+          loadData();
+        }}
+        scroll={scroll}
+      />
+      {showDelete && (
+        <ConfirmDialog
+          title={`Delete Exchange`}
+          body={`Are you sure to delete`}
+          onToggle={() => setShowDelete(false)}
+          onConfirm={() => {
+            setShowDelete(false);
+            handleDelete(editData?.id);
+          }}
+        />
+      )}
     </>
   );
 };

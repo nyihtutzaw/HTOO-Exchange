@@ -7,11 +7,13 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { withStyles } from "@material-ui/core/styles";
+import dayjs from "dayjs";
 import {
     Box,
 } from "@mui/material";
-import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
+
 import { useTranslation } from "react-i18next";
 
 const useStyles = makeStyles({
@@ -35,7 +37,7 @@ const CustomTableCell = withStyles((theme) => ({
     },
 }))(TableCell);
 
-function List({ rows }) {
+function List({ rows, handleDelete, handleEdit }) {
     const classes = useStyles();
     const { t } = useTranslation();
     const customColumnStyle = {
@@ -137,12 +139,12 @@ function List({ rows }) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
-                            <TableRow key={row.no}>
+                        {rows.map((row, index) => (
+                            <TableRow key={index}>
                                 <TableCell component="th" scope="row">
-                                    {row.no}
+                                    {index + 1}
                                 </TableCell>
-                                <TableCell align="center">{row.date} {row.time}</TableCell>
+                                <TableCell align="center">{dayjs(row.createdAt).format("DD/MM/YYYY HH:mm")}</TableCell>
                                 <TableCell align="center">{row.to_bank_account.name} ({row.to_bank_account.account_name})</TableCell>
                                 <TableCell align="center">{row.from_bank_account.name} ({row.from_bank_account.account_name})</TableCell>
                                 <TableCell align="center">{row.from_transfer_amount}</TableCell>
@@ -153,18 +155,18 @@ function List({ rows }) {
                                 <TableCell align="center">{row.customer?.name}</TableCell>
                                 <TableCell align="center">{row.user?.name}</TableCell>
                                 <TableCell align="center">
-                                    {/* <DriveFileRenameOutlineRoundedIcon
-                                        onClick={handleEdit("paper")}
+                                    <DriveFileRenameOutlineRoundedIcon
+                                        onClick={() => handleEdit(row)}
                                         sx={{ color: "#36353d", fontSize: "25px" }}
                                     />
                                     <DeleteForeverRoundedIcon
-                                        onClick={handleDelete}
+                                        onClick={() => handleDelete(row)}
                                         sx={{
                                             color: "red",
                                             fontSize: "25px",
                                             marginLeft: "10px",
                                         }}
-                                    /> */}
+                                    />
                                 </TableCell>
                             </TableRow>
                         ))}
