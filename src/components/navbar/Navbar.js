@@ -53,6 +53,7 @@ import { useSelector } from "react-redux";
 import AllowanceList from "../../pages/allowance/AllowanceList";
 import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransferList";
 import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
+import CashWalletList from "../../pages/cashWallet/CashWalletList";
 
 const settings = ["Account", "Logout"];
 
@@ -173,6 +174,11 @@ const Navbar = () => {
       name: `${t("true_money_transfer.list")}`,
       route: "/admin/list-true-money-transfer",
       element: <TrueMoneyTransferList />,
+    },
+    {
+      name: `${t("cash_wallet.list")}`,
+      route: "/admin/list-cash-wallet",
+      element: <CashWalletList />,
     },
   ];
 

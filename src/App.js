@@ -74,6 +74,9 @@ import TrueMoneyTransferList from "./pages/trueMoneyTransfer/TrueMoneyTransferLi
 import CreateTrueMoneyTransfer from "./pages/trueMoneyTransfer/CreateTrueMoneyTransfer";
 import EditTrueMoneyTransfer from "./pages/trueMoneyTransfer/EditTrueMoneyTransfer";
 
+import CashWalletList from "./pages/cashWallet/CashWalletList";
+import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
+
 function App() {
   return (
     <Router>
@@ -204,6 +207,13 @@ function App() {
             path="/admin/list-true-money-transfer"
             element={<TrueMoneyTransferList />}
           />
+
+          {/* cash wallet rouetes */}
+          <Route
+            path="/admin/create-cash-wallet"
+            element={<CreateCashWallet />}
+          />
+          <Route path="/admin/list-cash-wallet" element={<CashWalletList />} />
         </Route>
       </Routes>
       <NotificationContainer />
