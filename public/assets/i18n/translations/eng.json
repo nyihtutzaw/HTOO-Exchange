@@ -124,7 +124,6 @@
     "transfer_fee": "Transfer fee",
     "deposit_fee": "Deposit fee",
     "withdraw_fee": "Withdraw fee",
-
     "w-agent": "W-Agent",
     "employees": "Employees",
     "excel": "Excel Export",
@@ -157,7 +156,8 @@
     "amount": "Amount",
     "email":"Email",
     "password":"Password",
-    "employee":"Employee"
+    "employee":"Employee",
+    
     
 
 }
