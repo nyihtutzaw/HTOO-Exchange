@@ -142,5 +142,17 @@
   "employee": "Employee", 
   "staff-salary.month": "Month",
   "staff-salary.year": "Year",
+
   "new_admin":"New Admin"
+
+  "new_wave_money_transfer": "Wave Money ကော်မရှင် Create",
+  "wave_money_transfer.list": "Wave Money ကော်မရှင်ဇယား",
+  "new_true_money_transfer": "True Money ကော်မရှင် Create",
+  "true_money_transfer.list": "True Money ကော်မရှင်ဇယား",
+  "minimum_amount": "မှ",
+  "maximum_amount": "သို့",
+  "transfer_fee": "ငွေလွှဲခ",
+  "deposit_fee": "ငွေသွင်းခ",
+  "withdraw_fee": "ငွေထုတ်ခ"
+
 }

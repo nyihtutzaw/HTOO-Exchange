@@ -35,7 +35,6 @@ import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";
 import SalaryList from "../../pages/salary/SalaryList";
 import ExpenseList from "../../pages/expense/ExpenseList";
 
-
 // import CreateWave from "../wave/CreateWave";
 import CreateTrue from "../true/CreateTrue";
 
@@ -52,7 +51,13 @@ import TransitionRecord from "../transition_record/TransitionRecord";
 import AdminList from "../../pages/Admin/AdminList";
 import { useSelector } from "react-redux";
 import AllowanceList from "../../pages/allowance/AllowanceList";
+
 import CreateExchange from "../../pages/exchange/ExchangeLists";
+
+import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransferList";
+import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
+import CashWalletList from "../../pages/cashWallet/CashWalletList";
+
 
 const settings = ["Account", "Logout"];
 
@@ -142,13 +147,28 @@ const Navbar = () => {
     {
       name: `${t("staff-salary")}`,
       route: "/admin/list-stack-salary",
-      element: <SalaryList />
+      element: <SalaryList />,
     },
 
     {
       name: `Allowance`,
       route: "/admin/list-allowance",
       element: <AllowanceList />,
+    },
+    {
+      name: `${t("wave_money_transfer.list")}`,
+      route: "/admin/list-wave-money-transfer",
+      element: <WaveMoneyTransferList />,
+    },
+    {
+      name: `${t("true_money_transfer.list")}`,
+      route: "/admin/list-true-money-transfer",
+      element: <TrueMoneyTransferList />,
+    },
+    {
+      name: `${t("cash_wallet.list")}`,
+      route: "/admin/list-cash-wallet",
+      element: <CashWalletList />,
     },
   ];
 

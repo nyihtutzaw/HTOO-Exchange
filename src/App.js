@@ -33,8 +33,6 @@ import CreateStaffSalary from "./pages/salary/CreateStaffSalary";
 import EditStaffSalary from "./pages/salary/EditStaffSalary";
 import SalaryList from "./pages/salary/SalaryList";
 
-
-
 import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransfer";
@@ -67,9 +65,22 @@ import EditAllowance from "./pages/allowance/EditAllowance";
 import AddMoney from "./pages/bank/AddMoney";
 import EditExpense from "./pages/expense/EditExpense";
 
+
 import ExchangeCreate from "./pages/exchange/ExchangeCreate";
 import ExchangeEdit from "./pages/exchange/ExchangeEdit";
 import ExchangeLists from "./pages/exchange/ExchangeLists";
+
+import WaveMoneyTransferList from "./pages/waveMoneyTransfer/WaveMoneyTransferList";
+import CreateWaveMoneyTransfer from "./pages/waveMoneyTransfer/CreateWaveMoneyTransfer";
+import EditWaveMoneyTransfer from "./pages/waveMoneyTransfer/EditWaveMoneyTransfer";
+
+import TrueMoneyTransferList from "./pages/trueMoneyTransfer/TrueMoneyTransferList";
+import CreateTrueMoneyTransfer from "./pages/trueMoneyTransfer/CreateTrueMoneyTransfer";
+import EditTrueMoneyTransfer from "./pages/trueMoneyTransfer/EditTrueMoneyTransfer";
+
+import CashWalletList from "./pages/cashWallet/CashWalletList";
+import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
+
 
 function App() {
   return (
@@ -128,10 +139,7 @@ function App() {
             path="/admin/edit-stack-salary/:id"
             element={<EditStaffSalary />}
           />
-          <Route
-            path="/admin/list-stack-salary"
-            element={<SalaryList />}
-          />
+          <Route path="/admin/list-stack-salary" element={<SalaryList />} />
 
           {/* expense rouetes */}
           <Route path="/admin/create-expense" element={<CreateExpense />} />
@@ -176,6 +184,41 @@ function App() {
           <Route path="/admin/create-allowance" element={<CreateAllowance />} />
           <Route path="/admin/edit-allowance/:id" element={<EditAllowance />} />
           <Route path="/admin/list-allowance" element={<AllowanceList />} />
+
+          {/* wave money transfer routes */}
+          <Route
+            path="/admin/create-wave-money-transfer"
+            element={<CreateWaveMoneyTransfer />}
+          />
+          <Route
+            path="/admin/edit-wave-money-transfer/:id"
+            element={<EditWaveMoneyTransfer />}
+          />
+          <Route
+            path="/admin/list-wave-money-transfer"
+            element={<WaveMoneyTransferList />}
+          />
+
+          {/* true money transfer routes */}
+          <Route
+            path="/admin/create-true-money-transfer"
+            element={<CreateTrueMoneyTransfer />}
+          />
+          <Route
+            path="/admin/edit-true-money-transfer/:id"
+            element={<EditTrueMoneyTransfer />}
+          />
+          <Route
+            path="/admin/list-true-money-transfer"
+            element={<TrueMoneyTransferList />}
+          />
+
+          {/* cash wallet rouetes */}
+          <Route
+            path="/admin/create-cash-wallet"
+            element={<CreateCashWallet />}
+          />
+          <Route path="/admin/list-cash-wallet" element={<CashWalletList />} />
         </Route>
       </Routes>
       <NotificationContainer />

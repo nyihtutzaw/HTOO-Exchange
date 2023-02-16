@@ -6,17 +6,19 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import * as BankService from "./../../services/bankService";
+import * as CashWalletService from "./../../services/cashWalletService";
 import * as yup from "yup";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import { useSelector } from "react-redux";
 
-const AddMoneyForm = ({ editData }) => {
+const InputForm = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const schema = yup.object().shape({
     amount: yup.number().required(),
   });
+  const activeBranch = useSelector((state) => state.auth.activeBranch);
 
   const {
     register,
@@ -29,9 +31,12 @@ const AddMoneyForm = ({ editData }) => {
 
   const handleSubmit = useCallback(
     async (values) => {
-      await BankService.addMoney(values, editData?.id);
+      await CashWalletService.store({
+        branch_id: activeBranch.id,
+        amount: values.amount,
+      });
       reset();
-      navigate("/admin/list-bank");
+      navigate("/admin/list-cash-wallet");
     },
     [reset]
   );
@@ -54,7 +59,7 @@ const AddMoneyForm = ({ editData }) => {
           <Card sx={{ marginTop: "65px", bgcolor: "#edeff2" }}>
             <Box sx={{ margin: "30px" }}>
               <Typography variant="h6" color="#094708" ml={2} mb={4} mt={0}>
-                {t("add_money")}
+                {t("new_cash_wallet")}
               </Typography>
               <Stack spacing={2} direction="row" m={2}>
                 <Button
@@ -115,7 +120,7 @@ const AddMoneyForm = ({ editData }) => {
                     },
                   }}
                   onClick={() => {
-                    navigate("/admin/list-bank");
+                    navigate("/admin/list-cash-wallet");
                   }}
                 >
                   <ExitToAppIcon />
@@ -151,4 +156,4 @@ const AddMoneyForm = ({ editData }) => {
   );
 };
 
-export default AddMoneyForm;
+export default InputForm;
