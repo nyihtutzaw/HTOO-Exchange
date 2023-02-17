@@ -35,11 +35,12 @@ import SalaryList from "./pages/salary/SalaryList";
 
 import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
-import CreateBranchTransfer from "./components/branchTransfer/CreateBranchTransfer";
+import CreateBranchTransfer from "./pages/branchTransfer/CreateBranchTransfer";
 import CreateWave from "./components/wave/CreateWave";
 import CreateTrue from "./components/true/CreateTrue";
 
-import BranchTransferList from "./components/branchTransfer/BranchTransferList";
+import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
+
 
 // import ListExchange from "./components/exchange/ListExchange";
 
@@ -65,7 +66,6 @@ import EditAllowance from "./pages/allowance/EditAllowance";
 import AddMoney from "./pages/bank/AddMoney";
 import EditExpense from "./pages/expense/EditExpense";
 
-
 import ExchangeCreate from "./pages/exchange/ExchangeCreate";
 import ExchangeEdit from "./pages/exchange/ExchangeEdit";
 import ExchangeLists from "./pages/exchange/ExchangeLists";
@@ -80,7 +80,7 @@ import EditTrueMoneyTransfer from "./pages/trueMoneyTransfer/EditTrueMoneyTransf
 
 import CashWalletList from "./pages/cashWallet/CashWalletList";
 import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
-
+import EditBranchTransfer from "./pages/branchTransfer/EditBranchTransferr";
 
 function App() {
   return (
@@ -150,9 +150,15 @@ function App() {
             path="/admin/create-branch-transfer"
             element={<CreateBranchTransfer />}
           />
+
+          {/* branch transfer */}
           <Route
             path="/admin/list-branch-transfer"
             element={<BranchTransferList />}
+          />
+          <Route
+            path="/admin/edit-branch-transfer/:id"
+            element={<EditBranchTransfer />}
           />
 
           {/* wave routes */}
