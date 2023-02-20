@@ -26,7 +26,7 @@ import { removeCache, storeCache } from "../../utils/cache";
 import React, { useState, useEffect } from "react";
 import DrawerComp from "../drewer/DrawerComp";
 import { Link, useNavigate } from "react-router-dom";
-import CreateBranchTransfer from "../branchTransfer/CreateBranchTransfer";
+import CreateBranchTransfer from "../../pages/branchTransfer/CreateBranchTransfer";
 import EmployeeList from "../../pages/Employee/EmployeeList";
 import CustomerList from "../../pages/customer/CustomerList";
 import BankList from "../../pages/bank/BankList";
@@ -57,6 +57,7 @@ import CreateExchange from "../../pages/exchange/ExchangeLists";
 import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransferList";
 import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
 import CashWalletList from "../../pages/cashWallet/CashWalletList";
+import BranchTransferList from "../../pages/branchTransfer/BranchTransferList";
 
 
 const settings = ["Account", "Logout"];
@@ -142,7 +143,7 @@ const Navbar = () => {
     {
       name: `${t("branch-transfer")}`,
       route: "/admin/list-branch-transfer",
-      element: <CreateBranchTransfer />,
+      element: <BranchTransferList />,
     },
     {
       name: `${t("staff-salary")}`,
