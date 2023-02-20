@@ -82,9 +82,9 @@ const List = ({ data, handleEdit, onDelete }) => {
                 }</TableCell>
                 <TableCell align="center">{row.amount}</TableCell>
                 <TableCell align="center">
-                  {row.from_bank_account.name}
+                  {row.from_bank_account?.name}
                 </TableCell>
-                <TableCell align="center">{row.to_bank_account.name}</TableCell>
+                <TableCell align="center">{row.to_bank_account?.name}</TableCell>
                 <TableCell align="center">{row.remark}</TableCell>
 
                 <TableCell align="center">

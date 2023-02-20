@@ -35,12 +35,13 @@ const InputForm = ({ editData }) => {
   const branches = useSelector((state) => state.branch.branches);
   const banks = useSelector((state) => state.bank.banks);
   const [transferToBanks, setTransferToBanks] = useState([]);
+  const [showBanks, setShowBanks] = useState(true);
   const schema = yup.object().shape({
     type: yup.number().required(),
-   toBranchId: yup.number().required(),
+    toBranchId: yup.number().required(),
     amount: yup.number().required(),
-    toBankAccountId: yup.number().required(),
-    fromBankAccountId: yup.number().required(),
+    toBankAccountId: showBanks ? yup.number().required() : null,
+    fromBankAccountId: showBanks ? yup.number().required() : null,
   });
 
   const {
@@ -49,6 +50,7 @@ const InputForm = ({ editData }) => {
     handleSubmit: formHandleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -70,7 +72,7 @@ const InputForm = ({ editData }) => {
 
   useEffect(() => {
     if (editData) {
-      getTransferToBanks(editData.toBranchId)
+      getTransferToBanks(editData.toBranchId);
       reset({
         type: editData.type,
         amount: editData.amount,
@@ -87,7 +89,6 @@ const InputForm = ({ editData }) => {
 
   const handleSubmit = useCallback(
     async (values) => {
-     
       values.fromBranchId = activeBranch.id;
       editData
         ? await BranchTransferService.update(values, editData?.id)
@@ -145,7 +146,21 @@ const InputForm = ({ editData }) => {
                   id="type"
                   control={control}
                   render={({ field }) => (
-                    <Select labelId="type-label" {...field} fullWidth>
+                    <Select
+                      labelId="type-label"
+                      {...field}
+                      fullWidth
+                      onChange={(e) => {
+                        field.onChange(e.target.value);
+                        if (e.target.value === 2) {
+                          setShowBanks(false);
+                          setValue("toBankAccountId", null);
+                          setValue("fromBankAccountId", null);
+                        } else {
+                          setShowBanks(true);
+                        }
+                      }}
+                    >
                       {branchToBranchTransferTypes.map((type) => (
                         <MenuItem value={type.value}>{type.label}</MenuItem>
                       ))}
@@ -183,7 +198,6 @@ const InputForm = ({ editData }) => {
                       labelId="toBranchId-label"
                       {...field}
                       fullWidth
-                      
                       onChange={(e) => {
                         field.onChange(e.target.value);
                         getTransferToBanks(e.target.value);
@@ -232,83 +246,85 @@ const InputForm = ({ editData }) => {
                 />
               </Stack>
 
-              {/* from bank  */}
-              <Stack spacing={2} direction="row" m={2}>
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "#094708",
-                    minWidth: "200px",
-                    fontSize: "14px",
-                    ":hover": {
-                      bgcolor: "#094708",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  {t("branch-transfer.from-transfer-type")}
-                </Button>
-                <Controller
-                  name="fromBankAccountId"
-                  id="fromBankAccountId"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="fromBankAccountId-label"
-                      {...field}
-                      fullWidth
+              {showBanks && (
+                <>
+                  <Stack spacing={2} direction="row" m={2}>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{
+                        textTransform: "none",
+                        backgroundColor: "#094708",
+                        minWidth: "200px",
+                        fontSize: "14px",
+                        ":hover": {
+                          bgcolor: "#094708",
+                          color: "#fff",
+                        },
+                      }}
                     >
-                      {banks.map((bank) => (
-                        <MenuItem value={bank.id}>{bank.name}</MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <FormHelperText error={true}>
-                  {errors.fromBankAccountId?.message}
-                </FormHelperText>
-              </Stack>
+                      {t("branch-transfer.from-transfer-type")}
+                    </Button>
+                    <Controller
+                      name="fromBankAccountId"
+                      id="fromBankAccountId"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          labelId="fromBankAccountId-label"
+                          {...field}
+                          fullWidth
+                        >
+                          {banks.map((bank) => (
+                            <MenuItem value={bank.id}>{bank.name}</MenuItem>
+                          ))}
+                        </Select>
+                      )}
+                    />
+                    <FormHelperText error={true}>
+                      {errors.fromBankAccountId?.message}
+                    </FormHelperText>
+                  </Stack>
 
-              {/* to bank  */}
-              <Stack spacing={2} direction="row" m={2}>
-                <Button
-                  variant="contained"
-                  size="small"
-                  sx={{
-                    textTransform: "none",
-                    backgroundColor: "#094708",
-                    minWidth: "200px",
-                    fontSize: "14px",
-                    ":hover": {
-                      bgcolor: "#094708",
-                      color: "#fff",
-                    },
-                  }}
-                >
-                  {t("branch-transfer.to-transfer-type")}
-                </Button>
-                <Controller
-                  name="toBankAccountId"
-                  id="toBankAccountId"
-                  control={control}
-                  render={({ field }) => (
-                    <Select
-                      labelId="toBankAccountId-label"
-                      {...field}
-                      fullWidth
+                  <Stack spacing={2} direction="row" m={2}>
+                    <Button
+                      variant="contained"
+                      size="small"
+                      sx={{
+                        textTransform: "none",
+                        backgroundColor: "#094708",
+                        minWidth: "200px",
+                        fontSize: "14px",
+                        ":hover": {
+                          bgcolor: "#094708",
+                          color: "#fff",
+                        },
+                      }}
                     >
-                      {transferToBanks.map((bank) => (
-                        <MenuItem value={bank.id}>{bank.name}</MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                />
-                <FormHelperText error={true}>
-                  {errors.toBankAccountId?.message}
-                </FormHelperText>
-              </Stack>
+                      {t("branch-transfer.to-transfer-type")}
+                    </Button>
+                    <Controller
+                      name="toBankAccountId"
+                      id="toBankAccountId"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          labelId="toBankAccountId-label"
+                          {...field}
+                          fullWidth
+                        >
+                          {transferToBanks.map((bank) => (
+                            <MenuItem value={bank.id}>{bank.name}</MenuItem>
+                          ))}
+                        </Select>
+                      )}
+                    />
+                    <FormHelperText error={true}>
+                      {errors.toBankAccountId?.message}
+                    </FormHelperText>
+                  </Stack>
+                </>
+              )}
 
               <Stack spacing={2} direction="row" m={2}>
                 <Button
