@@ -36,11 +36,9 @@ import SalaryList from "./pages/salary/SalaryList";
 import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./pages/branchTransfer/CreateBranchTransfer";
-import CreateWave from "./components/wave/CreateWave";
 import CreateTrue from "./components/true/CreateTrue";
 
 import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
-
 
 // import ListExchange from "./components/exchange/ListExchange";
 
@@ -49,7 +47,7 @@ import TrueMoney from "./components/bank_money/TrueMoney";
 import YomaBank from "./components/bank_money/YomaBank";
 // import ListExchange from "./components/exchange/ListExchange";
 
-import ListWave from "./components/wave/ListWave";
+import ListWave from "./pages/wave/WaveList";
 import TransitionRecord from "./components/transition_record/TransitionRecord";
 
 import CreateBranch from "./pages/branch/CreateBranch";
@@ -162,7 +160,7 @@ function App() {
           />
 
           {/* wave routes */}
-          <Route path="/admin/create-wave" element={<CreateWave />} />
+          {/* <Route path="/admin/create-wave" element={<CreateWave />} /> */}
           <Route path="/admin/list-wave" element={<ListWave />} />
 
           {/* true routes */}
