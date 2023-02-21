@@ -18,7 +18,7 @@ function EditRoleAccess() {
     loadData();
   }, []);
 
-  return <InputForm editData={role} />;
+  return role ? <InputForm editData={role} /> : null;
 }
 
 export default EditRoleAccess;
