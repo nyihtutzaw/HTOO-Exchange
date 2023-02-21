@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
 });
 
-const List = ({ data, handleEdit, onDelete }) => {
+const List = ({ data, handleEdit, handleDelete }) => {
   const classes = useStyles();
   const { t } = useTranslation();
 
@@ -138,7 +138,7 @@ const List = ({ data, handleEdit, onDelete }) => {
                     sx={{ color: "#36353d", fontSize: "25px" }}
                   /> */}
                   <DeleteForeverRoundedIcon
-                    onClick={() => onDelete(row)}
+                    onClick={() => handleDelete(row)}
                     sx={{ color: "red", fontSize: "25px", marginLeft: "10px" }}
                   />
                 </TableCell>
