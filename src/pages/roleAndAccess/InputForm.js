@@ -10,7 +10,7 @@ import {
   Switch,
   Typography,
 } from "@mui/material";
-import {  useEffect } from "react";
+import { useEffect } from "react";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import Navbar from "../../components/navbar/Navbar";
@@ -22,6 +22,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import * as RoleService from "./../../services/roleService";
 import { usePermission } from "./usePermission";
+import { useCallback } from 'react';
 
 const InputForm = ({ editData }) => {
   const { t } = useTranslation();
@@ -50,34 +51,38 @@ const InputForm = ({ editData }) => {
     if (editData) {
       setValue("name", editData?.name);
       setValue("position", editData?.position);
-      try {
+      if (editData?.permission) {
         const parsedData = JSON.parse(editData?.permission);
         setPermission(parsedData);
-      } catch (e) {
-        console.error("Error parsing JSON: ", e);
       }
+
     } else {
       reset();
     }
   }, [editData, reset, setValue]);
 
-  const handleSubmit = async (values) => {
-    values.permission = JSON.stringify({
-      employee: employee,
-      customer: customer,
-      bank: bank,
-      wave: wave,
-      exchange: exchange,
-      trueMoney: trueMoney,
-    });
 
-    editData
-      ? await RoleService.update(values, editData?.id)
-      : await RoleService.store(values);
 
-    reset();
-    navigate("/admin/list-role-access");
-  };
+  const handleSubmit = useCallback(
+    async (values) => {
+      values.permission = JSON.stringify({
+        employee: employee,
+        customer: customer,
+        bank: bank,
+        wave: wave,
+        exchange: exchange,
+        trueMoney: trueMoney,
+      });
+
+      editData
+        ? await RoleService.update(values, editData?.id)
+        : await RoleService.store(values);
+
+      reset();
+      navigate("/admin/list-role-access");
+    },
+    [bank, customer, editData, employee, exchange, navigate, reset, trueMoney, wave]
+  );
 
   const IOSSwitch = styled((props) => (
     <Switch
