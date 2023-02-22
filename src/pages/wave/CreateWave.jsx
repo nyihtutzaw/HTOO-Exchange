@@ -6,6 +6,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import SaveIcon from "@mui/icons-material/Save";
 import SaveAsIcon from "@mui/icons-material/SaveAs";
+import { setWaveMoneyTransfers } from "../../store/reducer.waveMoneyTransfer";
 import {
   Box,
   Button,
@@ -24,7 +25,7 @@ import { transactionTypes } from "../../contants";
 import { useDispatch, useSelector } from "react-redux";
 import * as BankService from "./../../services/bankService";
 import { setBanks } from "../../store/reducer.bank";
-
+import * as WaveMoneyTransferService from "../../services/waveMoneyTransferService";
 const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const { t } = useTranslation();
   const [transactionType, setTransactionType] = useState(null);
@@ -54,33 +55,57 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
     handleSubmit: formHandleSubmit,
     formState: { errors },
     reset,
+    watch,
     control,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const banks = useSelector((state) => state.bank.banks);
+  const waveMoneyTransfers = useSelector(
+    (state) => state.waveMoneyTransfer.waveMoneyTransfers
+  );
+
+  const watchAmount = watch("amount", false);
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
-  const loadData = async () => {
-    const query = { branch_id: activeBranch.id };
-    const response = await BankService.getAll(query);
-    dispatch(setBanks(response));
-  };
 
   useEffect(() => {
+    async function loadData() {
+      const query = { branch_id: activeBranch.id };
+      const response = await BankService.getAll(query);
+      dispatch(setBanks(response));
+      const waveComiisonoResponse = await WaveMoneyTransferService.getAll(
+        query
+      );
+      dispatch(setWaveMoneyTransfers(waveComiisonoResponse));
+    }
     loadData();
   }, []);
+
+  useEffect(() => {
+    const amount = parseInt(watchAmount);
+    console.log(amount);
+    const commision = waveMoneyTransfers.find(
+      (e) => amount >= e.minimum_amount && amount <= e.maximum_amount
+    );
+    if (commision) {
+      if (transactionType === "transfer")
+        setValue("commission", commision.transfer_fee);
+      else if (transactionType === "deposit")
+        setValue("commission", commision.deposit_fee);
+      else if (transactionType === "withdraw")
+        setValue("commission", commision.withdraw_fee);
+    }
+  }, [setValue, transactionType, watchAmount, waveMoneyTransfers]);
 
   const handleSubmit = useCallback(
     async (values) => {
       values.branch_id = activeBranch.id;
-      if (transactionType === "transfer") {
+      if (values.type === "transfer") {
         await WaveMoneyTransactionService.store(values);
-      } else if (
-        transactionType === "from bank" ||
-        transactionType === "to bank"
-      ) {
+      } else if (values.type === "from bank" || values.type === "to bank") {
         await WaveMoneyTransactionService.store({
           type: values.type,
           amount: values.amount,
@@ -115,7 +140,9 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
       aria-labelledby="scroll-dialog-title"
       aria-describedby="scroll-dialog-description"
     >
-      <DialogTitle id="scroll-dialog-title">{t("create-exchange")}</DialogTitle>
+      <DialogTitle id="scroll-dialog-title">
+        {t("wave_money_transcation")}
+      </DialogTitle>
 
       <form onSubmit={formHandleSubmit(handleSubmit)}>
         <DialogContent dividers={scroll === "paper"}>
@@ -161,7 +188,9 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
                       }}
                     >
                       {transactionTypes.map((type) => (
-                        <MenuItem value={type}>{type}</MenuItem>
+                        <MenuItem value={type}>
+                          {type && type[0].toUpperCase() + type.slice(1)}
+                        </MenuItem>
                       ))}
                     </Select>
                   )}
@@ -243,7 +272,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
                   <TextField
                     type="number"
                     required
-                    label={t("cash-commission")}
+                    label={t("commission")}
                     variant="outlined"
                     size="small"
                     sx={{ width: "350px" }}
@@ -282,9 +311,13 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
                         {...field}
                         fullWidth
                       >
-                        {banks.map((bank) => (
-                          <MenuItem value={bank.id}>{bank.name}</MenuItem>
-                        ))}
+                        {banks
+                          .filter((bank) => bank.account_name === "Wave Money")
+                          .map((bank) => (
+                            <MenuItem value={bank.id}>
+                              {bank.name} - {bank.account_name} ({bank.amount})
+                            </MenuItem>
+                          ))}
                       </Select>
                     )}
                   />
@@ -302,6 +335,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
           }}
         >
           <Button
+            onClick={handleClose}
             variant="contained"
             size="small"
             sx={{
@@ -320,7 +354,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
             }}
           >
             <SaveIcon />
-            {t("save_assign")}
+            {t("close")}
           </Button>
           <Button
             type="submit"

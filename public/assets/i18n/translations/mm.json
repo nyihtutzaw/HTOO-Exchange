@@ -40,12 +40,12 @@
   "to-bank": "ဘဏ်(သို့)",
   "phone-in": "ငွေလဲသူဖုန်းနံပါတ်",
   "phone-out": "ငွေထုတ်သူဖုန်းနံပါတ်",
-  "transition-id": "ငွေလွှဲ ID",
+
   "transfer-amount": "ငွေလွှဲမည့်ပမာဏ",
   "transfer-fee": "ငွေလွှဲခ",
   "export-amount": "ထုပ်မည့်ငွေပမာဏ",
   "export-fee": "ငွေထုပ်ခ",
-  "wave-acc": "Wacesအကောင့်များ",
+  "wave-acc": "Wave Account",
   "otm": "OTM(%)",
   "wave-acc-left-money": "Wave အကောင့်လက်ကျန်",
   "total-e-money": "Total E-Money",
@@ -142,9 +142,9 @@
   "employee": "Employee", 
   "staff-salary.month": "Month",
   "staff-salary.year": "Year",
-
+  "transition-id": "Transition ID",
   "new_admin":"New Admin",
-
+  "commission":"ကော်မရှင်",
   "new_wave_money_transfer": "Wave Money ကော်မရှင် Create",
   "wave_money_transfer.list": "Wave Money ကော်မရှင်ဇယား",
   "new_true_money_transfer": "True Money ကော်မရှင် Create",
@@ -155,6 +155,7 @@
   "deposit_fee": "ငွေသွင်းခ",
   "withdraw_fee": "ငွေထုတ်ခ",
   "cash_wallet.list": "ငွေသား",
-  "new_cash_wallet": "ငွေသား Create"
+  "new_cash_wallet": "ငွေသား Create",
+  "wave_money_transcation":"Wave Money Transcation"
 
 }

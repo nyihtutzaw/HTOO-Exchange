@@ -35,12 +35,13 @@
     "branch-transfer.to-transfer-type": "To Transfer Type",
     "new_allowance": "Allowance Create",
     "allowance.list": "Allowance List",
-    "new_wave_money_transfer": "Wave Money Commissionr Create",
-    "wave_money_transfer.list": "Wave Money Commissionr List",
-    "new_true_money_transfer": "True Money Commissionr Create",
+    "new_wave_money_transfer": "Wave Money Commission Create",
+    "wave_money_transfer.list": "Wave Money Commission List",
+    "new_true_money_transfer": "True Money Commission Create",
     "true_money_transfer.list": "True Money Commission",
     "new_cash_wallet": "Cash Wallet Create",
     "cash_wallet.list": "Cash Wallet",
+    "commission":"Commission",
 
     "from-bank": "From Bank",
     "to-bank": "To Bank",
@@ -51,7 +52,7 @@
     "transfer-fee": "Transfer Fee",
     "export-amount": "Export Amount",
     "export-fee": "Export Fee",
-    "wave-acc": "Wace Accounts",
+    "wave-acc": "Wave Account",
     "otm": "OTM(%)",
     "wave-acc-left-money": "Wace Account Left Money",
     "total-e-money": "Total E-Money",
@@ -157,6 +158,7 @@
     "email":"Email",
     "password":"Password",
     "employee":"Employee",
+    "wave_money_transcation":"Wave Money Transcation"
     
     
 
