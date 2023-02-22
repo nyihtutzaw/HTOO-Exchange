@@ -18,14 +18,14 @@ import {
 import { useTranslation } from "react-i18next";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as WaveMoneyTransactionService from "../../services/waveMoneyTransactionService";
+import * as TrueMoneyTransactionService from "../../services/trueMoneyTransactionService ";
 import * as yup from "yup";
 import { transactionTypes } from "../../contants";
 import { useDispatch, useSelector } from "react-redux";
-import * as BankService from "./../../services/bankService";
+import * as BankService from "../../services/bankService";
 import { setBanks } from "../../store/reducer.bank";
 
-const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
+const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const { t } = useTranslation();
   const [transactionType, setTransactionType] = useState(null);
   const dispatch = useDispatch();
@@ -75,20 +75,21 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const handleSubmit = useCallback(
     async (values) => {
       values.branch_id = activeBranch.id;
+      console.log(values);
       if (transactionType === "transfer") {
-       await WaveMoneyTransactionService.store(values);
+        await TrueMoneyTransactionService.store(values);
       } else if (
         transactionType === "from bank" ||
         transactionType === "to bank"
       ) {
-        await WaveMoneyTransactionService.store({
+        await TrueMoneyTransactionService.store({
           type: values.type,
           amount: values.amount,
           bank_account_id: values.bank_account_id,
           branch_id: activeBranch.id,
         });
       } else {
-        await WaveMoneyTransactionService.store({
+        await TrueMoneyTransactionService.store({
           type: values.type,
           transaction_id: values.transaction_id,
           amount: values.amount,
@@ -98,7 +99,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
         });
       }
 
-        reset();
+      reset();
     },
     [reset, transactionType]
   );
@@ -115,7 +116,9 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
       aria-labelledby="scroll-dialog-title"
       aria-describedby="scroll-dialog-description"
     >
-      <DialogTitle id="scroll-dialog-title">{t("create-exchange")}</DialogTitle>
+      <DialogTitle id="scroll-dialog-title">
+        {t("create-true-money")}
+      </DialogTitle>
 
       <form onSubmit={formHandleSubmit(handleSubmit)}>
         <DialogContent dividers={scroll === "paper"}>
@@ -350,4 +353,4 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   );
 };
 
-export default CreateWave;
+export default CreateTrue;
