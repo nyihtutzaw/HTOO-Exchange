@@ -39,8 +39,14 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
       transactionType === "transfer" ? yup.number().required() : yup.number(),
     amount: yup.number().required(),
     bank_account_id: yup.number().required(),
-    transaction_id: yup.number().required(),
-    commission: yup.number().required(),
+    transaction_id:
+      transactionType === "from bank" || transactionType === "to bank"
+        ? yup.number()
+        : yup.number().required(),
+    commission:
+      transactionType === "from bank" || transactionType === "to bank"
+        ? yup.number()
+        : yup.number().required(),
   });
 
   const {
@@ -71,6 +77,16 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
       values.branch_id = activeBranch.id;
       if (transactionType === "transfer") {
         await WaveMoneyTransactionService.store(values);
+      } else if (
+        transactionType === "from bank" ||
+        transactionType === "to bank"
+      ) {
+        await WaveMoneyTransactionService.store({
+          type: values.type,
+          amount: values.amount,
+          bank_account_id: values.bank_account_id,
+          branch_id: activeBranch.id,
+        });
       } else {
         await WaveMoneyTransactionService.store({
           type: values.type,
@@ -179,17 +195,21 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
               )}
               {transactionType && (
                 <Stack spacing={2} direction="row" m={2}>
-                  <TextField
-                    type="number"
-                    required
-                    label={t("transaction_id")}
-                    variant="outlined"
-                    size="small"
-                    sx={{ width: "350px" }}
-                    {...register("transaction_id")}
-                    error={errors.transaction_id?.message}
-                    helperText={errors.transaction_id?.message}
-                  />
+                  {(transactionType === "transfer" ||
+                    transactionType === "deposit" ||
+                    transactionType === "withdraw") && (
+                    <TextField
+                      type="number"
+                      required
+                      label={t("transaction_id")}
+                      variant="outlined"
+                      size="small"
+                      sx={{ width: "350px" }}
+                      {...register("transaction_id")}
+                      error={errors.transaction_id?.message}
+                      helperText={errors.transaction_id?.message}
+                    />
+                  )}
                   <TextField
                     type="number"
                     required
@@ -203,7 +223,9 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
                   />
                 </Stack>
               )}
-              {transactionType && (
+              {(transactionType === "transfer" ||
+                transactionType === "deposit" ||
+                transactionType === "withdraw") && (
                 <Stack spacing={2} direction="row" m={2}>
                   {transactionType === "transfer" && (
                     <TextField
