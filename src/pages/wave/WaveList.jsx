@@ -114,7 +114,7 @@ const ListWave = () => {
           <Box mt={2}>
             <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
               {/* {t('exchange-list')} */}
-              Wave List
+              {t("wave_money_transcation")}
             </Typography>
           </Box>
           <Box
