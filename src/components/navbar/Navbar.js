@@ -46,7 +46,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TotalMoney from "../bank_money/TotalMoney";
 import TrueMoney from "../bank_money/TrueMoney";
 import YomaBank from "../bank_money/YomaBank";
-import ListWave from "../wave/ListWave";
+import ListWave from "../../pages/wave/WaveList";
 import TransitionRecord from "../transition_record/TransitionRecord";
 import AdminList from "../../pages/Admin/AdminList";
 import { useSelector } from "react-redux";
@@ -58,7 +58,6 @@ import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransf
 import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
 import CashWalletList from "../../pages/cashWallet/CashWalletList";
 import BranchTransferList from "../../pages/branchTransfer/BranchTransferList";
-
 
 const settings = ["Account", "Logout"];
 

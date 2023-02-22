@@ -14,3 +14,5 @@ export const branchToBranchTransferTypes = [
   { value: 1, label: "e money" },
   { value: 2, label: "cash buy" },
 ];
+
+export const transactionTypes = ["transfer", "deposit", "withdraw","from bank", "to bank"];
