@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 // import Paper from "@material-ui/core/Paper";
-import {
-  Box,
-  Button,
-  Card,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  Stack,
-  TextareaAutosize,
-  Typography,
-} from "@mui/material";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import TextField from "@mui/material/TextField";
-import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Box, Button, Typography } from "@mui/material";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import PrintIcon from "@mui/icons-material/Print";
 import { useTranslation } from "react-i18next";
@@ -28,15 +11,15 @@ import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import List from "./List";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import * as WaveMoneyTransactionService from "../../services/waveMoneyTransactionService";
+import * as TrueMoneyTransactionService from "../../services/trueMoneyTransactionService ";
 import {
-  deleteWaveMoneyTransaction,
-  setWaveMoneyTransactions,
-} from "../../store/reducer.waveMoneyTransaction";
+  deleteTrueMoneyTransaction,
+  setTrueMoneyTransactions,
+} from "../../store/reducer.trueMoneyTransaction";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
-import CreateWave from "./CreateWave";
+import CreateTrue from "./CreateTrue";
 
-const ListWave = () => {
+const ListTrue = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [showDelete, setShowDelete] = useState(false);
@@ -51,14 +34,14 @@ const ListWave = () => {
   };
 
   // const activeBranch = useSelector((state) => state.auth.activeBranch);
-  const waveMoneyTransactions = useSelector(
-    (state) => state.waveMoneyTransaction.waveMoneyTransactions
+  const trueMoneyTransactions = useSelector(
+    (state) => state.trueMoneyTransaction.trueMoneyTransactions
   );
 
   const loadData = async () => {
     // const query = { branch_id: activeBranch.id };
-    const response = await WaveMoneyTransactionService.getAll();
-    dispatch(setWaveMoneyTransactions(response));
+    const response = await TrueMoneyTransactionService.getAll();
+    dispatch(setTrueMoneyTransactions(response));
   };
 
   useEffect(() => {
@@ -87,8 +70,8 @@ const ListWave = () => {
   //   };
 
   const handleDelete = async (id) => {
-    await WaveMoneyTransactionService.deleteWaveMoneyTransaction(id);
-    dispatch(deleteWaveMoneyTransaction(id));
+    await TrueMoneyTransactionService.deleteTrueMoneyTransaction(id);
+    dispatch(deleteTrueMoneyTransaction(id));
   };
 
   return (
@@ -113,10 +96,7 @@ const ListWave = () => {
         >
           <Box mt={2}>
             <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
-              {/* {t('exchange-list')} */}
-
-              {t("wave_money_transcation")}
-
+              {t("true-list")}
             </Typography>
           </Box>
           <Box
@@ -217,7 +197,7 @@ const ListWave = () => {
           </Box>
         </Box>
         <List
-          data={waveMoneyTransactions}
+          data={trueMoneyTransactions}
           handleDelete={(row) => {
             setEditData(row);
             setShowDelete(true);
@@ -230,7 +210,7 @@ const ListWave = () => {
       </div>
       {showDelete && (
         <ConfirmDialog
-          title={`Delete Wave Money Transaction`}
+          title={`Delete True Money Transaction`}
           body={`Are you sure to delete`}
           onToggle={() => setShowDelete(false)}
           onConfirm={() => {
@@ -240,7 +220,7 @@ const ListWave = () => {
         />
       )}
 
-      <CreateWave
+      <CreateTrue
         open={open}
         editData={editData}
         handleClose={() => {
@@ -254,4 +234,4 @@ const ListWave = () => {
   );
 };
 
-export default ListWave;
+export default ListTrue;

@@ -36,7 +36,9 @@ import SalaryList from "./pages/salary/SalaryList";
 import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./pages/branchTransfer/CreateBranchTransfer";
+
 import CreateTrue from "./components/true/CreateTrue";
+
 
 import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
 
@@ -79,6 +81,7 @@ import EditTrueMoneyTransfer from "./pages/trueMoneyTransfer/EditTrueMoneyTransf
 import CashWalletList from "./pages/cashWallet/CashWalletList";
 import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
 import EditBranchTransfer from "./pages/branchTransfer/EditBranchTransferr";
+import ListTrue from "./pages/true/TrueList";
 
 function App() {
   return (
@@ -164,7 +167,7 @@ function App() {
           <Route path="/admin/list-wave" element={<ListWave />} />
 
           {/* true routes */}
-          <Route path="/admin/create-true" element={<CreateTrue />} />
+          <Route path="/admin/list-true" element={<ListTrue/>} />
 
           {/* exchange routes */}
           {/* <Route path="/admin/create-exchange" element={<CreateExchange />} /> */}

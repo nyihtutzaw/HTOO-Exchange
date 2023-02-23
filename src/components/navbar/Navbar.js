@@ -35,8 +35,6 @@ import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";
 import SalaryList from "../../pages/salary/SalaryList";
 import ExpenseList from "../../pages/expense/ExpenseList";
 
-// import CreateWave from "../wave/CreateWave";
-import CreateTrue from "../true/CreateTrue";
 
 import logo from "../../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
@@ -58,6 +56,9 @@ import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransf
 import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
 import CashWalletList from "../../pages/cashWallet/CashWalletList";
 import BranchTransferList from "../../pages/branchTransfer/BranchTransferList";
+
+import ListTrue from "../../pages/true/TrueList";
+
 
 const settings = ["Account", "Logout"];
 
@@ -82,8 +83,8 @@ const Navbar = () => {
     },
     {
       name: "True Money",
-      route: "/admin/create-true",
-      element: <CreateTrue />,
+      route: "/admin/list-true",
+      element: <ListTrue />,
     },
 
     {
