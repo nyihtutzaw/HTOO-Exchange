@@ -37,6 +37,8 @@ import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./pages/branchTransfer/CreateBranchTransfer";
 
+
+
 import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
 
 // import ListExchange from "./components/exchange/ListExchange";
@@ -56,7 +58,7 @@ import LoginForm from "./pages/LoginForm";
 import CreateRoleAccess from "./pages/roleAndAccess/CreateRoleAccess";
 import EditRoleAccess from "./pages/roleAndAccess/EditRoleAccess";
 import RoleAndAccessList from "./pages/roleAndAccess/RoleAndAccessList";
-
+import Invoice from "./pages/invoice/Invoice";
 import AllowanceList from "./pages/allowance/AllowanceList";
 import CreateAllowance from "./pages/allowance/CreateAllowance";
 import EditAllowance from "./pages/allowance/EditAllowance";
@@ -79,7 +81,6 @@ import CashWalletList from "./pages/cashWallet/CashWalletList";
 import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
 import EditBranchTransfer from "./pages/branchTransfer/EditBranchTransferr";
 import ListTrue from "./pages/true/TrueList";
-import Invoice from "./pages/invoice/Invoice";
 
 function App() {
   return (
@@ -224,8 +225,6 @@ function App() {
             element={<CreateCashWallet />}
           />
           <Route path="/admin/list-cash-wallet" element={<CashWalletList />} />
-
-          {/* invoice */}
           <Route path="/admin/invoice" element={<Invoice />} />
         </Route>
       </Routes>

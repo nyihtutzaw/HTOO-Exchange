@@ -55,6 +55,8 @@
     "wave-acc": "Wave Account",
     "otm": "OTM(%)",
     "wave-acc-left-money": "Wace Account Left Money",
+    "true-acc-left-money": "Wace Account Left Money",
+    
     "total-e-money": "Total E-Money",
     "total-cash-money": "Total-Cash",
 
@@ -158,7 +160,8 @@
     "email":"Email",
     "password":"Password",
     "employee":"Employee",
-    "wave_money_transcation":"Wave Money Transcation"
+    "wave_money_transcation":"Wave Money Transcation",
+    "true_money_transcation":"True Money Transcation"
     
     
 
