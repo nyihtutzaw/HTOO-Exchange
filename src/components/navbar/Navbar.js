@@ -56,7 +56,9 @@ import WaveMoneyTransferList from "../../pages/waveMoneyTransfer/WaveMoneyTransf
 import TrueMoneyTransferList from "../../pages/trueMoneyTransfer/TrueMoneyTransferList";
 import CashWalletList from "../../pages/cashWallet/CashWalletList";
 import BranchTransferList from "../../pages/branchTransfer/BranchTransferList";
+
 import ListTrue from "../../pages/true/TrueList";
+
 
 const settings = ["Account", "Logout"];
 

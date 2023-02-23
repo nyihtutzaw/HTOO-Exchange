@@ -48,13 +48,12 @@ const BankList = () => {
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
 
-  const loadData = async () => {
-    const query = { branch_id: activeBranch.id };
-    const response = await BankService.getAll(query);
-    dispatch(setBanks(response));
-  };
-
   useEffect(() => {
+    async function loadData() {
+      const query = { branch_id: activeBranch.id };
+      const response = await BankService.getAll(query);
+      dispatch(setBanks(response));
+    }
     loadData();
   }, [location.search]);
 
