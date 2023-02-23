@@ -37,9 +37,6 @@ import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./pages/branchTransfer/CreateBranchTransfer";
 
-import CreateTrue from "./components/true/CreateTrue";
-
-
 import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
 
 // import ListExchange from "./components/exchange/ListExchange";
@@ -82,6 +79,7 @@ import CashWalletList from "./pages/cashWallet/CashWalletList";
 import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
 import EditBranchTransfer from "./pages/branchTransfer/EditBranchTransferr";
 import ListTrue from "./pages/true/TrueList";
+import Invoice from "./pages/invoice/Invoice";
 
 function App() {
   return (
@@ -167,7 +165,7 @@ function App() {
           <Route path="/admin/list-wave" element={<ListWave />} />
 
           {/* true routes */}
-          <Route path="/admin/list-true" element={<ListTrue/>} />
+          <Route path="/admin/list-true" element={<ListTrue />} />
 
           {/* exchange routes */}
           {/* <Route path="/admin/create-exchange" element={<CreateExchange />} /> */}
@@ -226,6 +224,9 @@ function App() {
             element={<CreateCashWallet />}
           />
           <Route path="/admin/list-cash-wallet" element={<CashWalletList />} />
+
+          {/* invoice */}
+          <Route path="/admin/invoice" element={<Invoice />} />
         </Route>
       </Routes>
       <NotificationContainer />
