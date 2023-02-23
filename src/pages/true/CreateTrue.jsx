@@ -19,11 +19,13 @@ import { useTranslation } from "react-i18next";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as TrueMoneyTransactionService from "../../services/trueMoneyTransactionService ";
+import * as TrueMoneyTransferService from "../../services/trueMoneyTransferService";
 import * as yup from "yup";
 import { transactionTypes } from "../../contants";
 import { useDispatch, useSelector } from "react-redux";
 import * as BankService from "../../services/bankService";
 import { setBanks } from "../../store/reducer.bank";
+import { setTrueMoneyTransfers } from "../../store/reducer.trueMoneyTransfer";
 
 const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const { t } = useTranslation();
@@ -54,23 +56,50 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
     handleSubmit: formHandleSubmit,
     formState: { errors },
     reset,
+    watch,
+    setValue,
     control,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
+  const watchAmount = watch("amount", false);
+
   const banks = useSelector((state) => state.bank.banks);
+  const trueMoneyTransfers = useSelector(
+    (state) => state.trueMoneyTransfer.trueMoneyTransfers
+  );
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
-  const loadData = async () => {
-    const query = { branch_id: activeBranch.id };
-    const response = await BankService.getAll(query);
-    dispatch(setBanks(response));
-  };
 
   useEffect(() => {
+    async function loadData() {
+      const query = { branch_id: activeBranch.id };
+      const response = await BankService.getAll(query);
+      dispatch(setBanks(response));
+      const trueComiisonoResponse = await TrueMoneyTransferService.getAll(
+        query
+      );
+      dispatch(setTrueMoneyTransfers(trueComiisonoResponse));
+    }
     loadData();
   }, []);
+
+  useEffect(() => {
+    const amount = parseInt(watchAmount);
+    console.log(amount);
+    const commision = trueMoneyTransfers.find(
+      (e) => amount >= e.minimum_amount && amount <= e.maximum_amount
+    );
+    if (commision) {
+      if (transactionType === "transfer")
+        setValue("commission", commision.transfer_fee);
+      else if (transactionType === "deposit")
+        setValue("commission", commision.deposit_fee);
+      else if (transactionType === "withdraw")
+        setValue("commission", commision.withdraw_fee);
+    }
+  }, [setValue, transactionType, watchAmount, trueMoneyTransfers]);
 
   const handleSubmit = useCallback(
     async (values) => {
@@ -117,7 +146,7 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
       aria-describedby="scroll-dialog-description"
     >
       <DialogTitle id="scroll-dialog-title">
-        {t("create-true-money")}
+        {t("true_money_transcation")}
       </DialogTitle>
 
       <form onSubmit={formHandleSubmit(handleSubmit)}>
@@ -164,7 +193,9 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
                       }}
                     >
                       {transactionTypes.map((type) => (
-                        <MenuItem value={type}>{type}</MenuItem>
+                        <MenuItem value={type}>
+                          {type && type[0].toUpperCase() + type.slice(1)}
+                        </MenuItem>
                       ))}
                     </Select>
                   )}
@@ -246,7 +277,7 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
                   <TextField
                     type="number"
                     required
-                    label={t("cash-commission")}
+                    label={t("commission")}
                     variant="outlined"
                     size="small"
                     sx={{ width: "350px" }}
@@ -285,9 +316,13 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
                         {...field}
                         fullWidth
                       >
-                        {banks.map((bank) => (
-                          <MenuItem value={bank.id}>{bank.name}</MenuItem>
-                        ))}
+                        {banks
+                          .filter((bank) => bank.account_name === "True Money")
+                          .map((bank) => (
+                            <MenuItem value={bank.id}>
+                              {bank.name} - {bank.account_name} ({bank.amount})
+                            </MenuItem>
+                          ))}
                       </Select>
                     )}
                   />
@@ -305,6 +340,7 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
           }}
         >
           <Button
+            onClick={handleClose}
             variant="contained"
             size="small"
             sx={{
@@ -323,7 +359,7 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
             }}
           >
             <SaveIcon />
-            {t("save_assign")}
+            {t("close")}
           </Button>
           <Button
             type="submit"

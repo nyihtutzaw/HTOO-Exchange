@@ -50,6 +50,9 @@ const List = ({ data, handleEdit, handleDelete }) => {
                 {t("date-time")}
               </TableCell>
               <TableCell className={classes.tHColor} align="center">
+                {t("type")}
+              </TableCell>
+              <TableCell className={classes.tHColor} align="center">
                 {t("phone-out")}
               </TableCell>
               <TableCell className={classes.tHColor} align="center">
@@ -85,11 +88,9 @@ const List = ({ data, handleEdit, handleDelete }) => {
               <TableCell className={classes.tHColor} align="center">
                 {t("otm")}
               </TableCell>
+
               <TableCell className={classes.tHColor} align="center">
-                Ma
-              </TableCell>
-              <TableCell className={classes.tHColor} align="center">
-                {t("wave-acc-left-money")}
+                {t("true-acc-left-money")}
               </TableCell>
               <TableCell className={classes.tHColor} align="center">
                 {t("total-e-money")}
@@ -114,23 +115,23 @@ const List = ({ data, handleEdit, handleDelete }) => {
                 <TableCell align="center">
                   {dayjs(row.createdAt).format("DD/MM/YYYY HH:mm")}
                 </TableCell>
-
+                <TableCell align="center">{row.type && row.type[0].toUpperCase() + row.type.slice(1)}</TableCell>
                 <TableCell align="center">{row.sender_phone}</TableCell>
                 <TableCell align="center">{row.receiver_phone}</TableCell>
                 <TableCell align="center">{row.transaction_id}</TableCell>
-                <TableCell align="center">{row.amount}</TableCell>
+                <TableCell align="center">{row.type === "transfer" && row.amount}</TableCell>
                 <TableCell align="center">{row.transfer_fee}</TableCell>
-                <TableCell align="center">{row?.export_amount}</TableCell>
-                <TableCell align="center">{row?.export_fee}</TableCell>
-                <TableCell align="center">{row?.wave_acc}</TableCell>
-                <TableCell align="center">{row.comission}</TableCell>
-                <TableCell align="center">{row.bank_account?.name}</TableCell>
-                <TableCell align="center">{row.from_bank}</TableCell>
+                <TableCell align="center">{row.type === "withdraw" && row.amount}</TableCell>
+                <TableCell align="center">{row.type === "deposit" && row.amount}</TableCell>
+                <TableCell align="center">{row?.bank_account?.name}-{row?.bank_account?.account_name}</TableCell>
+                <TableCell align="center">{row.commission}</TableCell>
+
+                <TableCell align="center">{row.type === "from bank" && row.amount}</TableCell>
+
+                <TableCell align="center">{row.type === "to bank" && row.amount}</TableCell>
                 <TableCell align="center">{row.otm}</TableCell>
-                <TableCell align="center">{row.ma_thi}</TableCell>
-                <TableCell align="center">{row.wave_acc_left_money}</TableCell>
-                <TableCell align="center">{row.total_e_money}</TableCell>
-                <TableCell align="center">{row.total_cash}</TableCell>
+                <TableCell align="center">{row.last_bank_amount}</TableCell>
+                <TableCell align="center">{row.last_cash_amount}</TableCell>
                 <TableCell align="center">{row.customer_name}</TableCell>
                 <TableCell align="center">
                   {/* <DriveFileRenameOutlineRoundedIcon

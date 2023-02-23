@@ -48,6 +48,7 @@
   "wave-acc": "Wave Account",
   "otm": "OTM(%)",
   "wave-acc-left-money": "Wave အကောင့်လက်ကျန်",
+  "true-acc-left-money": "True အကောင့်လက်ကျန်",
   "total-e-money": "Total E-Money",
   "total-cash-money": "Total Cash-Money",
 
@@ -156,6 +157,7 @@
   "withdraw_fee": "ငွေထုတ်ခ",
   "cash_wallet.list": "ငွေသား",
   "new_cash_wallet": "ငွေသား Create",
-  "wave_money_transcation":"Wave Money Transcation"
+  "wave_money_transcation":"Wave Money Transcation",
+  "true_money_transcation":"True Money Transcation"
 
 }

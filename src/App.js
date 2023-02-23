@@ -37,7 +37,6 @@ import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./pages/branchTransfer/CreateBranchTransfer";
 
-import CreateTrue from "./components/true/CreateTrue";
 
 
 import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
@@ -167,7 +166,7 @@ function App() {
           <Route path="/admin/list-wave" element={<ListWave />} />
 
           {/* true routes */}
-          <Route path="/admin/list-true" element={<ListTrue/>} />
+          <Route path="/admin/list-true" element={<ListTrue />} />
 
           {/* exchange routes */}
           {/* <Route path="/admin/create-exchange" element={<CreateExchange />} /> */}
