@@ -58,7 +58,7 @@ import LoginForm from "./pages/LoginForm";
 import CreateRoleAccess from "./pages/roleAndAccess/CreateRoleAccess";
 import EditRoleAccess from "./pages/roleAndAccess/EditRoleAccess";
 import RoleAndAccessList from "./pages/roleAndAccess/RoleAndAccessList";
-
+import Invoice from "./pages/invoice/Invoice";
 import AllowanceList from "./pages/allowance/AllowanceList";
 import CreateAllowance from "./pages/allowance/CreateAllowance";
 import EditAllowance from "./pages/allowance/EditAllowance";
@@ -225,6 +225,7 @@ function App() {
             element={<CreateCashWallet />}
           />
           <Route path="/admin/list-cash-wallet" element={<CashWalletList />} />
+          <Route path="/admin/invoice" element={<Invoice />} />
         </Route>
       </Routes>
       <NotificationContainer />
