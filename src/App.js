@@ -68,6 +68,7 @@ import EditExpense from "./pages/expense/EditExpense";
 import ExchangeCreate from "./pages/exchange/ExchangeCreate";
 import ExchangeEdit from "./pages/exchange/ExchangeEdit";
 import ExchangeLists from "./pages/exchange/ExchangeLists";
+import ExchangeInvoice from "./pages/exchange/ExchangeInvoice";
 
 import WaveMoneyTransferList from "./pages/waveMoneyTransfer/WaveMoneyTransferList";
 import CreateWaveMoneyTransfer from "./pages/waveMoneyTransfer/CreateWaveMoneyTransfer";
@@ -174,6 +175,9 @@ function App() {
           <Route path="/admin/edit-exchange" element={<ExchangeEdit />} />
           {/* <Route path="/admin/list-exchange" element={<ListExchange />} /> */}
           <Route path="/admin/list-exchange" element={<ExchangeLists />} />
+          <Route path="/admin/exchange-invoice/:id" element={<ExchangeInvoice />} />
+
+
 
           {/* bank_money_left */}
           <Route path="/admin/total-money" element={<TotalMoney />} />

@@ -17,6 +17,7 @@ import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import { setBranches } from "../../store/reducer.branch";
 import AssignDialog from "./AssignDialog";
 import queryString from "query-string";
+import usePermission from "../../hooks/usePermission";
 
 const CssTextField = withStyles({
   root: {
@@ -49,6 +50,8 @@ const EmployeeList = () => {
   const [selectedBranchIds, setSelectedBranchIds] = useState([]);
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const { permitCreate } = usePermission("employee");
 
   const employees = useSelector((state) => state.employee.employees);
   const branches = useSelector((state) => state.branch.branches);
@@ -168,26 +171,28 @@ const EmployeeList = () => {
               }}
             />
 
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                backgroundColor: "#1dad52",
-                minWidth: "200px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <AddCircleRoundedIcon />
-              <Box>{t("new")}</Box>
-            </Button>
+            {permitCreate && (
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  backgroundColor: "#1dad52",
+                  minWidth: "200px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+                onClick={handleLink}
+              >
+                <AddCircleRoundedIcon />
+                <Box>{t("new")}</Box>
+              </Button>
+            )}
           </Box>
           <List
             data={employees}

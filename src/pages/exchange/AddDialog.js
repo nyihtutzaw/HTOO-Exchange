@@ -89,12 +89,18 @@ function AddDialog({ open, handleClose, scroll, editData }) {
 
     const handleSubmit = useCallback(
         async (values) => {
-            editData
-                ? await ExchangeService.update(values, editData?.id)
-                : await ExchangeService.store({ ...values, branch_id: activeBranch.id });
 
+            if (editData) {
+                await ExchangeService.update(values, editData?.id)
+            }
+            else {
+                const response = await ExchangeService.store({ ...values, branch_id: activeBranch.id });
+                navigate("/admin/exchange-invoice/" + response.data.id)
+            }
             reset();
             handleClose();
+            return;
+
         },
         [activeBranch.id, editData, handleClose, reset]
     );

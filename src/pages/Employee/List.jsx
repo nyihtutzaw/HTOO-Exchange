@@ -9,9 +9,11 @@ import { useTranslation } from "react-i18next";
 import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import DisplaySettingsRoundedIcon from "@mui/icons-material/DisplaySettingsRounded";
+import usePermission from "../../hooks/usePermission";
 
 function List({ data, handleClickOpen, handleEdit, onDelete }) {
   const { t } = useTranslation();
+  const { permitDelete, permitUpdate } = usePermission("employee");
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -64,14 +66,22 @@ function List({ data, handleClickOpen, handleEdit, onDelete }) {
                   onClick={() => handleClickOpen(row)}
                   sx={{ color: "green", fontSize: "25px" }}
                 />
-                <DriveFileRenameOutlineRoundedIcon
-                  onClick={() => handleEdit(row)}
-                  sx={{ color: "#36353d", fontSize: "25px", marginLeft: "5px" }}
-                />
-                <DeleteForeverRoundedIcon
-                  onClick={() => onDelete(row)}
-                  sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }}
-                />
+                {permitUpdate && (
+                  <DriveFileRenameOutlineRoundedIcon
+                    onClick={() => handleEdit(row)}
+                    sx={{
+                      color: "#36353d",
+                      fontSize: "25px",
+                      marginLeft: "5px",
+                    }}
+                  />
+                )}
+                {permitDelete && (
+                  <DeleteForeverRoundedIcon
+                    onClick={() => onDelete(row)}
+                    sx={{ color: "red", fontSize: "25px", marginLeft: "5px" }}
+                  />
+                )}
               </TableCell>
             </TableRow>
           ))}
