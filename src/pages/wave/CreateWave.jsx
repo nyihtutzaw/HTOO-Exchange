@@ -26,6 +26,9 @@ import { useDispatch, useSelector } from "react-redux";
 import * as BankService from "./../../services/bankService";
 import { setBanks } from "../../store/reducer.bank";
 import * as WaveMoneyTransferService from "../../services/waveMoneyTransferService";
+import * as CustomerService from "./../../services/customerService";
+import { setCustomers } from "../../store/reducer.customer";
+
 const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const { t } = useTranslation();
   const [transactionType, setTransactionType] = useState(null);
@@ -48,6 +51,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
       transactionType === "from bank" || transactionType === "to bank"
         ? yup.number()
         : yup.number().required(),
+    customer_id: yup.number().required(),
   });
 
   const {
@@ -63,6 +67,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   });
 
   const banks = useSelector((state) => state.bank.banks);
+  const customers = useSelector((state) => state.customer.customers);
   const waveMoneyTransfers = useSelector(
     (state) => state.waveMoneyTransfer.waveMoneyTransfers
   );
@@ -80,6 +85,9 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
         query
       );
       dispatch(setWaveMoneyTransfers(waveComiisonoResponse));
+
+      const result = await CustomerService.getAll();
+      dispatch(setCustomers(result));
     }
     loadData();
   }, []);
@@ -111,6 +119,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
           amount: values.amount,
           bank_account_id: values.bank_account_id,
           branch_id: activeBranch.id,
+          customer_id: values.customer_id
         });
       } else {
         await WaveMoneyTransactionService.store({
@@ -120,6 +129,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
           commission: values.commission,
           bank_account_id: values.bank_account_id,
           branch_id: activeBranch.id,
+          customer_id: values.customer_id
         });
       }
 
@@ -318,6 +328,44 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
                               {bank.name} - {bank.account_name} ({bank.amount})
                             </MenuItem>
                           ))}
+                      </Select>
+                    )}
+                  />
+                </Stack>
+              )}
+              {transactionType && (
+                <Stack spacing={2} direction="row" m={2}>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    sx={{
+                      textTransform: "none",
+                      backgroundColor: "#094708",
+                      minWidth: "200px",
+                      fontSize: "14px",
+                      ":hover": {
+                        bgcolor: "#094708",
+                        color: "#fff",
+                      },
+                    }}
+                  >
+                    {t("customer.name")}
+                  </Button>
+                  <Controller
+                    name="customer_id"
+                    id="customer_id"
+                    control={control}
+                    render={({ field }) => (
+                      <Select
+                        labelId="customer_id-label"
+                        {...field}
+                        fullWidth
+                      >
+                        {customers.map((customer) => (
+                          <MenuItem value={customer.id}>
+                            {customer.name}
+                          </MenuItem>
+                        ))}
                       </Select>
                     )}
                   />
