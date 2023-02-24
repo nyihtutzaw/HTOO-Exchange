@@ -130,9 +130,10 @@ const List = ({ data, handleEdit, handleDelete }) => {
 
                 <TableCell align="center">{row.type === "to bank" && row.amount}</TableCell>
                 <TableCell align="center">{row.otm}</TableCell>
+                <TableCell align="center">{}</TableCell>
                 <TableCell align="center">{row.last_bank_amount}</TableCell>
                 <TableCell align="center">{row.last_cash_amount}</TableCell>
-                <TableCell align="center">{row.customer_name}</TableCell>
+                <TableCell align="center">{row.customer?.name}</TableCell>
                 <TableCell align="center">
                   {/* <DriveFileRenameOutlineRoundedIcon
                     onClick={() => handleEdit(row)}
