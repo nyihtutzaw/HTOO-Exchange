@@ -45,10 +45,13 @@ import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
 
 import TotalMoney from "./components/bank_money/TotalMoney";
 import TrueMoney from "./components/bank_money/TrueMoney";
+
+import TrueMoneyInvoice from "./pages/true/TrueMoneyInvoice";
 import YomaBank from "./components/bank_money/YomaBank";
 // import ListExchange from "./components/exchange/ListExchange";
 
 import ListWave from "./pages/wave/WaveList";
+import WaveInvoice from "./pages/wave/WaveInvoice";
 import TransitionRecord from "./components/transition_record/TransitionRecord";
 
 import CreateBranch from "./pages/branch/CreateBranch";
@@ -165,6 +168,9 @@ function App() {
           {/* wave routes */}
           {/* <Route path="/admin/create-wave" element={<CreateWave />} /> */}
           <Route path="/admin/list-wave" element={<ListWave />} />
+          <Route path="/admin/wave-invoice/:id" element={<WaveInvoice />} />
+
+
 
           {/* true routes */}
           <Route path="/admin/list-true" element={<ListTrue />} />
@@ -222,6 +228,11 @@ function App() {
             path="/admin/list-true-money-transfer"
             element={<TrueMoneyTransferList />}
           />
+          <Route
+            path="/admin/truemoney-invoice/:id"
+            element={<TrueMoneyInvoice />}
+          />
+
 
           {/* cash wallet rouetes */}
           <Route

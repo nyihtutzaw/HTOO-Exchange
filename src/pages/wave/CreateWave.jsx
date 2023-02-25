@@ -28,6 +28,7 @@ import { setBanks } from "../../store/reducer.bank";
 import * as WaveMoneyTransferService from "../../services/waveMoneyTransferService";
 import * as CustomerService from "./../../services/customerService";
 import { setCustomers } from "../../store/reducer.customer";
+import { useNavigate } from "react-router-dom";
 
 const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const { t } = useTranslation();
@@ -73,7 +74,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   );
 
   const watchAmount = watch("amount", false);
-
+  const navigate = useNavigate();
   const activeBranch = useSelector((state) => state.auth.activeBranch);
 
   useEffect(() => {
@@ -111,27 +112,30 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const handleSubmit = useCallback(
     async (values) => {
       values.branch_id = activeBranch.id;
+      let response;
       if (values.type === "transfer") {
-        await WaveMoneyTransactionService.store(values);
+        response = await WaveMoneyTransactionService.store(values);
       } else if (values.type === "from bank" || values.type === "to bank") {
-        await WaveMoneyTransactionService.store({
+        response = await WaveMoneyTransactionService.store({
           type: values.type,
           amount: values.amount,
           bank_account_id: values.bank_account_id,
           branch_id: activeBranch.id,
-          customer_id: values.customer_id
+          customer_id: values.customer_id,
         });
       } else {
-        await WaveMoneyTransactionService.store({
+        response = await WaveMoneyTransactionService.store({
           type: values.type,
           transaction_id: values.transaction_id,
           amount: values.amount,
           commission: values.commission,
           bank_account_id: values.bank_account_id,
           branch_id: activeBranch.id,
-          customer_id: values.customer_id
+          customer_id: values.customer_id,
         });
       }
+
+      navigate("/admin/wave-invoice/" + response.data.id);
 
       //   reset();
     },
@@ -356,11 +360,7 @@ const CreateWave = ({ open, handleClose, scroll, descriptionElementRef }) => {
                     id="customer_id"
                     control={control}
                     render={({ field }) => (
-                      <Select
-                        labelId="customer_id-label"
-                        {...field}
-                        fullWidth
-                      >
+                      <Select labelId="customer_id-label" {...field} fullWidth>
                         {customers.map((customer) => (
                           <MenuItem value={customer.id}>
                             {customer.name}

@@ -10,6 +10,7 @@ import { Box, Paper } from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles({
 const List = ({ data, handleEdit, handleDelete }) => {
   const classes = useStyles();
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <Box
@@ -108,7 +110,9 @@ const List = ({ data, handleEdit, handleDelete }) => {
           </TableHead>
           <TableBody>
             {data?.map((row, index) => (
-              <TableRow key={index}>
+              <TableRow key={index} onDoubleClick={() => {
+                navigate("/admin/wave-invoice/" + row.id)
+              }}>
                 <TableCell width="20px" component="th" scope="row">
                   {index + 1}
                 </TableCell>
@@ -130,7 +134,7 @@ const List = ({ data, handleEdit, handleDelete }) => {
 
                 <TableCell align="center">{row.type === "to bank" && row.amount}</TableCell>
                 <TableCell align="center">{row.otm}</TableCell>
-                <TableCell align="center">{}</TableCell>
+                <TableCell align="center">{ }</TableCell>
                 <TableCell align="center">{row.last_bank_amount}</TableCell>
                 <TableCell align="center">{row.last_cash_amount}</TableCell>
                 <TableCell align="center">{row.customer?.name}</TableCell>
