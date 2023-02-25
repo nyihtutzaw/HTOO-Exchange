@@ -15,6 +15,7 @@ import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
     table: {
@@ -40,6 +41,7 @@ const CustomTableCell = withStyles((theme) => ({
 function List({ rows, handleDelete, handleEdit }) {
     const classes = useStyles();
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const customColumnStyle = {
         wordWrap: "break-word",
         minWidth: "100px",
@@ -140,7 +142,9 @@ function List({ rows, handleDelete, handleEdit }) {
                     </TableHead>
                     <TableBody>
                         {rows.map((row, index) => (
-                            <TableRow key={index}>
+                            <TableRow key={index} onDoubleClick={() => {
+                                navigate("/admin/exchange-invoice/" + row.id)
+                            }}>
                                 <TableCell component="th" scope="row">
                                     {index + 1}
                                 </TableCell>

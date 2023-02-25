@@ -28,7 +28,7 @@ import { setBanks } from "../../store/reducer.bank";
 import { setTrueMoneyTransfers } from "../../store/reducer.trueMoneyTransfer";
 import * as CustomerService from "./../../services/customerService";
 import { setCustomers } from "../../store/reducer.customer";
-
+import { useNavigate } from "react-router-dom";
 const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const { t } = useTranslation();
   const [transactionType, setTransactionType] = useState(null);
@@ -74,7 +74,7 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
   const trueMoneyTransfers = useSelector(
     (state) => state.trueMoneyTransfer.trueMoneyTransfers
   );
-
+  const navigate = useNavigate();
   const activeBranch = useSelector((state) => state.auth.activeBranch);
 
   useEffect(() => {
@@ -110,15 +110,16 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
 
   const handleSubmit = useCallback(
     async (values) => {
+      let response;
       values.branch_id = activeBranch.id;
       console.log(values);
       if (transactionType === "transfer") {
-        await TrueMoneyTransactionService.store(values);
+        response = await TrueMoneyTransactionService.store(values);
       } else if (
         transactionType === "from bank" ||
         transactionType === "to bank"
       ) {
-        await TrueMoneyTransactionService.store({
+        response = await TrueMoneyTransactionService.store({
           type: values.type,
           amount: values.amount,
           bank_account_id: values.bank_account_id,
@@ -126,7 +127,7 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
           customer_id: values.customer_id,
         });
       } else {
-        await TrueMoneyTransactionService.store({
+        response = await TrueMoneyTransactionService.store({
           type: values.type,
           transaction_id: values.transaction_id,
           amount: values.amount,
@@ -136,6 +137,8 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
           customer_id: values.customer_id,
         });
       }
+
+      navigate("/admin/truemoney-invoice/" + response.data.id);
 
       reset();
     },
