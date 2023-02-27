@@ -37,8 +37,6 @@ import CreateExpense from "./pages/expense/CreateExpense";
 import ExpenseList from "./pages/expense/ExpenseList";
 import CreateBranchTransfer from "./pages/branchTransfer/CreateBranchTransfer";
 
-
-
 import BranchTransferList from "./pages/branchTransfer/BranchTransferList";
 
 // import ListExchange from "./components/exchange/ListExchange";
@@ -85,6 +83,7 @@ import CashWalletList from "./pages/cashWallet/CashWalletList";
 import CreateCashWallet from "./pages/cashWallet/CreateCashWallet";
 import EditBranchTransfer from "./pages/branchTransfer/EditBranchTransferr";
 import ListTrue from "./pages/true/TrueList";
+import BankAccountBalance from "./pages/bankAccountBalance/BankAccountBalance";
 
 function App() {
   return (
@@ -170,8 +169,6 @@ function App() {
           <Route path="/admin/list-wave" element={<ListWave />} />
           <Route path="/admin/wave-invoice/:id" element={<WaveInvoice />} />
 
-
-
           {/* true routes */}
           <Route path="/admin/list-true" element={<ListTrue />} />
 
@@ -181,9 +178,10 @@ function App() {
           <Route path="/admin/edit-exchange" element={<ExchangeEdit />} />
           {/* <Route path="/admin/list-exchange" element={<ListExchange />} /> */}
           <Route path="/admin/list-exchange" element={<ExchangeLists />} />
-          <Route path="/admin/exchange-invoice/:id" element={<ExchangeInvoice />} />
-
-
+          <Route
+            path="/admin/exchange-invoice/:id"
+            element={<ExchangeInvoice />}
+          />
 
           {/* bank_money_left */}
           <Route path="/admin/total-money" element={<TotalMoney />} />
@@ -233,7 +231,6 @@ function App() {
             element={<TrueMoneyInvoice />}
           />
 
-
           {/* cash wallet rouetes */}
           <Route
             path="/admin/create-cash-wallet"
@@ -241,6 +238,10 @@ function App() {
           />
           <Route path="/admin/list-cash-wallet" element={<CashWalletList />} />
           <Route path="/admin/invoice" element={<Invoice />} />
+          <Route
+            path="/admin/bank-account-balance"
+            element={<BankAccountBalance />}
+          />
         </Route>
       </Routes>
       <NotificationContainer />

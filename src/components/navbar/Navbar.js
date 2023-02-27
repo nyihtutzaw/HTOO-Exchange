@@ -35,7 +35,6 @@ import RoleAndAccessList from "../../pages/roleAndAccess/RoleAndAccessList";
 import SalaryList from "../../pages/salary/SalaryList";
 import ExpenseList from "../../pages/expense/ExpenseList";
 
-
 import logo from "../../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -58,7 +57,7 @@ import CashWalletList from "../../pages/cashWallet/CashWalletList";
 import BranchTransferList from "../../pages/branchTransfer/BranchTransferList";
 
 import ListTrue from "../../pages/true/TrueList";
-
+import BankAccountBalance from "../../pages/bankAccountBalance/BankAccountBalance";
 
 const settings = ["Account", "Logout"];
 
@@ -170,6 +169,11 @@ const Navbar = () => {
       name: `${t("cash_wallet.list")}`,
       route: "/admin/list-cash-wallet",
       element: <CashWalletList />,
+    },
+    {
+      name: `${t("bank-account-balance")}`,
+      route: "/admin/bank-account-balance",
+      element: <BankAccountBalance />,
     },
   ];
 
