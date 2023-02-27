@@ -3,13 +3,13 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { Box, Paper } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
+import usePermission from "../../hooks/usePermission";
 
 const useStyles = makeStyles({
   root: {
@@ -32,6 +32,8 @@ const List = ({ data, handleEdit, handleDelete }) => {
   const classes = useStyles();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { permitDelete, permitUpdate } = usePermission("trueMoney");
+
   return (
     <Box
       display="flex"
@@ -108,31 +110,48 @@ const List = ({ data, handleEdit, handleDelete }) => {
           </TableHead>
           <TableBody>
             {data?.map((row, index) => (
-              <TableRow key={index} onDoubleClick={() => {
-                navigate("/admin/truemoney-invoice/" + row.id)
-              }}>
+              <TableRow
+                key={index}
+                onDoubleClick={() => {
+                  navigate("/admin/truemoney-invoice/" + row.id);
+                }}
+              >
                 <TableCell width="20px" component="th" scope="row">
                   {index + 1}
                 </TableCell>
                 <TableCell align="center">
                   {dayjs(row.createdAt).format("DD/MM/YYYY HH:mm")}
                 </TableCell>
-                <TableCell align="center">{row.type && row.type[0].toUpperCase() + row.type.slice(1)}</TableCell>
+                <TableCell align="center">
+                  {row.type && row.type[0].toUpperCase() + row.type.slice(1)}
+                </TableCell>
                 <TableCell align="center">{row.sender_phone}</TableCell>
                 <TableCell align="center">{row.receiver_phone}</TableCell>
                 <TableCell align="center">{row.transaction_id}</TableCell>
-                <TableCell align="center">{row.type === "transfer" && row.amount}</TableCell>
+                <TableCell align="center">
+                  {row.type === "transfer" && row.amount}
+                </TableCell>
                 <TableCell align="center">{row.transfer_fee}</TableCell>
-                <TableCell align="center">{row.type === "withdraw" && row.amount}</TableCell>
-                <TableCell align="center">{row.type === "deposit" && row.amount}</TableCell>
-                <TableCell align="center">{row?.bank_account?.name}-{row?.bank_account?.account_name}</TableCell>
+                <TableCell align="center">
+                  {row.type === "withdraw" && row.amount}
+                </TableCell>
+                <TableCell align="center">
+                  {row.type === "deposit" && row.amount}
+                </TableCell>
+                <TableCell align="center">
+                  {row?.bank_account?.name}-{row?.bank_account?.account_name}
+                </TableCell>
                 <TableCell align="center">{row.commission}</TableCell>
 
-                <TableCell align="center">{row.type === "from bank" && row.amount}</TableCell>
+                <TableCell align="center">
+                  {row.type === "from bank" && row.amount}
+                </TableCell>
 
-                <TableCell align="center">{row.type === "to bank" && row.amount}</TableCell>
+                <TableCell align="center">
+                  {row.type === "to bank" && row.amount}
+                </TableCell>
                 <TableCell align="center">{row.otm}</TableCell>
-                <TableCell align="center">{ }</TableCell>
+                <TableCell align="center">{}</TableCell>
                 <TableCell align="center">{row.last_bank_amount}</TableCell>
                 <TableCell align="center">{row.last_cash_amount}</TableCell>
                 <TableCell align="center">{row.customer?.name}</TableCell>
@@ -141,10 +160,16 @@ const List = ({ data, handleEdit, handleDelete }) => {
                     onClick={() => handleEdit(row)}
                     sx={{ color: "#36353d", fontSize: "25px" }}
                   /> */}
-                  <DeleteForeverRoundedIcon
-                    onClick={() => handleDelete(row)}
-                    sx={{ color: "red", fontSize: "25px", marginLeft: "10px" }}
-                  />
+                  {permitDelete && (
+                    <DeleteForeverRoundedIcon
+                      onClick={() => handleDelete(row)}
+                      sx={{
+                        color: "red",
+                        fontSize: "25px",
+                        marginLeft: "10px",
+                      }}
+                    />
+                  )}
                 </TableCell>
               </TableRow>
             ))}

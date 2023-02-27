@@ -18,6 +18,7 @@ import {
 } from "../../store/reducer.trueMoneyTransaction";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import CreateTrue from "./CreateTrue";
+import usePermission from "../../hooks/usePermission";
 
 const ListTrue = () => {
   const { t } = useTranslation();
@@ -28,6 +29,7 @@ const ListTrue = () => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
+  const { permitCreate } = usePermission("trueMoney");
 
   const handleClose = () => {
     window.location.reload();
@@ -171,29 +173,31 @@ const ListTrue = () => {
               <PrintIcon />
               <Box>Print</Box>
             </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                margin: "3px",
-                padding: "7px",
-                minWidth: "100px",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                backgroundColor: "#1dad52",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleClickOpen("paper")}
-            >
-              <AddCircleRoundedIcon />
-              <Box>{t("new")}</Box>
-            </Button>
+            {permitCreate && (
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  textTransform: "none",
+                  margin: "3px",
+                  padding: "7px",
+                  minWidth: "100px",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  backgroundColor: "#1dad52",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+                onClick={handleClickOpen("paper")}
+              >
+                <AddCircleRoundedIcon />
+                <Box>{t("new")}</Box>
+              </Button>
+            )}
           </Box>
         </Box>
         <List
