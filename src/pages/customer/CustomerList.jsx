@@ -13,6 +13,7 @@ import * as CustomerService from "./../../services/customerService";
 import { deleteCustomer, setCustomers } from "../../store/reducer.customer";
 import queryString from "query-string";
 import { useLocation, useNavigate } from "react-router-dom";
+import usePermission from "../../hooks/usePermission";
 
 const CssTextField = withStyles({
   root: {
@@ -44,6 +45,7 @@ const CustomerList = () => {
   const [editData, setEditData] = useState(false);
   const location = useLocation();
   const customers = useSelector((state) => state.customer.customers);
+  const { permitCreate } = usePermission("customer");
 
   const handleDelete = async (id) => {
     await CustomerService.deleteCustomer(id);
@@ -124,26 +126,28 @@ const CustomerList = () => {
                 ),
               }}
             />
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                backgroundColor: "#1dad52",
-                minWidth: "200px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <AddCircleRoundedIcon />
-              <Box>{t("new")}</Box>
-            </Button>
+            {permitCreate && (
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  backgroundColor: "#1dad52",
+                  minWidth: "200px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+                onClick={handleLink}
+              >
+                <AddCircleRoundedIcon />
+                <Box>{t("new")}</Box>
+              </Button>
+            )}
           </Box>
           <List
             data={customers}

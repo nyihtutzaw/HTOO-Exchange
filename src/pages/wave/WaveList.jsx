@@ -4,21 +4,8 @@ import Navbar from "../../components/navbar/Navbar";
 import {
   Box,
   Button,
-  Card,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  Stack,
-  TextareaAutosize,
   Typography,
 } from "@mui/material";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import TextField from "@mui/material/TextField";
-import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import PrintIcon from "@mui/icons-material/Print";
 import { useTranslation } from "react-i18next";
@@ -35,6 +22,7 @@ import {
 } from "../../store/reducer.waveMoneyTransaction";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import CreateWave from "./CreateWave";
+import usePermission from "../../hooks/usePermission";
 
 const ListWave = () => {
   const { t } = useTranslation();
@@ -45,6 +33,7 @@ const ListWave = () => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
+  const { permitCreate } = usePermission("wave");
 
   const handleClose = () => {
     window.location.reload();
@@ -116,7 +105,6 @@ const ListWave = () => {
               {/* {t('exchange-list')} */}
 
               {t("wave_money_transcation")}
-
             </Typography>
           </Box>
           <Box
@@ -191,29 +179,31 @@ const ListWave = () => {
               <PrintIcon />
               <Box>Print</Box>
             </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                margin: "3px",
-                padding: "7px",
-                minWidth: "100px",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                backgroundColor: "#1dad52",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleClickOpen("paper")}
-            >
-              <AddCircleRoundedIcon />
-              <Box>{t("new")}</Box>
-            </Button>
+            {permitCreate && (
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  textTransform: "none",
+                  margin: "3px",
+                  padding: "7px",
+                  minWidth: "100px",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  backgroundColor: "#1dad52",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+                onClick={handleClickOpen("paper")}
+              >
+                <AddCircleRoundedIcon />
+                <Box>{t("new")}</Box>
+              </Button>
+            )}
           </Box>
         </Box>
         <List

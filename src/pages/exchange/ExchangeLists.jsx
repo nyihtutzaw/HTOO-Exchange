@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import {
-  Box,
-  Button,
-
-  Typography,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 
 import { useTranslation } from "react-i18next";
 
@@ -18,6 +13,7 @@ import List from "./List";
 import Filter from "./Filter";
 import { setExchanges, deleteExchange } from "../../store/reducer.exchange";
 import AddDialog from "./AddDialog";
+import usePermission from "../../hooks/usePermission";
 
 const ExchangeLists = () => {
   const { t } = useTranslation();
@@ -28,6 +24,7 @@ const ExchangeLists = () => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
+  const { permitCreate } = usePermission("exchange");
 
   const handleClose = () => {
     window.location.reload();
@@ -169,26 +166,28 @@ const ExchangeLists = () => {
                 <PrintIcon />
                 <Box>Print</Box>
             </Button> */}
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                backgroundColor: "#1dad52",
-                minWidth: "200px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleClickOpen("paper")}
-            >
-              <AddCircleRoundedIcon />
-              <Box>{t("new")}</Box>
-            </Button>
+            {permitCreate && (
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  backgroundColor: "#1dad52",
+                  minWidth: "200px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+                onClick={handleClickOpen("paper")}
+              >
+                <AddCircleRoundedIcon />
+                <Box>{t("new")}</Box>
+              </Button>
+            )}
           </Box>
         </Box>
       </div>
