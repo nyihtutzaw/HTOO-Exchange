@@ -14,6 +14,8 @@ import { setBanks, deleteBank } from "../../store/reducer.bank";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import List from "./List";
 import queryString from "query-string";
+import usePermission from "../../hooks/usePermission";
+
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -47,6 +49,7 @@ const BankList = () => {
   const banks = useSelector((state) => state.bank.banks);
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
+  const { permitCreate } = usePermission("bank");
 
   useEffect(() => {
     async function loadData() {
@@ -128,26 +131,28 @@ const BankList = () => {
                 ),
               }}
             />
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                backgroundColor: "#1dad52",
-                minWidth: "200px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <AddCircleRoundedIcon />
-              <Box>{t("new")}</Box>
-            </Button>
+            {permitCreate && (
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  backgroundColor: "#1dad52",
+                  minWidth: "200px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+                onClick={handleLink}
+              >
+                <AddCircleRoundedIcon />
+                <Box>{t("new")}</Box>
+              </Button>
+            )}
           </Box>
           <List
             data={banks}

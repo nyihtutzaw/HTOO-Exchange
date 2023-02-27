@@ -21,6 +21,7 @@ import CreateTrue from "./CreateTrue";
 import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import usePermission from "../../hooks/usePermission";
 
 const ListTrue = () => {
   const { t } = useTranslation();
@@ -31,6 +32,7 @@ const ListTrue = () => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
+  const { permitCreate } = usePermission("trueMoney");
 
   const handleClose = () => {
     window.location.reload();

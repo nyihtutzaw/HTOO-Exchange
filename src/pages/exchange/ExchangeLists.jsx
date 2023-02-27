@@ -5,6 +5,7 @@ import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { Box, Button, Typography } from "@mui/material";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import PrintIcon from "@mui/icons-material/Print";
+
 import { useTranslation } from "react-i18next";
 
 import { useLocation } from "react-router-dom";
@@ -17,6 +18,7 @@ import AddDialog from "./AddDialog";
 import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import usePermission from "../../hooks/usePermission";
 
 const ExchangeLists = () => {
   const { t } = useTranslation();
@@ -27,6 +29,7 @@ const ExchangeLists = () => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
+  const { permitCreate } = usePermission("exchange");
 
   const handleClose = () => {
     window.location.reload();

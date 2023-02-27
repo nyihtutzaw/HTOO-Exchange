@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 // import Paper from "@material-ui/core/Paper";
-import {
-  Box,
-  Button,
-  Card,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  Stack,
-  TextareaAutosize,
-  Typography,
-} from "@mui/material";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import TextField from "@mui/material/TextField";
-import dayjs from "dayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Box, Button, Typography } from "@mui/material";
 import GetAppIcon from "@mui/icons-material/GetApp";
 import PrintIcon from "@mui/icons-material/Print";
 import { useTranslation } from "react-i18next";
@@ -39,6 +22,7 @@ import CreateWave from "./CreateWave";
 import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import usePermission from "../../hooks/usePermission";
 
 const ListWave = () => {
   const { t } = useTranslation();
@@ -50,6 +34,7 @@ const ListWave = () => {
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
+  const { permitCreate } = usePermission("wave");
 
   const handleClose = () => {
     window.location.reload();
