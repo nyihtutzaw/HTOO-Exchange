@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 // import Paper from "@material-ui/core/Paper";
 import { Box, Button, Typography } from "@mui/material";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -26,7 +25,9 @@ import {
 } from "../../store/reducer.branchTransfer";
 import List from "./List";
 import { makeStyles } from "@material-ui/core/styles";
-
+import ReactToPrint from "react-to-print";
+import { useRef } from "react";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 
 const BranchTransferList = () => {
   const { t } = useTranslation();
@@ -35,6 +36,7 @@ const BranchTransferList = () => {
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
   const location = useLocation();
+  const componentRef = useRef();
   const branchTransfers = useSelector(
     (state) => state.branchTransfer.branchTransfers
   );
@@ -85,6 +87,62 @@ const BranchTransferList = () => {
             {" "}
             {t("branch-transfer.list")}
           </Typography>
+          <DownloadTableExcel
+            filename="Branch To Branch Lists"
+            sheet="users"
+            currentTableRef={componentRef.current}
+          >
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                textTransform: "none",
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                margin: "3px",
+                padding: "7px",
+                backgroundColor: "#1dad52",
+                minWidth: "100px",
+                fontSize: "14px",
+                ":hover": {
+                  bgcolor: "#1dad52",
+                  color: "#fff",
+                },
+              }}
+            >
+              <GetAppIcon />
+              <Box>Excel Export</Box>
+            </Button>
+          </DownloadTableExcel>
+
+          <ReactToPrint
+            trigger={() => (
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  textTransform: "none",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  margin: "3px",
+                  padding: "7px",
+                  backgroundColor: "#1dad52",
+                  minWidth: "100px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <PrintIcon />
+                <Box>Print</Box>
+              </Button>
+            )}
+            content={() => componentRef.current}
+          />
           <Button
             variant="contained"
             size="small"
@@ -106,138 +164,16 @@ const BranchTransferList = () => {
             <Box>{t("new")}</Box>
           </Button>
         </Box>
-        <Box
-          m={1}
-          display="flex"
-          flexDirection="row"
-          justifyContent="space-between"
-        >
-          <Box
-            mt={2}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DesktopDatePicker
-                label={t("date")}
-                inputFormat="MM/DD/YYYY"
-                // value={value}
-                //onChange={handleChange}
-                renderInput={(params) => (
-                  <TextField {...params} sx={{ mr: 2 }} size="small" />
-                )}
-              />
-            </LocalizationProvider>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <DvrIcon />
-              <Box>{t("branch")}</Box>
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <GroupsIcon />
-              <Box>{t("employees")}</Box>
-            </Button>
-          </Box>
-          <Box
-            m={1}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <GetAppIcon />
-              <Box>{t("excel")}</Box>
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <PrintIcon />
-              <Box>Print</Box>
-            </Button>
-          </Box>
+        <Box ref={componentRef}>
+          <List
+            data={branchTransfers}
+            onDelete={(row) => {
+              setEditData(row);
+              setShowDelete(true);
+            }}
+            handleEdit={handleEdit}
+          />
         </Box>
-        <List
-          data={branchTransfers}
-          onDelete={(row) => {
-            setEditData(row);
-            setShowDelete(true);
-          }}
-          handleEdit={handleEdit}
-        />
 
         {showDelete && (
           <ConfirmDialog

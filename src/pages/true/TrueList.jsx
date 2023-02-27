@@ -18,6 +18,9 @@ import {
 } from "../../store/reducer.trueMoneyTransaction";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import CreateTrue from "./CreateTrue";
+import ReactToPrint from "react-to-print";
+import { useRef } from "react";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 import usePermission from "../../hooks/usePermission";
 
 const ListTrue = () => {
@@ -25,7 +28,7 @@ const ListTrue = () => {
   const dispatch = useDispatch();
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
-
+  const componentRef = useRef();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
@@ -35,14 +38,14 @@ const ListTrue = () => {
     window.location.reload();
   };
 
-  // const activeBranch = useSelector((state) => state.auth.activeBranch);
+  const activeBranch = useSelector((state) => state.auth.activeBranch);
   const trueMoneyTransactions = useSelector(
     (state) => state.trueMoneyTransaction.trueMoneyTransactions
   );
 
   const loadData = async () => {
-    // const query = { branch_id: activeBranch.id };
-    const response = await TrueMoneyTransactionService.getAll();
+    const query = { branch_id: activeBranch.id };
+    const response = await TrueMoneyTransactionService.getAll(query);
     dispatch(setTrueMoneyTransactions(response));
   };
 
@@ -127,90 +130,96 @@ const ListTrue = () => {
                 )}
               />
             </LocalizationProvider> */}
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              //onClick={handleLink}
+            <DownloadTableExcel
+              filename="True Money Lists"
+              sheet="users"
+              currentTableRef={componentRef.current}
             >
-              <GetAppIcon />
-              <Box>Excel Export</Box>
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              // onClick={handleLink}
-            >
-              <PrintIcon />
-              <Box>Print</Box>
-            </Button>
-            {permitCreate && (
               <Button
                 variant="contained"
                 size="small"
                 sx={{
                   textTransform: "none",
-                  margin: "3px",
-                  padding: "7px",
-                  minWidth: "100px",
                   display: "flex",
                   justifyContent: "space-evenly",
                   alignItems: "center",
+                  margin: "3px",
+                  padding: "7px",
                   backgroundColor: "#1dad52",
+                  minWidth: "100px",
                   fontSize: "14px",
                   ":hover": {
                     bgcolor: "#1dad52",
                     color: "#fff",
                   },
                 }}
-                onClick={handleClickOpen("paper")}
               >
-                <AddCircleRoundedIcon />
-                <Box>{t("new")}</Box>
+                <GetAppIcon />
+                <Box>Excel Export</Box>
               </Button>
-            )}
+            </DownloadTableExcel>
+
+            <ReactToPrint
+              trigger={() => (
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    textTransform: "none",
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    margin: "3px",
+                    padding: "7px",
+                    backgroundColor: "#1dad52",
+                    minWidth: "100px",
+                    fontSize: "14px",
+                    ":hover": {
+                      bgcolor: "#1dad52",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  <PrintIcon />
+                  <Box>Print</Box>
+                </Button>
+              )}
+              content={() => componentRef.current}
+            />
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                textTransform: "none",
+                margin: "3px",
+                padding: "7px",
+                minWidth: "100px",
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                backgroundColor: "#1dad52",
+                fontSize: "14px",
+                ":hover": {
+                  bgcolor: "#1dad52",
+                  color: "#fff",
+                },
+              }}
+              onClick={handleClickOpen("paper")}
+            >
+              <AddCircleRoundedIcon />
+              <Box>{t("new")}</Box>
+            </Button>
           </Box>
         </Box>
-        <List
-          data={trueMoneyTransactions}
-          handleDelete={(row) => {
-            setEditData(row);
-            setShowDelete(true);
-          }}
-          //   handleEdit={(row) => {
-          //     setEditData(row);
-          //     setOpen(true);
-          //   }}
-        />
+        <Box ref={componentRef}>
+          <List
+            data={trueMoneyTransactions}
+            handleDelete={(row) => {
+              setEditData(row);
+              setShowDelete(true);
+            }}
+          />
+        </Box>
       </div>
       {showDelete && (
         <ConfirmDialog

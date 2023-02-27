@@ -12,6 +12,7 @@ import * as ExpenseService from "../../services/expenseService";
 import { setExpenses, deleteExpense } from "../../store/reducer.expense";
 import List from "./List";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
+import queryString from "query-string";
 
 const CssTextField = withStyles({
   root: {
@@ -49,6 +50,8 @@ const ExpenseList = () => {
 
   const loadData = async () => {
     const query = { branch_id: activeBranch.id };
+    const params = queryString.parse(location.search);
+    if (params.search) query.search = params.search;
     const response = await ExpenseService.getAll(query);
     dispatch(setExpenses(response));
   };
@@ -107,7 +110,7 @@ const ExpenseList = () => {
               label="Search"
               className="search"
               name="search"
-              // onChange={this.onChange}
+              onKeyDown={onSearch}
               type="text"
               autoComplete=""
               margin="normal"

@@ -3,6 +3,8 @@ import Navbar from "../../components/navbar/Navbar";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import { Box, Button, Typography } from "@mui/material";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import PrintIcon from "@mui/icons-material/Print";
 
 import { useTranslation } from "react-i18next";
 
@@ -13,6 +15,9 @@ import List from "./List";
 import Filter from "./Filter";
 import { setExchanges, deleteExchange } from "../../store/reducer.exchange";
 import AddDialog from "./AddDialog";
+import ReactToPrint from "react-to-print";
+import { useRef } from "react";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 import usePermission from "../../hooks/usePermission";
 
 const ExchangeLists = () => {
@@ -20,7 +25,7 @@ const ExchangeLists = () => {
   const dispatch = useDispatch();
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
-
+  const componentRef = useRef();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
@@ -120,88 +125,102 @@ const ExchangeLists = () => {
                     )}
                 />
             </LocalizationProvider>
-            <Button
-                variant="contained"
-                size="small"
-                sx={{
-                    textTransform: "none",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                    margin: "3px",
-                    padding: "7px",
-                    backgroundColor: "#1dad52",
-                    minWidth: "100px",
-                    fontSize: "14px",
-                    ":hover": {
-                        bgcolor: "#1dad52",
-                        color: "#fff",
-                    },
-                }}
-                onClick={handleLink}
+            
+            */}
+
+            <DownloadTableExcel
+              filename="Exchange Lists"
+              sheet="users"
+              currentTableRef={componentRef.current}
             >
-                <GetAppIcon />
-                <Box>Excel Export</Box>
-            </Button>
-            <Button
-                variant="contained"
-                size="small"
-                sx={{
-                    textTransform: "none",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                    margin: "3px",
-                    padding: "7px",
-                    backgroundColor: "#1dad52",
-                    minWidth: "100px",
-                    fontSize: "14px",
-                    ":hover": {
-                        bgcolor: "#1dad52",
-                        color: "#fff",
-                    },
-                }}
-                onClick={handleLink}
-            >
-                <PrintIcon />
-                <Box>Print</Box>
-            </Button> */}
-            {permitCreate && (
               <Button
                 variant="contained"
                 size="small"
                 sx={{
+                  textTransform: "none",
                   display: "flex",
                   justifyContent: "space-evenly",
                   alignItems: "center",
+                  margin: "3px",
+                  padding: "7px",
                   backgroundColor: "#1dad52",
-                  minWidth: "200px",
+                  minWidth: "100px",
                   fontSize: "14px",
                   ":hover": {
                     bgcolor: "#1dad52",
                     color: "#fff",
                   },
                 }}
-                onClick={handleClickOpen("paper")}
               >
-                <AddCircleRoundedIcon />
-                <Box>{t("new")}</Box>
+                <GetAppIcon />
+                <Box>Excel Export</Box>
               </Button>
-            )}
+            </DownloadTableExcel>
+
+            <ReactToPrint
+              trigger={() => (
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    textTransform: "none",
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    margin: "3px",
+                    padding: "7px",
+                    backgroundColor: "#1dad52",
+                    minWidth: "100px",
+                    fontSize: "14px",
+                    ":hover": {
+                      bgcolor: "#1dad52",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  <PrintIcon />
+                  <Box>Print</Box>
+                </Button>
+              )}
+              content={() => componentRef.current}
+            />
+
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                backgroundColor: "#1dad52",
+                minWidth: "200px",
+                fontSize: "14px",
+                ":hover": {
+                  bgcolor: "#1dad52",
+                  color: "#fff",
+                },
+              }}
+              onClick={handleClickOpen("paper")}
+            >
+              <AddCircleRoundedIcon />
+              <Box>{t("new")}</Box>
+            </Button>
           </Box>
         </Box>
       </div>
-      <List
-        rows={exchanges}
-        handleDelete={(row) => {
-          setEditData(row);
-          setShowDelete(true);
-        }}
-        handleEdit={(row) => {
-          setEditData(row);
-          setOpen(true);
-        }}
-      />
+      <Box ref={componentRef}>
+        <List
+          rows={exchanges}
+          handleDelete={(row) => {
+            setEditData(row);
+            setShowDelete(true);
+          }}
+          handleEdit={(row) => {
+            setEditData(row);
+            setOpen(true);
+          }}
+        />
+      </Box>
       <AddDialog
         open={open}
         editData={editData}
