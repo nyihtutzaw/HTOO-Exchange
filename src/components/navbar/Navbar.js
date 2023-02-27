@@ -45,7 +45,7 @@ import TotalMoney from "../bank_money/TotalMoney";
 import TrueMoney from "../bank_money/TrueMoney";
 import YomaBank from "../bank_money/YomaBank";
 import ListWave from "../../pages/wave/WaveList";
-import TransitionRecord from "../transition_record/TransitionRecord";
+import DailyComnision from "../../pages/daily_comission"
 import AdminList from "../../pages/Admin/AdminList";
 import { useSelector } from "react-redux";
 import AllowanceList from "../../pages/allowance/AllowanceList";
@@ -99,8 +99,8 @@ const Navbar = () => {
     },
     {
       name: `${t("transition-record")}`,
-      route: "/admin/list-transitions",
-      element: <TransitionRecord />,
+      route: "/admin/list-commision",
+      element: <DailyComnision />,
     },
   ];
 

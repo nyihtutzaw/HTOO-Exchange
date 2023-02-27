@@ -52,10 +52,11 @@ import YomaBank from "./components/bank_money/YomaBank";
 
 import ListWave from "./pages/wave/WaveList";
 import WaveInvoice from "./pages/wave/WaveInvoice";
-import TransitionRecord from "./components/transition_record/TransitionRecord";
+
 
 import CreateBranch from "./pages/branch/CreateBranch";
 import EditBranch from "./pages/branch/EditBranch";
+import DailyComnision from "./pages/daily_comission"
 import BranchList from "./pages/branch/BranchList";
 import LoginForm from "./pages/LoginForm";
 import CreateRoleAccess from "./pages/roleAndAccess/CreateRoleAccess";
@@ -192,12 +193,12 @@ function App() {
 
           {/* transition-records */}
           <Route
-            path="/admin/list-transitions"
-            element={<TransitionRecord />}
+            path="/admin/list-commision"
+            element={< DailyComnision />}
           />
 
           {/* allowance routes */}
-          <Route path="/admin/create-allowance" element={<CreateAllowance />} />
+          < Route path="/admin/create-allowance" element={<CreateAllowance />} />
           <Route path="/admin/edit-allowance/:id" element={<EditAllowance />} />
           <Route path="/admin/list-allowance" element={<AllowanceList />} />
 

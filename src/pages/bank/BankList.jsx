@@ -13,7 +13,7 @@ import * as BankService from "./../../services/bankService";
 import { setBanks, deleteBank } from "../../store/reducer.bank";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import List from "./List";
-
+import queryString from "query-string";
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -51,6 +51,8 @@ const BankList = () => {
   useEffect(() => {
     async function loadData() {
       const query = { branch_id: activeBranch.id };
+      const params = queryString.parse(location.search);
+      if (params.search) query.search = params.search;
       const response = await BankService.getAll(query);
       dispatch(setBanks(response));
     }

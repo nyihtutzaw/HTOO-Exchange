@@ -2,13 +2,9 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
-import {
-  Box,
-  Button,
-
-  Typography,
-} from "@mui/material";
-
+import { Box, Button, Typography } from "@mui/material";
+import GetAppIcon from "@mui/icons-material/GetApp";
+import PrintIcon from "@mui/icons-material/Print";
 import { useTranslation } from "react-i18next";
 
 import { useLocation } from "react-router-dom";
@@ -18,13 +14,16 @@ import List from "./List";
 import Filter from "./Filter";
 import { setExchanges, deleteExchange } from "../../store/reducer.exchange";
 import AddDialog from "./AddDialog";
+import ReactToPrint from "react-to-print";
+import { useRef } from "react";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 
 const ExchangeLists = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [showDelete, setShowDelete] = useState(false);
   const [editData, setEditData] = useState(false);
-
+  const componentRef = useRef();
   const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
@@ -123,33 +122,44 @@ const ExchangeLists = () => {
                     )}
                 />
             </LocalizationProvider>
-            <Button
+            
+            */}
+
+            <DownloadTableExcel
+              filename="Exchange Lists"
+              sheet="users"
+              currentTableRef={componentRef.current}
+            >
+              <Button
                 variant="contained"
                 size="small"
                 sx={{
-                    textTransform: "none",
-                    display: "flex",
-                    justifyContent: "space-evenly",
-                    alignItems: "center",
-                    margin: "3px",
-                    padding: "7px",
-                    backgroundColor: "#1dad52",
-                    minWidth: "100px",
-                    fontSize: "14px",
-                    ":hover": {
-                        bgcolor: "#1dad52",
-                        color: "#fff",
-                    },
+                  textTransform: "none",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  margin: "3px",
+                  padding: "7px",
+                  backgroundColor: "#1dad52",
+                  minWidth: "100px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
                 }}
-                onClick={handleLink}
-            >
+              >
                 <GetAppIcon />
                 <Box>Excel Export</Box>
-            </Button>
-            <Button
-                variant="contained"
-                size="small"
-                sx={{
+              </Button>
+            </DownloadTableExcel>
+
+            <ReactToPrint
+              trigger={() => (
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
                     textTransform: "none",
                     display: "flex",
                     justifyContent: "space-evenly",
@@ -160,15 +170,18 @@ const ExchangeLists = () => {
                     minWidth: "100px",
                     fontSize: "14px",
                     ":hover": {
-                        bgcolor: "#1dad52",
-                        color: "#fff",
+                      bgcolor: "#1dad52",
+                      color: "#fff",
                     },
-                }}
-                onClick={handleLink}
-            >
-                <PrintIcon />
-                <Box>Print</Box>
-            </Button> */}
+                  }}
+                >
+                  <PrintIcon />
+                  <Box>Print</Box>
+                </Button>
+              )}
+              content={() => componentRef.current}
+            />
+
             <Button
               variant="contained"
               size="small"
@@ -192,17 +205,19 @@ const ExchangeLists = () => {
           </Box>
         </Box>
       </div>
-      <List
-        rows={exchanges}
-        handleDelete={(row) => {
-          setEditData(row);
-          setShowDelete(true);
-        }}
-        handleEdit={(row) => {
-          setEditData(row);
-          setOpen(true);
-        }}
-      />
+      <Box ref={componentRef}>
+        <List
+          rows={exchanges}
+          handleDelete={(row) => {
+            setEditData(row);
+            setShowDelete(true);
+          }}
+          handleEdit={(row) => {
+            setEditData(row);
+            setOpen(true);
+          }}
+        />
+      </Box>
       <AddDialog
         open={open}
         editData={editData}
