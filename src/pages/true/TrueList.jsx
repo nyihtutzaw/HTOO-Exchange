@@ -51,7 +51,7 @@ const ListTrue = () => {
 
   useEffect(() => {
     loadData();
-  }, [location.search]);
+  }, []);
 
   const handleClickOpen = (scrollType) => () => {
     setOpen(true);

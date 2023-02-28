@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 // import Paper from "@material-ui/core/Paper";
 import { Box, Button, Typography } from "@mui/material";
-import { Box, Button, Typography } from "@mui/material";
+
 import GetAppIcon from "@mui/icons-material/GetApp";
 import PrintIcon from "@mui/icons-material/Print";
 import { useTranslation } from "react-i18next";

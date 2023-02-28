@@ -22,7 +22,7 @@ import { setBankBalances } from "../../store/reducer.bankBalance";
 const BankAccountBalance = () => {
   const { t } = useTranslation();
   const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+
   const [open, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const bankBalances = useSelector((state) => state.bankBalance.bankBalances);
@@ -36,11 +36,9 @@ const BankAccountBalance = () => {
   const handleStartDateChange = (newValue) => {
     setStartDate(newValue);
   };
-  const handleEndDateChange = (newValue) => {
-    setEndDate(newValue);
-  };
+
   const loadData = async () => {
-    const query = { start_date: startDate, end_date: endDate };
+    const query = { start_date: dayjs(startDate).format("YYYY-MM-DD") };
     const response = await BankBalanceService.getAll(query);
     dispatch(setBankBalances(response));
     setIsOpen(true);
@@ -85,15 +83,7 @@ const BankAccountBalance = () => {
                   <TextField {...params} sx={{ mr: 2 }} size="small" />
                 )}
               />
-              <DesktopDatePicker
-                label={t("end-date")}
-                inputFormat="MM/DD/YYYY"
-                value={endDate}
-                onChange={handleEndDateChange}
-                renderInput={(params) => (
-                  <TextField {...params} sx={{ mr: 2 }} size="small" />
-                )}
-              />
+
             </LocalizationProvider>
             <Button
               sx={{
@@ -107,7 +97,7 @@ const BankAccountBalance = () => {
               }}
               variant="contained"
               onClick={() => {
-                if (startDate && endDate) {
+                if (startDate) {
                   loadData();
                 }
               }}
@@ -162,7 +152,7 @@ const BankAccountBalance = () => {
                               }}
                             >
                               <TableCell align="center">
-                                {bankBalance.bank_account?.name}
+                                {bankBalance.bank_account?.name} ({bankBalance.bank_account?.account_name})
                               </TableCell>
                               <TableCell align="center">
                                 {bankBalance.open_balance}
