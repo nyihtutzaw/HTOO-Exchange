@@ -16,6 +16,9 @@ import GetAppIcon from "@mui/icons-material/GetApp";
 import PrintIcon from "@mui/icons-material/Print";
 import { useTranslation } from "react-i18next";
 import * as DailyCommissionService from "./../../services/dailyCommission";
+import ReactToPrint from "react-to-print";
+import { useRef } from "react";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +40,7 @@ const useStyles = makeStyles({
 const TransitionRecord = () => {
   const { t } = useTranslation();
   const classes = useStyles();
-
+  const componentRef = useRef();
   // const [age, setAge] = useState('');
   const [startDate, setStartDate] = useState(dayjs(new Date()));
   const [endDate, setEndDate] = useState(dayjs(new Date()));
@@ -138,53 +141,66 @@ const TransitionRecord = () => {
             >
               <Box>Search</Box>
             </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
+            <DownloadTableExcel
+              filename="wave_lists"
+              sheet="users"
+              currentTableRef={componentRef.current}
             >
-              <GetAppIcon />
-              <Box>Excel Export</Box>
-            </Button>
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                textTransform: "none",
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                margin: "3px",
-                padding: "7px",
-                backgroundColor: "#1dad52",
-                minWidth: "100px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-            >
-              <PrintIcon />
-              <Box>Print</Box>
-            </Button>
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  textTransform: "none",
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  margin: "3px",
+                  padding: "7px",
+                  backgroundColor: "#1dad52",
+                  minWidth: "100px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <GetAppIcon />
+                <Box>Excel Export</Box>
+              </Button>
+            </DownloadTableExcel>
+
+            <ReactToPrint
+              trigger={() => (
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    textTransform: "none",
+                    display: "flex",
+                    justifyContent: "space-evenly",
+                    alignItems: "center",
+                    margin: "3px",
+                    padding: "7px",
+                    backgroundColor: "#1dad52",
+                    minWidth: "100px",
+                    fontSize: "14px",
+                    ":hover": {
+                      bgcolor: "#1dad52",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  <PrintIcon />
+                  <Box>Print</Box>
+                </Button>
+              )}
+              content={() => componentRef.current}
+            />
           </Box>
         </Box>
         <Box
+          ref={componentRef}
           display="flex"
           justifyContent="center"
           alignItems="center"
@@ -243,8 +259,13 @@ const TransitionRecord = () => {
                         Number(row.wave_comission) +
                         Number(row.true_comission)}
                     </TableCell>
-                    <TableCell align="center">{"row.totalExpense"}</TableCell>
-                    <TableCell align="center">{"row.totalNetProfit"}</TableCell>
+                    <TableCell align="center">{row.expense}</TableCell>
+                    <TableCell align="center">
+                      {Number(row.cash_comission) +
+                        Number(row.wave_comission) +
+                        Number(row.true_comission) -
+                        Number(row.expense)}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
