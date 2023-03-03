@@ -99,6 +99,7 @@ const CreateTrue = ({ open, handleClose, scroll, descriptionElementRef }) => {
       (e) => amount >= e.minimum_amount && amount <= e.maximum_amount
     );
     if (commision) {
+      setValue("transfer_fee", commision.true_transfer_fee);
       if (transactionType === "transfer")
         setValue("commission", commision.transfer_fee);
       else if (transactionType === "deposit")

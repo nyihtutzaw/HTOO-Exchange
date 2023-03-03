@@ -125,6 +125,8 @@
     "transition-record": "Transition Records",
     "minimum_amount": "Minimum amount",
     "maximum_amount": "Maximum amount",
+    "wave_transfer_fee": "Wave Transfer fee",
+    "true_transfer_fee": "True Transfer fee",
     "transfer_fee": "Transfer fee",
     "deposit_fee": "Deposit fee",
     "withdraw_fee": "Withdraw fee",

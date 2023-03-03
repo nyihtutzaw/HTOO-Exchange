@@ -28,6 +28,9 @@ function List({ data, handleEdit, onDelete }) {
               {t("maximum_amount")}
             </TableCell>
             <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">
+              {t("wave_transfer_fee")}
+            </TableCell>
+            <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">
               {t("transfer_fee")}
             </TableCell>
             <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">
@@ -53,6 +56,7 @@ function List({ data, handleEdit, onDelete }) {
               </TableCell>
               <TableCell align="center">{row.minimum_amount}</TableCell>
               <TableCell align="center">{row.maximum_amount}</TableCell>
+              <TableCell align="center">{row.wave_transfer_fee}</TableCell>
               <TableCell align="center">{row.transfer_fee}</TableCell>
               <TableCell align="center">{row.deposit_fee}</TableCell>
               <TableCell align="center">{row.withdraw_fee}</TableCell>

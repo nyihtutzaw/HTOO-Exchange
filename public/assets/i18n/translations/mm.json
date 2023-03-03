@@ -154,6 +154,8 @@
   "minimum_amount": "မှ",
   "maximum_amount": "သို့",
   "transfer_fee": "ငွေလွှဲခ",
+  "wave_transfer_fee": "wave ငွေလွှဲခ",
+  "true_transfer_fee": "true ငွေလွှဲခ",
   "deposit_fee": "ငွေသွင်းခ",
   "withdraw_fee": "ငွေထုတ်ခ",
   "cash_wallet.list": "ငွေသား",

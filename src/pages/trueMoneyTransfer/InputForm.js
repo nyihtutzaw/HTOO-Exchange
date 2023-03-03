@@ -17,6 +17,7 @@ const InputForm = ({ editData }) => {
   const schema = yup.object().shape({
     minimum_amount: yup.number().required(),
     maximum_amount: yup.number().required(),
+    true_transfer_fee: yup.number().required(),
     transfer_fee: yup.number().required(),
     deposit_fee: yup.number().required(),
     withdraw_fee: yup.number().required(),
@@ -49,6 +50,7 @@ const InputForm = ({ editData }) => {
       reset({
         minimum_amount: editData?.minimum_amount,
         maximum_amount: editData?.maximum_amount,
+        true_transfer_fee: editData?.true_transfer_fee,
         transfer_fee: editData?.transfer_fee,
         deposit_fee: editData?.deposit_fee,
         withdraw_fee: editData?.withdraw_fee,
@@ -134,6 +136,35 @@ const InputForm = ({ editData }) => {
                   {...register("maximum_amount")}
                   error={errors.maximum_amount?.message}
                   helperText={errors.maximum_amount?.message}
+                />
+              </Stack>
+              <Stack spacing={2} direction="row" m={2}>
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    textTransform: "none",
+                    backgroundColor: "#094708",
+                    minWidth: "200px",
+                    fontSize: "14px",
+                    ":hover": {
+                      bgcolor: "#094708",
+                      color: "#fff",
+                    },
+                  }}
+                >
+                  {t("true_transfer_fee")}
+                </Button>
+                <TextField
+                  type="number"
+                  required
+                  label=""
+                  variant="outlined"
+                  size="small"
+                  sx={{ width: "350px" }}
+                  {...register("true_transfer_fee")}
+                  error={errors.true_transfer_fee?.message}
+                  helperText={errors.true_transfer_fee?.message}
                 />
               </Stack>
               <Stack spacing={2} direction="row" m={2}>
