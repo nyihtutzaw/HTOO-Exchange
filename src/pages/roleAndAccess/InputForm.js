@@ -30,7 +30,6 @@ const InputForm = ({ editData }) => {
 
   const schema = yup.object().shape({
     name: yup.string().required(),
-    position: yup.string().required(),
   });
 
   const {
@@ -50,7 +49,7 @@ const InputForm = ({ editData }) => {
   useEffect(() => {
     if (editData) {
       setValue("name", editData?.name);
-      setValue("position", editData?.position);
+
       if (editData?.permission) {
         const parsedData = JSON.parse(editData?.permission);
         setPermission(parsedData);
@@ -201,48 +200,7 @@ const InputForm = ({ editData }) => {
                   </Grid>
                 </Grid>
               </Stack>
-              <Stack spacing={2} direction="row" m={2}>
-                <Grid container>
-                  <Grid
-                    item
-                    xs={6}
-                    md={9}
-                    display="flex"
-                    justifyContent="space-between"
-                  >
-                    <Button
-                      variant="contained"
-                      size="small"
-                      sx={{
-                        textTransform: "none",
-                        margin: "8px",
-                        backgroundColor: "#094708",
-                        minWidth: "100px",
-                        fontSize: "14px",
-                        ":hover": {
-                          bgcolor: "#094708",
-                          color: "#fff",
-                        },
-                      }}
-                    >
-                      {t("position")}
-                    </Button>
-                    <FormControl sx={{ m: 1, minWidth: 250 }} size="small">
-                      <TextField
-                        type="text"
-                        label=""
-                        variant="outlined"
-                        size="small"
-                        sx={{ width: "350px" }}
-                        {...register("position")}
-                        error={errors.position?.message}
-                        helperText={errors.position?.message}
-                      />
-                    </FormControl>
-                  </Grid>
-                </Grid>
-              </Stack>
-
+           
               <Box>
                 <Typography variant="h6" m={1} color="#094708">
                   Access

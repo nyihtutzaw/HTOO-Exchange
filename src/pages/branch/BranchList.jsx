@@ -106,6 +106,7 @@ const BranchList = () => {
     });
     const response = await BranchService.getAll();
     dispatch(setBranches(response));
+    handleClose();
   };
 
   const handleClose = () => {

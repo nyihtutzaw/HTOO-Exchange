@@ -107,6 +107,7 @@ const EmployeeList = () => {
     });
     const response = await EmployeeService.getAll();
     dispatch(setEmployees(response));
+    handleClose();
   };
 
   const handleClose = () => {

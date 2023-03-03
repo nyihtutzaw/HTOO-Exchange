@@ -26,7 +26,7 @@ function List({ data, handleClickOpen, handleEdit, onDelete }) {
               {t("name")}
             </TableCell>
             <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">
-              {t("position")}
+              {t("employee")}
             </TableCell>
 
             <TableCell sx={{ color: "white", fontSize: "16px" }} align="center">
@@ -44,7 +44,11 @@ function List({ data, handleClickOpen, handleEdit, onDelete }) {
                 {index + 1}
               </TableCell>
               <TableCell align="center">{row.name}</TableCell>
-              <TableCell align="center">{row.position}</TableCell>
+              <TableCell align="center">
+                {row.users?.map((user) => {
+                  return user?.employee?.name
+                })}
+              </TableCell>
               <TableCell align="center">
                 <DriveFileRenameOutlineRoundedIcon
                   onClick={() => {
@@ -57,7 +61,7 @@ function List({ data, handleClickOpen, handleEdit, onDelete }) {
                   }}
                 />
                 <DeleteForeverRoundedIcon
-                  onClick={()=> onDelete(row)}
+                  onClick={() => onDelete(row)}
                   sx={{
                     color: "red",
                     fontSize: "25px",
