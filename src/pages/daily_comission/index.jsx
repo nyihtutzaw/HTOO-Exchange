@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -67,6 +67,22 @@ const TransitionRecord = () => {
       setData(response);
     }
   };
+
+  const loadData = async () => {
+    const now = new Date();
+    const firstDayOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const lastDayOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    const query = {
+      start_date: dayjs(firstDayOfMonth).format("YYYY-MM-DD"),
+      end_date: dayjs(lastDayOfMonth).format("YYYY-MM-DD"),
+    };
+    const response = await DailyCommissionService.getAll(query);
+    setData(response);
+  };
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <>

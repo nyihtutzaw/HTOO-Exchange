@@ -45,9 +45,15 @@ function List({ data, handleClickOpen, handleEdit, onDelete }) {
               </TableCell>
               <TableCell align="center">{row.name}</TableCell>
               <TableCell align="center">
-                {row.users?.map((user) => {
-                  return user?.employee?.name
-                })}
+                {row.users
+                  ?.map((user) => user?.employee?.name)
+                  ?.reduce((names, newName) => {
+                    if (!names.includes(newName)) {
+                      names.push(newName);
+                    }
+                    return names;
+                  }, [])
+                  .join(" , ")}
               </TableCell>
               <TableCell align="center">
                 <DriveFileRenameOutlineRoundedIcon
