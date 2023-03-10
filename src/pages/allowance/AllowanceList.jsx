@@ -13,6 +13,8 @@ import * as AllowanceService from "../../services/allowanceService";
 import { deleteAllowance, setAllowances } from "../../store/reducer.allowance";
 import queryString from "query-string";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setLoading } from "../../store/reducer.loading";
+import LoadingData from "../../components/commons/LoadingData";
 
 const CssTextField = withStyles({
   root: {
@@ -44,6 +46,7 @@ const AllowanceList = () => {
   const [editData, setEditData] = useState(false);
   const location = useLocation();
   const allowances = useSelector((state) => state.allowance.allowances);
+  const loading = useSelector((state) => state.loading.loading);
 
   const handleDelete = async (id) => {
     await AllowanceService.deleteAllowance(id);
@@ -56,8 +59,10 @@ const AllowanceList = () => {
 
   const loadData = async () => {
     const query = queryString.parse(location.search);
+    dispatch(setLoading());
     const response = await AllowanceService.getAll(query);
     dispatch(setAllowances(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -72,13 +77,22 @@ const AllowanceList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
       const response = await AllowanceService.getAll(
         queryString.stringify(query)
       );
       dispatch(setAllowances(response));
+      dispatch(setLoading());
     }
   };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />

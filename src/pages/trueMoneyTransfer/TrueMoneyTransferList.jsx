@@ -16,6 +16,8 @@ import {
 } from "../../store/reducer.trueMoneyTransfer";
 import queryString from "query-string";
 import { useLocation, useNavigate } from "react-router-dom";
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 
 const CssTextField = withStyles({
   root: {
@@ -49,6 +51,7 @@ const TrueMoneyTransferList = () => {
   const trueMoneyTransfers = useSelector(
     (state) => state.trueMoneyTransfer.trueMoneyTransfers
   );
+  const loading = useSelector((state) => state.loading.loading);
 
   const handleDelete = async (id) => {
     await TrueMoneyTransferService.deleteTrueMoneyTransfer(id);
@@ -61,8 +64,10 @@ const TrueMoneyTransferList = () => {
 
   const loadData = async () => {
     const query = queryString.parse(location.search);
+    dispatch(setLoading());
     const response = await TrueMoneyTransferService.getAll(query);
     dispatch(setTrueMoneyTransfers(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -77,12 +82,22 @@ const TrueMoneyTransferList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
       const response = await TrueMoneyTransferService.getAll(
         queryString.stringify(query)
       );
       dispatch(setTrueMoneyTransfers(response));
+      dispatch(setLoading());
     }
   };
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
 
   return (
     <>

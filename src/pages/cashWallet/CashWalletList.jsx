@@ -13,6 +13,8 @@ import * as CashWalletService from "../../services/cashWalletService";
 import { setCashWallets } from "../../store/reducer.cashWallet";
 import List from "./List";
 import DepositWithdrawDialog from "./DepositWithdrawDialog";
+import { setLoading } from "../../store/reducer.loading";
+import LoadingData from "../../components/commons/LoadingData";
 
 const CssTextField = withStyles({
   root: {
@@ -48,11 +50,14 @@ const CashWalletList = () => {
   const [open, setOpen] = useState(false);
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
-
+  const loading = useSelector((state) => state.loading.loading);
+  
   const loadData = async () => {
     const query = { branch_id: activeBranch.id };
+    dispatch(setLoading());
     const response = await CashWalletService.getAll(query);
     dispatch(setCashWallets(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -99,6 +104,15 @@ const CashWalletList = () => {
   const handleChange = (e) => {
     setAmount(e.target.value);
   };
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
+ 
 
   return (
     <>

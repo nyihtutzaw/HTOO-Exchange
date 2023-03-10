@@ -19,6 +19,9 @@ import * as DailyCommissionService from "./../../services/dailyCommission";
 import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import LoadingData from "../../components/commons/LoadingData";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../../store/reducer.loading";
 
 const useStyles = makeStyles({
   root: {
@@ -47,7 +50,8 @@ const TransitionRecord = () => {
   const [data, setData] = useState([]);
   // const [open, setOpen] = useState(false);
   // const [scroll, setScroll] = useState('paper');
-
+  const loading = useSelector((state) => state.loading.loading);
+  const dispatch = useDispatch();
   const handleStartDateChange = (newValue) => {
     setStartDate(newValue);
   };
@@ -62,9 +66,10 @@ const TransitionRecord = () => {
         start_date: dayjs(startDate).format("YYYY-MM-DD"),
         end_date: dayjs(endDate).format("YYYY-MM-DD"),
       };
-
+      dispatch(setLoading());
       const response = await DailyCommissionService.getAll(query);
       setData(response);
+      dispatch(setLoading());
     }
   };
 
@@ -76,14 +81,23 @@ const TransitionRecord = () => {
       start_date: dayjs(firstDayOfMonth).format("YYYY-MM-DD"),
       end_date: dayjs(lastDayOfMonth).format("YYYY-MM-DD"),
     };
+    dispatch(setLoading());
     const response = await DailyCommissionService.getAll(query);
     setData(response);
+    dispatch(setLoading());
   };
 
   useEffect(() => {
     loadData();
   }, []);
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />

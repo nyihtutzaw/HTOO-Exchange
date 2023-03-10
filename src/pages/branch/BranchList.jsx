@@ -129,109 +129,114 @@ const BranchList = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
-      {loading ? (
-        <LoadingData />
-      ) : (
-        <div
-          style={{
-            // position: "absolute",
-            width: "100%",
-            height: "80%",
-            marginTop: "75px",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Box m={2}>
-            <Box mt={2}>
-              <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
-                {" "}
-                {t("branch.list")}
-              </Typography>
-            </Box>
-            <Box
-              m={1}
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <CssTextField
-                size="small"
-                label="Search"
-                className="search"
-                name="search"
-                onKeyDown={onSearch}
-                type="text"
-                autoComplete=""
-                margin="normal"
-                inputProps={{
-                  style: { fontFamily: "nunito", color: "black" },
-                }}
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SearchRoundedIcon />
-                    </InputAdornment>
-                  ),
-                }}
-              />
-              <Button
-                variant="contained"
-                size="small"
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  backgroundColor: "#1dad52",
-                  minWidth: "200px",
-                  fontSize: "14px",
-                  ":hover": {
-                    bgcolor: "#1dad52",
-                    color: "#fff",
-                  },
-                }}
-                onClick={handleLink}
-              >
-                <AddCircleRoundedIcon />
-                <Box>{t("new")}</Box>
-              </Button>
-            </Box>
-            <List
-              data={branches}
-              handleClickOpen={handleClickOpen}
-              handleEdit={handleEdit}
-              onDelete={(row) => {
-                setEditData(row);
-                setShowDelete(true);
-              }}
-            />
-          </Box>
 
-          {showDelete && (
-            <ConfirmDialog
-              title={`Delete Branch`}
-              body={`Are you sure to delete ${editData?.name}?`}
-              onToggle={() => setShowDelete(false)}
-              onConfirm={() => {
-                setShowDelete(false);
-                handleDelete(editData?.id);
+      <div
+        style={{
+          // position: "absolute",
+          width: "100%",
+          height: "80%",
+          marginTop: "75px",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <Box m={2}>
+          <Box mt={2}>
+            <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
+              {" "}
+              {t("branch.list")}
+            </Typography>
+          </Box>
+          <Box
+            m={1}
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <CssTextField
+              size="small"
+              label="Search"
+              className="search"
+              name="search"
+              onKeyDown={onSearch}
+              type="text"
+              autoComplete=""
+              margin="normal"
+              inputProps={{
+                style: { fontFamily: "nunito", color: "black" },
+              }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchRoundedIcon />
+                  </InputAdornment>
+                ),
               }}
             />
-          )}
-          <AssignDialog
-            open={open}
-            handleClose={handleClose}
-            CssTextField={CssTextField}
-            data={employees}
-            selectedEmployeeIds={selectedEmployeeIds}
-            handleChange={handleChange}
-            handleAssign={handleAssign}
+            <Button
+              variant="contained"
+              size="small"
+              sx={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                backgroundColor: "#1dad52",
+                minWidth: "200px",
+                fontSize: "14px",
+                ":hover": {
+                  bgcolor: "#1dad52",
+                  color: "#fff",
+                },
+              }}
+              onClick={handleLink}
+            >
+              <AddCircleRoundedIcon />
+              <Box>{t("new")}</Box>
+            </Button>
+          </Box>
+          <List
+            data={branches}
+            handleClickOpen={handleClickOpen}
+            handleEdit={handleEdit}
+            onDelete={(row) => {
+              setEditData(row);
+              setShowDelete(true);
+            }}
           />
-        </div>
-      )}
+        </Box>
+
+        {showDelete && (
+          <ConfirmDialog
+            title={`Delete Branch`}
+            body={`Are you sure to delete ${editData?.name}?`}
+            onToggle={() => setShowDelete(false)}
+            onConfirm={() => {
+              setShowDelete(false);
+              handleDelete(editData?.id);
+            }}
+          />
+        )}
+        <AssignDialog
+          open={open}
+          handleClose={handleClose}
+          CssTextField={CssTextField}
+          data={employees}
+          selectedEmployeeIds={selectedEmployeeIds}
+          handleChange={handleChange}
+          handleAssign={handleAssign}
+        />
+      </div>
     </>
   );
 };

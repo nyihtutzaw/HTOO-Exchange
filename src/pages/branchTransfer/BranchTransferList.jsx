@@ -28,6 +28,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
+import { setLoading } from "../../store/reducer.loading";
+import LoadingData from "../../components/commons/LoadingData";
 
 const BranchTransferList = () => {
   const { t } = useTranslation();
@@ -40,7 +42,8 @@ const BranchTransferList = () => {
   const branchTransfers = useSelector(
     (state) => state.branchTransfer.branchTransfers
   );
-
+  const loading = useSelector((state) => state.loading.loading);
+  
   const handleDelete = async (id) => {
     await BranchTransferService.deleteBranchTransfer(id);
     dispatch(deleteBranchTransfer(id));
@@ -51,8 +54,10 @@ const BranchTransferList = () => {
   };
 
   const loadData = async () => {
+    dispatch(setLoading());
     const response = await BranchTransferService.getAll();
     dispatch(setBranchTransfers(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -62,6 +67,15 @@ const BranchTransferList = () => {
   const handleEdit = (e) => {
     navigate("/admin/edit-branch-transfer/" + e.id);
   };
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
+  
 
   return (
     <>

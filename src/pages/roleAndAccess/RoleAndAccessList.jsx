@@ -14,7 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import List from "./List";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import queryString from "query-string";
-
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -45,6 +46,7 @@ const RoleAndAccessList = () => {
   const [editData, setEditData] = useState(false);
   const location = useLocation();
   const roles = useSelector((state) => state.role.roles);
+  const loading = useSelector((state) => state.loading.loading);
 
   const handleDelete = async (id) => {
     await RoleService.deleteRole(id);
@@ -56,8 +58,10 @@ const RoleAndAccessList = () => {
   };
 
   const loadData = async () => {
+    dispatch(setLoading());
     const response = await RoleService.getAll();
     dispatch(setRoles(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -68,11 +72,21 @@ const RoleAndAccessList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
+
       const response = await RoleService.getAll(queryString.stringify(query));
       dispatch(setRoles(response));
+      dispatch(setLoading());
     }
   };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />

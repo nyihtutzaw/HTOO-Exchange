@@ -23,7 +23,8 @@ import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import { useDispatch, useSelector } from "react-redux";
 import * as SalaryService from "../../services/salaryService";
 import { deleteSalary, setSalarys } from "../../store/reducer.salary";
-
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 function createData(
   Id,
   name,
@@ -66,6 +67,7 @@ const SalaryList = () => {
   const [editData, setEditData] = useState(false);
   const location = useLocation();
   const salarys = useSelector((state) => state.salary.salarys);
+  const loading = useSelector((state) => state.loading.loading);
 
   const handleDelete = async (id) => {
     await SalaryService.deleteSalary(id);
@@ -78,8 +80,11 @@ const SalaryList = () => {
 
   const loadData = async () => {
     const query = queryString.parse(location.search);
+    dispatch(setLoading());
+
     const response = await SalaryService.getAll(query);
     dispatch(setSalarys(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -98,7 +103,14 @@ const SalaryList = () => {
 
     return total;
   };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
