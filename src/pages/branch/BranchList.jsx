@@ -11,12 +11,14 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import * as BranchService from "./../../services/branchService";
 import { setBranches, deleteBranch } from "../../store/reducer.branch";
+import { setLoading } from "../../store/reducer.loading";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import List from "./List";
 import * as EmployeeService from "./../../services/employeeService";
 import { setEmployees } from "../../store/reducer.employee";
 import AssignDialog from "./AssignDialog";
 import queryString from "query-string";
+import LoadingData from "../../components/commons/LoadingData";
 
 const CssTextField = withStyles({
   root: {
@@ -52,13 +54,15 @@ const BranchList = () => {
 
   const branches = useSelector((state) => state.branch.branches);
   const employees = useSelector((state) => state.employee.employees);
+  const loading = useSelector((state) => state.loading.loading);
 
   const loadData = async () => {
+    dispatch(setLoading());
     const response = await BranchService.getAll();
     dispatch(setBranches(response));
-
     const result = await EmployeeService.getAll();
     dispatch(setEmployees(result));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -104,8 +108,10 @@ const BranchList = () => {
     await BranchService.assignEmployees(editData.id, {
       employees: selectedEmployeeIds,
     });
+    dispatch(setLoading());
     const response = await BranchService.getAll();
     dispatch(setBranches(response));
+    dispatch(setLoading());
     handleClose();
   };
 
@@ -116,7 +122,9 @@ const BranchList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
       const response = await BranchService.getAll(queryString.stringify(query));
+      dispatch(setLoading());
       dispatch(setBranches(response));
     }
   };
@@ -124,102 +132,106 @@ const BranchList = () => {
   return (
     <>
       <Navbar />
-      <div
-        style={{
-          // position: "absolute",
-          width: "100%",
-          height: "80%",
-          marginTop: "75px",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <Box m={2}>
-          <Box mt={2}>
-            <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
-              {" "}
-              {t("branch.list")}
-            </Typography>
-          </Box>
-          <Box
-            m={1}
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <CssTextField
-              size="small"
-              label="Search"
-              className="search"
-              name="search"
-              onKeyDown={onSearch}
-              type="text"
-              autoComplete=""
-              margin="normal"
-              inputProps={{
-                style: { fontFamily: "nunito", color: "black" },
-              }}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchRoundedIcon />
-                  </InputAdornment>
-                ),
+      {loading ? (
+        <LoadingData />
+      ) : (
+        <div
+          style={{
+            // position: "absolute",
+            width: "100%",
+            height: "80%",
+            marginTop: "75px",
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Box m={2}>
+            <Box mt={2}>
+              <Typography variant="h6" color="#094708" ml={2} mb={1} mt={0}>
+                {" "}
+                {t("branch.list")}
+              </Typography>
+            </Box>
+            <Box
+              m={1}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <CssTextField
+                size="small"
+                label="Search"
+                className="search"
+                name="search"
+                onKeyDown={onSearch}
+                type="text"
+                autoComplete=""
+                margin="normal"
+                inputProps={{
+                  style: { fontFamily: "nunito", color: "black" },
+                }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchRoundedIcon />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <Button
+                variant="contained"
+                size="small"
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  backgroundColor: "#1dad52",
+                  minWidth: "200px",
+                  fontSize: "14px",
+                  ":hover": {
+                    bgcolor: "#1dad52",
+                    color: "#fff",
+                  },
+                }}
+                onClick={handleLink}
+              >
+                <AddCircleRoundedIcon />
+                <Box>{t("new")}</Box>
+              </Button>
+            </Box>
+            <List
+              data={branches}
+              handleClickOpen={handleClickOpen}
+              handleEdit={handleEdit}
+              onDelete={(row) => {
+                setEditData(row);
+                setShowDelete(true);
               }}
             />
-            <Button
-              variant="contained"
-              size="small"
-              sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                backgroundColor: "#1dad52",
-                minWidth: "200px",
-                fontSize: "14px",
-                ":hover": {
-                  bgcolor: "#1dad52",
-                  color: "#fff",
-                },
-              }}
-              onClick={handleLink}
-            >
-              <AddCircleRoundedIcon />
-              <Box>{t("new")}</Box>
-            </Button>
           </Box>
-          <List
-            data={branches}
-            handleClickOpen={handleClickOpen}
-            handleEdit={handleEdit}
-            onDelete={(row) => {
-              setEditData(row);
-              setShowDelete(true);
-            }}
-          />
-        </Box>
 
-        {showDelete && (
-          <ConfirmDialog
-            title={`Delete Branch`}
-            body={`Are you sure to delete ${editData?.name}?`}
-            onToggle={() => setShowDelete(false)}
-            onConfirm={() => {
-              setShowDelete(false);
-              handleDelete(editData?.id);
-            }}
+          {showDelete && (
+            <ConfirmDialog
+              title={`Delete Branch`}
+              body={`Are you sure to delete ${editData?.name}?`}
+              onToggle={() => setShowDelete(false)}
+              onConfirm={() => {
+                setShowDelete(false);
+                handleDelete(editData?.id);
+              }}
+            />
+          )}
+          <AssignDialog
+            open={open}
+            handleClose={handleClose}
+            CssTextField={CssTextField}
+            data={employees}
+            selectedEmployeeIds={selectedEmployeeIds}
+            handleChange={handleChange}
+            handleAssign={handleAssign}
           />
-        )}
-        <AssignDialog
-          open={open}
-          handleClose={handleClose}
-          CssTextField={CssTextField}
-          data={employees}
-          selectedEmployeeIds={selectedEmployeeIds}
-          handleChange={handleChange}
-          handleAssign={handleAssign}
-        />
-      </div>
+        </div>
+      )}
     </>
   );
 };
