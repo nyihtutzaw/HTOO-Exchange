@@ -45,7 +45,7 @@ function List({ rows, handleDelete, handleEdit }) {
     wordWrap: "break-word",
     minWidth: "100px",
   };
-  const { permitDelete, permitUpdate } = usePermission("customer");
+  const { permitDelete, permitUpdate } = usePermission("exchange");
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center">
