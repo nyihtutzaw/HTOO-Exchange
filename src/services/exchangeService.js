@@ -33,10 +33,10 @@ export async function getEach(id) {
 
 export async function update(values, id) {
     try {
-        let response = await sendData("exchange/" + id, values, "PUT");
+        let response = await sendData("exchange/" + id, values, "PUT",false);
         return response;
     } catch (e) {
-        NotificationManager.error("Failed");
+      //  NotificationManager.error("Failed");
         return false;
     }
 }

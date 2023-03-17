@@ -45,9 +45,12 @@ const ExchangeTableEdit = ({ data, index, handleDelete }) => {
     handleSubmit: formHandleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
   })
+
+  
 
   useEffect(() => {
     reset({
@@ -74,6 +77,13 @@ const ExchangeTableEdit = ({ data, index, handleDelete }) => {
     [data],
   )
 
+  React.useEffect(() => {
+    const subscription = watch(async (value) => {
+      await handleSubmit(value);
+    })
+    return () => subscription.unsubscribe()
+  }, [handleSubmit, watch])
+
   return (
     <TableRow
       onDoubleClick={() => {
@@ -91,12 +101,14 @@ const ExchangeTableEdit = ({ data, index, handleDelete }) => {
           name="fromBankAccountId"
           id="fromBankAccountId"
           control={control}
+          defaultValue={banks.length > 0 ? watch("fromBankAccountId") : ''}
           render={({ field }) => (
             <Select
               fullWidth
               label={t('branch-bank-out')}
               labelId="fromBankAccountId-label"
               {...field}
+              
             >
               {banks.map((bankAccount) => (
                 <MenuItem value={bankAccount.id}>
@@ -114,6 +126,7 @@ const ExchangeTableEdit = ({ data, index, handleDelete }) => {
         <Controller
           name="toBankAccountId"
           id="toBankAccountId"
+          defaultValue={banks.length > 0 ? watch("toBankAccountId") : ''}
           control={control}
           render={({ field }) => (
             <Select
@@ -195,6 +208,7 @@ const ExchangeTableEdit = ({ data, index, handleDelete }) => {
       </TableCell>
       <TableCell align="center">
         <Controller
+        defaultValue={customers.length > 0 ? watch("customerId") : ''}
           name="customer_id"
           id="customer_id"
           control={control}
