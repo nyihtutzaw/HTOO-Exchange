@@ -75,8 +75,8 @@ const List = ({ data, handleEdit, onDelete }) => {
                 <TableCell align="center">
                   {dayjs(row.created_at).format("DD/MM/YYYY")}
                 </TableCell>
-                <TableCell align="center">{row.from_branch.name}</TableCell>
-                <TableCell align="center">{row.to_branch.name}</TableCell>
+                <TableCell align="center">{row.from_branch?.name}</TableCell>
+                <TableCell align="center">{row.to_branch?.name}</TableCell>
                 <TableCell align="center">{
                   row.type === 1 ? 'e money' : 'cash buy'
                 }</TableCell>

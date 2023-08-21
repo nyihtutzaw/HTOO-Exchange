@@ -48,10 +48,10 @@ function List({ data, handleEdit, onDelete }) {
               <TableCell component="th" scope="row" align="center">
                 {index + 1}
               </TableCell>
-              <TableCell align="center">{row.employee.name}</TableCell>
+              <TableCell align="center">{row.employee?.name}</TableCell>
               <TableCell align="center">{row.email}</TableCell>
               <TableCell align="center">{row.role?.name}</TableCell>
-              <TableCell align="center">{row.employee.branches?.map((branch) => (`${branch.name},`))}</TableCell>
+              <TableCell align="center">{row.employee?.branches?.map((branch) => (`${branch.name},`))}</TableCell>
               <TableCell align="center">
                 <DriveFileRenameOutlineRoundedIcon
                   onClick={() => handleEdit(row)}
