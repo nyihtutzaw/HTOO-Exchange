@@ -2,8 +2,8 @@ import axios from 'axios'
 import { getCache } from '../utils/cache'
 import { NotificationManager } from 'react-notifications'
 
-//const apiEndpoint = "http://localhost:3100/api/"
-const apiEndpoint = "http://150.95.31.137:7702/api/"
+const apiEndpoint = "http://localhost:3100/api/"
+// const apiEndpoint = "http://150.95.31.137:7702/api/"
 
 const headers = {
     'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export async function getData(url, params) {
     return response.data
 }
 
-export async function sendData(url, data, type = 'POST') {
+export async function sendData(url, data, type = 'POST',showNoti=true) {
     let token = getCache('access_token')
     if (token) {
         headers.Authorization = `Bearer ${token}`
@@ -36,7 +36,7 @@ export async function sendData(url, data, type = 'POST') {
     else if (type === 'PATCH')
         response = await axios.patch(`${apiEndpoint}${url}`, data)
 
-    if (response.status === 200) {
+    if (response.status === 200 && showNoti) {
         NotificationManager.success('Success')
     }
 

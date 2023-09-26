@@ -60,13 +60,7 @@ function AddDialog({ open, handleClose, scroll, editData }) {
     });
 
 
-    const loadData = async () => {
-        const query = { branch_id: activeBranch.id };
-        const response = await BankService.getAll(query);
-        const custRes = await CustomerService.getAll(query);
-        dispatch(setCustomers(custRes));
-        dispatch(setBanks(response));
-    };
+    
 
     useEffect(() => {
 
@@ -84,7 +78,7 @@ function AddDialog({ open, handleClose, scroll, editData }) {
         } else {
             reset();
         }
-        loadData();
+       
     }, [editData, reset]);
 
     const handleSubmit = useCallback(
