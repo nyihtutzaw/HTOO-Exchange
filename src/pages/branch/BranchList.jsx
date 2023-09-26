@@ -11,12 +11,14 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import * as BranchService from "./../../services/branchService";
 import { setBranches, deleteBranch } from "../../store/reducer.branch";
+import { setLoading } from "../../store/reducer.loading";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import List from "./List";
 import * as EmployeeService from "./../../services/employeeService";
 import { setEmployees } from "../../store/reducer.employee";
 import AssignDialog from "./AssignDialog";
 import queryString from "query-string";
+import LoadingData from "../../components/commons/LoadingData";
 
 const CssTextField = withStyles({
   root: {
@@ -52,13 +54,15 @@ const BranchList = () => {
 
   const branches = useSelector((state) => state.branch.branches);
   const employees = useSelector((state) => state.employee.employees);
+  const loading = useSelector((state) => state.loading.loading);
 
   const loadData = async () => {
+    dispatch(setLoading());
     const response = await BranchService.getAll();
     dispatch(setBranches(response));
-
     const result = await EmployeeService.getAll();
     dispatch(setEmployees(result));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -104,8 +108,10 @@ const BranchList = () => {
     await BranchService.assignEmployees(editData.id, {
       employees: selectedEmployeeIds,
     });
+    dispatch(setLoading());
     const response = await BranchService.getAll();
     dispatch(setBranches(response));
+    dispatch(setLoading());
     handleClose();
   };
 
@@ -116,14 +122,25 @@ const BranchList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
       const response = await BranchService.getAll(queryString.stringify(query));
+      dispatch(setLoading());
       dispatch(setBranches(response));
     }
   };
 
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
+
       <div
         style={{
           // position: "absolute",

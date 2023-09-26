@@ -13,6 +13,8 @@ import * as AdminService from "../../services/adminService";
 import { deleteAdmin, setAdmins } from "../../store/reducer.admin";
 import queryString from "query-string";
 import { useLocation, useNavigate } from "react-router-dom";
+import { setLoading } from "../../store/reducer.loading";
+import LoadingData from "../../components/commons/LoadingData";
 
 const CssTextField = withStyles({
   root: {
@@ -44,7 +46,8 @@ const AdminList = () => {
   const [editData, setEditData] = useState(false);
   const location = useLocation();
   const admins = useSelector((state) => state.admin.admins);
-
+  const loading = useSelector((state) => state.loading.loading);
+  
   const handleDelete = async (id) => {
     await AdminService.deleteAdmin(id);
     dispatch(deleteAdmin(id));
@@ -56,8 +59,10 @@ const AdminList = () => {
 
   const loadData = async () => {
     const query = queryString.parse(location.search);
+    dispatch(setLoading());
     const response = await AdminService.getAll(query);
     dispatch(setAdmins(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -73,6 +78,15 @@ const AdminList = () => {
       navigate("/admin/list-admin?search=" + e.target.value);
     }
   };
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
 
   return (
     <>

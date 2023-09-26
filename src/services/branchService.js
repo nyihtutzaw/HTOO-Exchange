@@ -13,7 +13,9 @@ export async function store(values) {
 
 export async function getAll(query) {
   try {
-    let response = await getData(`branch?${new URLSearchParams(query).toString()}`);
+    let response = await getData(
+      `branch?${new URLSearchParams(query).toString()}`
+    );
     return response.data;
   } catch (e) {
     NotificationManager.error("Failed");

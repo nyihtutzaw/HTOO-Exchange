@@ -24,6 +24,8 @@ import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import usePermission from "../../hooks/usePermission";
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 
 const ListWave = () => {
   const { t } = useTranslation();
@@ -36,6 +38,7 @@ const ListWave = () => {
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
   const { permitCreate } = usePermission("wave");
+  const loading = useSelector((state) => state.loading.loading);
 
   const handleClose = () => {
     window.location.reload();
@@ -48,8 +51,10 @@ const ListWave = () => {
 
   const loadData = async () => {
     const query = { branch_id: activeBranch.id };
+    dispatch(setLoading());
     const response = await WaveMoneyTransactionService.getAll(query);
     dispatch(setWaveMoneyTransactions(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -81,7 +86,14 @@ const ListWave = () => {
     await WaveMoneyTransactionService.deleteWaveMoneyTransaction(id);
     dispatch(deleteWaveMoneyTransaction(id));
   };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />

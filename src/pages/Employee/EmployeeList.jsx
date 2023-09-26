@@ -18,6 +18,8 @@ import { setBranches } from "../../store/reducer.branch";
 import AssignDialog from "./AssignDialog";
 import queryString from "query-string";
 import usePermission from "../../hooks/usePermission";
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 
 const CssTextField = withStyles({
   root: {
@@ -55,13 +57,16 @@ const EmployeeList = () => {
 
   const employees = useSelector((state) => state.employee.employees);
   const branches = useSelector((state) => state.branch.branches);
+  const loading = useSelector((state) => state.loading.loading);
 
   const loadData = async () => {
+    dispatch(setLoading());
     const response = await EmployeeService.getAll();
     dispatch(setEmployees(response));
 
     const result = await BranchService.getAll();
     dispatch(setBranches(result));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -105,8 +110,10 @@ const EmployeeList = () => {
     await EmployeeService.assignToBranches(editData.id, {
       branches: selectedBranchIds,
     });
+    dispatch(setLoading());
     const response = await EmployeeService.getAll();
     dispatch(setEmployees(response));
+    dispatch(setLoading());
     handleClose();
   };
 
@@ -118,12 +125,22 @@ const EmployeeList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
       const response = await EmployeeService.getAll(
         queryString.stringify(query)
       );
       dispatch(setEmployees(response));
+      dispatch(setLoading());
     }
   };
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
 
   return (
     <>

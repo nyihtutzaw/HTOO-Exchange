@@ -15,6 +15,8 @@ import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import List from "./List";
 import queryString from "query-string";
 import usePermission from "../../hooks/usePermission";
+import { setLoading } from "../../store/reducer.loading";
+import LoadingData from "../../components/commons/LoadingData";
 
 const CssTextField = withStyles({
   root: {
@@ -50,14 +52,17 @@ const BankList = () => {
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
   const { permitCreate } = usePermission("bank");
+  const loading = useSelector((state) => state.loading.loading);
 
   useEffect(() => {
     async function loadData() {
       const query = { branch_id: activeBranch.id };
       const params = queryString.parse(location.search);
       if (params.search) query.search = params.search;
+      dispatch(setLoading());
       const response = await BankService.getAll(query);
       dispatch(setBanks(response));
+      dispatch(setLoading());
     }
     loadData();
   }, [location.search]);
@@ -84,6 +89,14 @@ const BankList = () => {
   const handleAddMoney = async (e) => {
     navigate("/admin/add-money-to-bank/" + e.id);
   };
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
 
   return (
     <>

@@ -16,6 +16,8 @@ import {
 } from "../../store/reducer.waveMoneyTransfer";
 import queryString from "query-string";
 import { useLocation, useNavigate } from "react-router-dom";
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 
 const CssTextField = withStyles({
   root: {
@@ -49,6 +51,7 @@ const WaveMoneyTransferList = () => {
   const waveMoneyTransfers = useSelector(
     (state) => state.waveMoneyTransfer.waveMoneyTransfers
   );
+  const loading = useSelector((state) => state.loading.loading);
 
   const handleDelete = async (id) => {
     await WaveMoneyTransferService.deleteWaveMoneyTransfer(id);
@@ -61,8 +64,10 @@ const WaveMoneyTransferList = () => {
 
   const loadData = async () => {
     const query = queryString.parse(location.search);
+    dispatch(setLoading());
     const response = await WaveMoneyTransferService.getAll(query);
     dispatch(setWaveMoneyTransfers(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -77,13 +82,22 @@ const WaveMoneyTransferList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
       const response = await WaveMoneyTransferService.getAll(
         queryString.stringify(query)
       );
       dispatch(setWaveMoneyTransfers(response));
+      dispatch(setLoading());
     }
   };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
@@ -159,7 +173,7 @@ const WaveMoneyTransferList = () => {
             handleEdit={handleEdit}
           />
         </Box>
-       
+
         {showDelete && (
           <ConfirmDialog
             title={`Delete Wave Money Transfer`}

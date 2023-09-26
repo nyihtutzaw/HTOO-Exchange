@@ -13,7 +13,8 @@ import { setExpenses, deleteExpense } from "../../store/reducer.expense";
 import List from "./List";
 import ConfirmDialog from "../../components/Dialogs/ConfirmDialog";
 import queryString from "query-string";
-
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 const CssTextField = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -47,13 +48,18 @@ const ExpenseList = () => {
   const expenses = useSelector((state) => state.expense.expenses);
 
   const activeBranch = useSelector((state) => state.auth.activeBranch);
+  const loading = useSelector((state) => state.loading.loading);
+ 
+
 
   const loadData = async () => {
     const query = { branch_id: activeBranch.id };
     const params = queryString.parse(location.search);
     if (params.search) query.search = params.search;
+    dispatch(setLoading());
     const response = await ExpenseService.getAll(query);
     dispatch(setExpenses(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -78,7 +84,14 @@ const ExpenseList = () => {
       navigate("/admin/list-expense?search=" + e.target.value);
     }
   };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />

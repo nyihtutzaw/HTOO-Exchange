@@ -14,6 +14,8 @@ import { deleteCustomer, setCustomers } from "../../store/reducer.customer";
 import queryString from "query-string";
 import { useLocation, useNavigate } from "react-router-dom";
 import usePermission from "../../hooks/usePermission";
+import { setLoading } from "../../store/reducer.loading";
+import LoadingData from "../../components/commons/LoadingData";
 
 const CssTextField = withStyles({
   root: {
@@ -46,6 +48,7 @@ const CustomerList = () => {
   const location = useLocation();
   const customers = useSelector((state) => state.customer.customers);
   const { permitCreate } = usePermission("customer");
+  const loading = useSelector((state) => state.loading.loading);
 
   const handleDelete = async (id) => {
     await CustomerService.deleteCustomer(id);
@@ -58,8 +61,10 @@ const CustomerList = () => {
 
   const loadData = async () => {
     const query = queryString.parse(location.search);
+    dispatch(setLoading());
     const response = await CustomerService.getAll(query);
     dispatch(setCustomers(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -74,12 +79,22 @@ const CustomerList = () => {
     if (e.key === "Enter") {
       const query = queryString.parse(location.search);
       query.search = e.target.value;
+      dispatch(setLoading());
       const response = await CustomerService.getAll(
         queryString.stringify(query)
       );
       dispatch(setCustomers(response));
+      dispatch(setLoading());
     }
   };
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
 
   return (
     <>

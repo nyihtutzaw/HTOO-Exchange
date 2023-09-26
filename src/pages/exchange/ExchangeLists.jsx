@@ -19,6 +19,8 @@ import ReactToPrint from "react-to-print";
 import { useRef } from "react";
 import { DownloadTableExcel } from "react-export-table-to-excel";
 import usePermission from "../../hooks/usePermission";
+import LoadingData from "../../components/commons/LoadingData";
+import { setLoading } from "../../store/reducer.loading";
 
 const ExchangeLists = () => {
   const { t } = useTranslation();
@@ -30,6 +32,9 @@ const ExchangeLists = () => {
   const [scroll, setScroll] = React.useState("paper");
   const location = useLocation();
   const { permitCreate } = usePermission("exchange");
+  const loading = useSelector((state) => state.loading.loading);
+  
+  
 
   const handleClose = () => {
     window.location.reload();
@@ -40,8 +45,10 @@ const ExchangeLists = () => {
 
   const loadData = async () => {
     const query = { branch_id: activeBranch.id };
+    dispatch(setLoading());
     const response = await ExchangeService.getAll(query);
     dispatch(setExchanges(response));
+    dispatch(setLoading());
   };
 
   useEffect(() => {
@@ -73,7 +80,14 @@ const ExchangeLists = () => {
     await ExchangeService.deleteData(id);
     dispatch(deleteExchange(id));
   };
-
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <LoadingData />
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
